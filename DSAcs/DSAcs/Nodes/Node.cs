@@ -9,12 +9,19 @@ namespace DSAcs.Nodes
     public abstract class Node
     {
         public object Data { get; set; }
-        // same as:
+        public Node A { get; set; }
+
+        public Node(object data=null, Node A=null)
+        {
+            Data = data;
+            this.A = A;
+        }
+
+        // Data {get; set;} same as:
         // get { return data; }
         // set { data = value; }
 
-        public Node A { get; set; }
-        // same as:
+        // A {get; set;} same as:
         // get { return next; }
         // set { next = value; }
     }

@@ -34,28 +34,28 @@ namespace DSAcs.Graph
         }
 
         // check if there isn't a node that's pointing to a node to be removed
-        public bool AdjacentNodesExist(Node givenNode)
-        {
-            // ingest index of node
-            int indexOfNode = givenNode.index;
+        //public bool AdjacentNodesExist(Node givenNode)
+        //{
+        //    // ingest index of node
+        //    int indexOfNode = givenNode.index;
 
-            // use index to access adjacency matrix and check if 1 exists for the row of that index; if so, adjacent node exists
-            for (int i = 0; i < directedEdgeList[indexOfNode,]; i++)
-            {
-                if (directed)
-            }
-        }
+        //    // use index to access adjacency matrix and check if 1 exists for the row of that index; if so, adjacent node exists
+        //    for (int i = 0; i < directedEdgeList[indexOfNode,]; i++)
+        //    {
+        //        if (directed)
+        //    }
+        //}
 
         // remove a node
-        public bool RemoveNode(Node givenNode)
-        {
-            if (AdjacentNodesExist(givenNode))
-            {
-                return false;
-            }
+        //public bool RemoveNode(Node givenNode)
+        //{
+        //    if (AdjacentNodesExist(givenNode))
+        //    {
+        //        return false;
+        //    }
 
-            // access 
-        }
+        //    // access 
+        //}
     }
 
     class Node

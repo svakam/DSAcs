@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace DSAcs.LinkedLists
 {
-    abstract class LinkedList { }
+    public abstract class LinkedList { }
 }

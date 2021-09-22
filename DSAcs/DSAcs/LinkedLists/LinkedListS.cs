@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using DSAcs.Nodes;
 
 namespace DSAcs.LinkedLists
-{
-    class LinkedListS : LinkedList, ILinkedList
+{ // should implement ILinkedList
+    class LinkedListS : LinkedList
     {
         NodeS head;
-        NodeS current;
+        Node current; // polymorphic 
         // add //
         public void Add(object data)
         {
@@ -38,20 +38,20 @@ namespace DSAcs.LinkedLists
         }
 
         // remove //
-        public Node Remove()
-        {
+        //public Node Remove()
+        //{
 
-        }
+        //}
 
-        public Node Remove(object data, int n)
-        {
+        //public Node Remove(object data, int n)
+        //{
 
-        }
+        //}
 
-        public Node RemoveFirst()
-        {
+        //public Node RemoveFirst()
+        //{
 
-        }
+        //}
 
         public void Clean()
         {
@@ -59,31 +59,31 @@ namespace DSAcs.LinkedLists
         }
 
         // peek//
-        public object PeekFirst()
-        {
+        //public object PeekFirst()
+        //{
 
-        }
+        //}
 
-        public object PeekLast()
-        {
+        //public object PeekLast()
+        //{
 
-        }
+        //}
 
-        public object Peek(int n)
-        {
+        //public object Peek(int n)
+        //{
 
-        }
+        //}
 
         // merge, split //
-        public LinkedList[] Split(int n)
-        {
+        //public LinkedList[] Split(int n)
+        //{
 
-        }
+        //}
 
-        public static LinkedList Merge(LinkedListS A, LinkedListS B)
-        {
+        //public static LinkedList Merge(LinkedListS A, LinkedListS B)
+        //{
 
-        }
+        //}
 
         public void SortAscending()
         {

@@ -10,11 +10,9 @@ namespace DSAcs.Nodes
     {
         public NodeD B { get; set; }
 
-        public NodeD(object data)
+        public NodeD(object data=null, NodeD B=null) : base(data)
         {
-            Data = data;
-            A = null;
-            B = null;
+            this.B = B;
         }
     }
 }

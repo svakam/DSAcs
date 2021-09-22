@@ -38,7 +38,7 @@ namespace DSAcs.LinkedLists
         // split at n'th node
         public LinkedList[] Split(int n);
         // merge two lists
-        public static LinkedList Merge(LinkedList A, LinkedList B);
+        //public static LinkedList Merge(LinkedList A, LinkedList B);
         // sort ascending
         public void SortAscending();
         // sort descending
