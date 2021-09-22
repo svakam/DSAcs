@@ -1,0 +1,11 @@
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.AssemblyInfoInputs.cache
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.AssemblyInfo.cs
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.csproj.CoreCompileInputs.cache
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\DSAcs.deps.json
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\DSAcs.dll
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\ref\DSAcs.dll
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\DSAcs.pdb
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.dll
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\ref\DSAcs.dll
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.pdb
