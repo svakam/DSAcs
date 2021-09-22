@@ -8,6 +8,6 @@ namespace DSAcs.Nodes
 {
     public class NodeS : Node
     {
-        public NodeS(object data) : base(data) { }
+        public NodeS(object data=null) : base(data) { }
     }
 }
