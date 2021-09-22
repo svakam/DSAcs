@@ -2,6 +2,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DSAcs.Nodes;
 using System;
 
+// test class must:
+// use Microsoft.VisualStudio.TestTools.UnitTesting;
+// class decorated with [TestClass] attribute
+
 // test method must meet requirements:
 // decorated with [TestMethod] attribute
 // returns void

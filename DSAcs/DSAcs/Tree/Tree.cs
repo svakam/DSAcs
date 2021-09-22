@@ -28,18 +28,16 @@ namespace DSAcs.Tree
             INORDER,
             POSTORDER
         }
-        public void TraverseAndPrint(TraversalType traversalType)
+        public string TraverseAndPrint(TraversalType traversalType)
         {
-            if (Root == null) return;
+            if (Root == null) return null;
             TypeOfTraversal = traversalType;
 
             Sb = new StringBuilder();
             Sb = Sb.Append(Print(Root));
 
-            Console.WriteLine(Sb.ToString());
+            return Sb.ToString();
         }
-
-        // Create()
 
         private StringBuilder Print(TreeNode node)
         {
@@ -48,7 +46,9 @@ namespace DSAcs.Tree
                 return Sb;
             }
 
+            // output
             Sb.Append($"{node.Data} ");
+            Console.WriteLine(node.Data);
 
             switch (TypeOfTraversal)
             {
