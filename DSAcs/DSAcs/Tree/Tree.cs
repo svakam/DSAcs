@@ -11,7 +11,9 @@ namespace DSAcs.Tree
     public class Tree
     {
         protected TreeNode Root { get; set; }
-        protected TraversalType TypeOfTraversal { get; set; }
+        protected TraversalType Traversal { get; set; }
+        protected OperationType Operation { get; set; }
+        protected int Result { get; set; }
         protected StringBuilder Sb { get; set; }
 
         public Tree(TreeNode root=null)
@@ -28,39 +30,53 @@ namespace DSAcs.Tree
             INORDER,
             POSTORDER
         }
-        public string TraverseAndPrint(TraversalType traversalType)
+
+        public enum OperationType
+        {
+            PRINT,
+            ADD,
+            SUBTRACT,
+            MULTIPLY,
+            DIVIDE
+        }
+
+        public string Traverse(TraversalType traversalType, OperationType operation)
         {
             if (Root == null) return null;
-            TypeOfTraversal = traversalType;
 
-            Sb = new StringBuilder();
-            Sb = Sb.Append(Print(Root));
+            Traversal = traversalType;
+            Operation = operation;
+
+            switch (Operation)
+            {
+                case OperationType.PRINT:
+                    Sb = new StringBuilder();
+                    break;
+                case OperationType.MULTIPLY:
+                    Result = 1;
+                    break;
+                case OperationType.DIVIDE:
+                    Result = 1;
+                    break;
+                default:
+                    Result = 0;
+                    break;
+            }
+
+            switch (Traversal)
+            {
+                case TraversalType.PREORDER:
+                    break;
+                case TraversalType.INORDER:
+                    break;
+                case TraversalType.POSTORDER:
+                    break;
+            }
 
             return Sb.ToString();
         }
 
-        private StringBuilder Print(TreeNode node)
-        {
-            if (node == null)
-            {
-                return Sb;
-            }
 
-            // output
-            Sb.Append($"{node.Data} ");
-            Console.WriteLine(node.Data);
 
-            switch (TypeOfTraversal)
-            {
-                case TraversalType.PREORDER:
-                    return Sb.Append(Print(node)).Append(Print(node.Left)).Append(Print(node.Right));
-                case TraversalType.INORDER:
-                    return Sb.Append(Print(node.Left)).Append(Print(node)).Append(Print(node.Right));
-                case TraversalType.POSTORDER:
-                    return Sb.Append(Print(node.Left)).Append(Print(node.Right)).Append(Print(node));
-                default:
-                    return Sb;
-            }
-        }
     }
 }

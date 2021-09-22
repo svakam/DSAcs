@@ -14,7 +14,10 @@ namespace DSATest
         {
             Tree treeNullData = new();
             Assert.IsNotNull(treeNullData);
-            Assert.IsNull(treeNullData.TraverseAndPrint(Tree.TraversalType.PREORDER));
+            Assert.IsNull(treeNullData.Traverse(Tree.TraversalType.PREORDER, Tree.OperationType.PRINT));
+
+            Tree tree1 = new Tree(new TreeNode(1));
+            Assert.AreEqual("1", tree1.Traverse(Tree.TraversalType.PREORDER, Tree.OperationType.PRINT));
 
             Tree tree = new(new TreeNode(1, // root
                 new TreeNode(2, // l
@@ -28,7 +31,6 @@ namespace DSATest
                 )
             );
             Assert.IsNotNull(tree);
-
         }
     }
 }
