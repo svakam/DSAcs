@@ -22,8 +22,8 @@ namespace DSAcs.LinkedLists
             }
             else
             {
-                current.A = node;
-                current = current.A;
+                current.Next = node;
+                current = current.Next;
             }
         }
 

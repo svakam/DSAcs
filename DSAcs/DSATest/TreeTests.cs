@@ -10,7 +10,7 @@ namespace DSATest
     public class TreeTests
     {
         [TestMethod]
-        public void TestTreeCreation()
+        public void TestTreeCreation() 
         {
             //Tree treeNullData = new();
             //Assert.IsNotNull(treeNullData);
