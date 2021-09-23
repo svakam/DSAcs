@@ -12,14 +12,14 @@ namespace DSATest
         [TestMethod]
         public void TestTreeCreation()
         {
-            Tree treeNullData = new();
-            Assert.IsNotNull(treeNullData);
-            Assert.IsNull(treeNullData.Traverse(Tree.TraversalType.PREORDER, Tree.OperationType.PRINT));
+            //Tree treeNullData = new();
+            //Assert.IsNotNull(treeNullData);
+            //Assert.IsNull(treeNullData.Traverse(Tree.TraversalType.PREORDER));
 
             Tree tree1 = new Tree(new TreeNode(1));
-            Assert.AreEqual("1", tree1.Traverse(Tree.TraversalType.PREORDER, Tree.OperationType.PRINT));
+            Assert.AreEqual("1", tree1.Traverse(Tree.TraversalType.PREORDER));
 
-            Tree tree = new(new TreeNode(1, // root
+            Tree tree2 = new(new TreeNode(1, // root
                 new TreeNode(2, // l
                     new TreeNode(4, null, null), // l
                     null), // r
@@ -30,7 +30,10 @@ namespace DSATest
                     )
                 )
             );
-            Assert.IsNotNull(tree);
+            Assert.IsNotNull(tree2);
+            Assert.AreEqual("124356", tree2.Traverse(Tree.TraversalType.PREORDER));
+            Assert.AreEqual("421563", tree2.Traverse(Tree.TraversalType.INORDER));
+            Assert.AreEqual("426531", tree2.Traverse(Tree.TraversalType.POSTORDER));
         }
     }
 }

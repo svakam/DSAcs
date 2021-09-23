@@ -12,13 +12,16 @@ namespace DSAcs.Tree
     {
         protected TreeNode Root { get; set; }
         protected TraversalType Traversal { get; set; }
-        protected OperationType Operation { get; set; }
-        protected int Result { get; set; }
         protected StringBuilder Sb { get; set; }
 
-        public Tree(TreeNode root=null)
+        public Tree(TreeNode root)
         {
             Root = root;
+            //if (root == null) Console.WriteLine("input null");
+            //if (Root == null) Console.WriteLine("null");
+            //Console.WriteLine(Root.GetType());
+            //Console.WriteLine($"root: {Root.Data}");
+            //Console.WriteLine($"and type: {Root.Data.GetType()}");
         }
 
         // preorder: root, left, right
@@ -28,55 +31,60 @@ namespace DSAcs.Tree
         {
             PREORDER,
             INORDER,
-            POSTORDER
+            POSTORDER,
+            BREADTHFIRST
         }
 
-        public enum OperationType
-        {
-            PRINT,
-            ADD,
-            SUBTRACT,
-            MULTIPLY,
-            DIVIDE
-        }
-
-        public string Traverse(TraversalType traversalType, OperationType operation)
+        public string Traverse(TraversalType traversalType)
         {
             if (Root == null) return null;
 
             Traversal = traversalType;
-            Operation = operation;
 
-            switch (Operation)
-            {
-                case OperationType.PRINT:
-                    Sb = new StringBuilder();
-                    break;
-                case OperationType.MULTIPLY:
-                    Result = 1;
-                    break;
-                case OperationType.DIVIDE:
-                    Result = 1;
-                    break;
-                default:
-                    Result = 0;
-                    break;
-            }
+            Sb = new StringBuilder();
 
+            // new notation for switch case if a variable's result depends on cases
             switch (Traversal)
             {
                 case TraversalType.PREORDER:
+                    PreOrder(Root);
                     break;
                 case TraversalType.INORDER:
+                    InOrder(Root);
                     break;
                 case TraversalType.POSTORDER:
+                    PostOrder(Root);
                     break;
-            }
-
+                default:
+                    break;
+            };
+            Console.WriteLine(Sb.ToString());
             return Sb.ToString();
         }
 
+        private void PreOrder(TreeNode node)
+        {
+            if (node == null) return;
 
+            Sb.Append(node.Data);
+            PreOrder(node.Left);
+            PreOrder(node.Right);
+        }
+        private void InOrder(TreeNode node)
+        {
+            if (node == null) return;
 
+            InOrder(node.Left);
+            Sb.Append(node.Data);
+            InOrder(node.Right);
+        }
+        private void PostOrder(TreeNode node)
+        {
+            if (node == null) return;
+
+            PostOrder(node.Left);
+            PostOrder(node.Right);
+            Sb.Append(node.Data);
+        }
     }
 }
