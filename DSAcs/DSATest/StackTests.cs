@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAcs.Nodes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DSAcs.Nodes
+namespace DSATest
 {
-    public class NodeS : Node
+    [TestClass]
+    public class StackTests
     {
-        public NodeS(object data=null, NodeS next=null) : base(data) { }
     }
 }

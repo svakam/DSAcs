@@ -9,9 +9,9 @@ namespace DSAcs.Queue
 {
     public interface IQueue
     {
-        public NodeS Pop();
-        public void Push(NodeS node);
-        public NodeS Peek();
-
+        public NodeS Dequeue();
+        public void Enqueue(object data);
+        public object Peek();
+        public bool IsEmpty();
     }
 }

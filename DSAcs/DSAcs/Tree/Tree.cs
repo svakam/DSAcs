@@ -14,7 +14,8 @@ namespace DSAcs.Tree
         protected TraversalType Traversal { get; set; }
         protected StringBuilder Sb { get; set; }
 
-        public Tree(TreeNode root)
+        public Tree() { }
+        public Tree(TreeNode root=null)
         {
             Root = root;
             //if (root == null) Console.WriteLine("input null");

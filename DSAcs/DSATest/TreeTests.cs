@@ -12,11 +12,11 @@ namespace DSATest
         [TestMethod]
         public void TestTreeCreation() 
         {
-            //Tree treeNullData = new();
-            //Assert.IsNotNull(treeNullData);
-            //Assert.IsNull(treeNullData.Traverse(Tree.TraversalType.PREORDER));
+            Tree treeNullData = new();
+            Assert.IsNotNull(treeNullData);
+            Assert.IsNull(treeNullData.Traverse(Tree.TraversalType.PREORDER));
 
-            Tree tree1 = new Tree(new TreeNode(1));
+            Tree tree1 = new(new TreeNode(1));
             Assert.AreEqual("1", tree1.Traverse(Tree.TraversalType.PREORDER));
 
             Tree tree2 = new(new TreeNode(1, // root
