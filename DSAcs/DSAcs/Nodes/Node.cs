@@ -9,12 +9,12 @@ namespace DSAcs.Nodes
     public abstract class Node
     {
         public object Data { get; set; }
-        public Node A { get; set; }
+        public Node Next { get; set; }
 
-        public Node(object data=null, Node A=null)
+        public Node(object data=null, Node next=null)
         {
             Data = data;
-            this.A = A;
+            this.Next = next;
         }
 
         // Data {get; set;} same as:

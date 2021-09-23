@@ -8,11 +8,11 @@ namespace DSAcs.Nodes
 {
     public class NodeD : Node
     {
-        public NodeD B { get; set; }
+        public NodeD Prev { get; set; }
 
-        public NodeD(object data=null, NodeD B=null) : base(data)
+        public NodeD(object data=null, NodeD prev=null) : base(data)
         {
-            this.B = B;
+            this.Prev = prev;
         }
     }
 }
