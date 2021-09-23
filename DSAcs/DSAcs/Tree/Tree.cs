@@ -55,6 +55,9 @@ namespace DSAcs.Tree
                 case TraversalType.POSTORDER:
                     PostOrder(Root);
                     break;
+                case TraversalType.BREADTHFIRST:
+                    BreadthFirst(Root);
+                    break;
                 default:
                     break;
             };
@@ -85,6 +88,12 @@ namespace DSAcs.Tree
             PostOrder(node.Left);
             PostOrder(node.Right);
             Sb.Append(node.Data);
+        }
+        private void BreadthFirst(TreeNode node)
+        {
+            if (node == null) return;
+
+
         }
     }
 }

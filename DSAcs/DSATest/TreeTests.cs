@@ -34,6 +34,7 @@ namespace DSATest
             Assert.AreEqual("124356", tree2.Traverse(Tree.TraversalType.PREORDER));
             Assert.AreEqual("421563", tree2.Traverse(Tree.TraversalType.INORDER));
             Assert.AreEqual("426531", tree2.Traverse(Tree.TraversalType.POSTORDER));
+            Assert.AreEqual("123456", tree2.Traverse(Tree.TraversalType.BREADTHFIRST));
         }
     }
 }
