@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +14,12 @@ namespace DSATest
         [TestMethod]
         public void Instantiation()
         {
-            Queue queue = new();
+            Queue<int> queue = new();
             Assert.IsNotNull(queue);
             Assert.IsNull(queue.Front);
             Assert.IsNull(queue.Back);
 
-            Queue queue2 = new(new NodeS(2));
+            Queue<int> queue2 = new(2);
             Assert.IsNotNull(queue2);
             Assert.IsNotNull(queue2.Front.Data);
             Assert.IsNotNull(queue2.Back.Data);
@@ -28,12 +27,55 @@ namespace DSATest
         [TestMethod]
         public void TestEnqueue()
         {
-            Queue queue = new Queue(new NodeS("hi"));
+            Queue<string> queue = new("hi");
             queue.Enqueue("hello");
             Assert.AreEqual("hi", queue.Front.Data);
             Assert.AreEqual("hello", queue.Back.Data);
             queue.Enqueue("hey");
             Assert.AreEqual("hey", queue.Back.Data);
+        }
+
+        [TestMethod]
+        public void TestDequeue()
+        {
+            Queue<int> queueNull = new();
+            //Assert.ThrowsException(queue.Dequeue);
+
+            Queue<int> queue = new(1);
+            queue.Dequeue();
+            Assert.IsNull(queue.Front);
+            Assert.IsNull(queue.Back);
+            queue.Enqueue(2);
+            queue.Enqueue(4);
+            Assert.AreEqual(2, queue.Front.Data);
+            Assert.AreEqual(4, queue.Back.Data);
+            Node node = queue.Dequeue();
+            Assert.AreEqual(2, node.Data);
+            Assert.AreEqual(4, queue.Front.Data);
+            Assert.AreEqual(4, queue.Back.Data);
+            queue.Enqueue(3);
+            node = queue.Dequeue();
+            Assert.AreEqual(4, node.Data);
+            Assert.AreEqual(3, queue.Front.Data);
+            Assert.AreEqual(3, queue.Back.Data);
+            node = queue.Dequeue();
+            Assert.AreEqual(3, node.Data);
+            Assert.IsNull(queue.Front);
+            Assert.IsNull(queue.Back);
+        }
+
+        [TestMethod]
+        public void TestPeek()
+        {
+            Queue<string> queue = new("hi");
+            object front = queue.Peek();
+            Assert.AreEqual("hi", front);
+            queue.Enqueue("hello");
+            front = queue.Peek();
+            Assert.AreEqual("hi", front);
+            queue.Dequeue();
+            front = queue.Peek();
+            Assert.AreEqual("hello", front);
         }
     }
 }
