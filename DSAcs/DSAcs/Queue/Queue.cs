@@ -65,11 +65,11 @@ namespace DSAcs.Queue
             }
         }
 
-        public object Peek()
+        public T Peek()
         {
             if (Front != null)
             {
-                return Front.Data;
+                return (T) Front.Data;
             }
             throw new ArgumentNullException("Queue is empty.");
         }

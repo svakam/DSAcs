@@ -9,11 +9,18 @@ namespace DSAcs.Stack
 {
     // stack is just a singly LL sitting on its tail
     // always adding to and removing from head (1 pointer)
-    public class Stack
+    public class Stack<T> : IStack<T>
     {
         NodeS Top { get; set; }
         public Stack(NodeS node)
         {
+            Top = node;
+        }
+
+        public void Push(T data)
+        {
+            NodeS node = new(data);
+            node.Next = Top;
             Top = node;
         }
 
@@ -27,12 +34,17 @@ namespace DSAcs.Stack
         {
             NodeS temp = Top;
             Top = (NodeS) Top.Next;
+            temp.Next = null;
             return temp;
         }
 
-        public object Peek()
+        public T Peek()
         {
-            return Top.Data;
+            return (T) Top.Data;
+        }
+        public bool IsEmpty()
+        {
+            return Top == null;
         }
     }
 }
