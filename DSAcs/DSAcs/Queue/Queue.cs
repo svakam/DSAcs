@@ -25,7 +25,7 @@ namespace DSAcs.Queue
         }
         public NodeS Dequeue()
         {
-            if (Front == null) throw new ArgumentNullException("Cannot dequeue from an empty queue.");
+            if (Front == null) throw new InvalidOperationException("Cannot dequeue from an empty queue.");
 
             NodeS temp = (NodeS)Front;
             Front = Front.Next;

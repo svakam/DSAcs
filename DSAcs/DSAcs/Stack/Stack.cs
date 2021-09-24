@@ -32,6 +32,8 @@ namespace DSAcs.Stack
 
         public NodeS Pop()
         {
+            if (IsEmpty()) throw new InvalidOperationException("Cannot pop from stack; stack is empty.");
+
             NodeS temp = Top;
             Top = (NodeS) Top.Next;
             temp.Next = null;
