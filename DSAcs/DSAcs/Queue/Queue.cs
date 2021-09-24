@@ -49,6 +49,20 @@ namespace DSAcs.Queue
 
         }
 
+        public void Enqueue(NodeS node)
+        {
+            if (IsEmpty())
+            {
+                Front = node;
+                Back = node;
+            }
+            else
+            {
+                Back.Next = node;
+                Back = Back.Next;
+            }
+        }
+
         public object Peek()
         {
             if (Front != null)
@@ -61,6 +75,11 @@ namespace DSAcs.Queue
         public bool IsEmpty()
         {
             return Front == null;
+        }
+
+        public Queue<T> CastToQueue(object instance)
+        {
+            return (Queue<T>)instance;
         }
     }
 }
