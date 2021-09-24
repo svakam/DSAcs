@@ -51,6 +51,8 @@ namespace DSAcs.Queue
 
         public void Enqueue(NodeS node)
         {
+            if (node == null) return;
+
             if (IsEmpty())
             {
                 Front = node;
