@@ -11,23 +11,36 @@ namespace DSAcs.Stack
     // always adding to and removing from head (1 pointer)
     public class Stack<T> : IStack<T>
     {
-        NodeS Top { get; set; }
-        public Stack(NodeS node)
+        public NodeS Top { get; set; }
+        public Stack() 
         {
+            Top = null;
+        }
+        public Stack(T data)
+        {
+            NodeS node = new(data);
             Top = node;
         }
 
         public void Push(T data)
         {
             NodeS node = new(data);
-            node.Next = Top;
-            Top = node;
+            if (IsEmpty()) Top = node;
+            else
+            {
+                node.Next = Top;
+                Top = node;
+            }
         }
 
         public void Push(NodeS node)
         {
-            node.Next = Top;
-            Top = node;
+            if (IsEmpty()) Top = node;
+            else
+            {
+                node.Next = Top;
+                Top = node;
+            }
         }
 
         public NodeS Pop()
