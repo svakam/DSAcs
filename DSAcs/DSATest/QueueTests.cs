@@ -77,5 +77,16 @@ namespace DSATest
             front = queue.Peek();
             Assert.AreEqual("hello", front);
         }
+
+        [TestMethod]
+        public void TestIsEmpty()
+        {
+            Queue<string> queue = new();
+            Assert.IsTrue(queue.IsEmpty());
+            queue.Enqueue("hi");
+            Assert.IsFalse(queue.IsEmpty());
+            queue.Dequeue();
+            Assert.IsTrue(queue.IsEmpty());
+        }
     }
 }

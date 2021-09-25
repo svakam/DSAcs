@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using DSAcs.LinkedLists;
 using System.Text;
 using System.Threading.Tasks;
 using DSAcs.Nodes;
+using DSAcs.Queue;
 
 namespace DSAcs.Tree
 {
@@ -90,11 +90,26 @@ namespace DSAcs.Tree
             PostOrder(node.Right);
             Sb.Append(node.Data);
         }
+
+        // https://stackoverflow.com/questions/17519078/initializing-a-generic-variable-from-a-c-sharp-type-variable
         private void BreadthFirst(TreeNode node)
         {
             if (node == null) return;
 
+            //Queue <type> queue = new Queue<type> ();
+            /* 
+             tree data type is not known at compile-time
+             generic is a compile-time construct, thus cannot use type at runtime; need to construct _instance_ of the generic type at runtime
+             https://stackoverflow.com/questions/17519078/initializing-a-generic-variable-from-a-c-sharp-type-variable 
+            */
+            var type = typeof(Queue<>).MakeGenericType(node.Data.GetType());
+            dynamic context = Activator.CreateInstance(type);
+            type.GetMethod("Enqueue").Invoke(context, null);
             
+            // enqueue root
+            // recursion:
+                // print current
+                // enqueue left (enqueue will check if null)
         }
     }
 }

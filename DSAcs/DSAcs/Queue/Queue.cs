@@ -25,7 +25,7 @@ namespace DSAcs.Queue
         }
         public NodeS Dequeue()
         {
-            if (Front == null) throw new ArgumentNullException("Cannot dequeue from an empty queue.");
+            if (Front == null) throw new InvalidOperationException("Cannot dequeue from an empty queue.");
 
             NodeS temp = (NodeS)Front;
             Front = Front.Next;
@@ -49,11 +49,27 @@ namespace DSAcs.Queue
 
         }
 
-        public object Peek()
+        public void Enqueue(NodeS node)
+        {
+            if (node == null) return;
+
+            if (IsEmpty())
+            {
+                Front = node;
+                Back = node;
+            }
+            else
+            {
+                Back.Next = node;
+                Back = Back.Next;
+            }
+        }
+
+        public T Peek()
         {
             if (Front != null)
             {
-                return Front.Data;
+                return (T) Front.Data;
             }
             throw new ArgumentNullException("Queue is empty.");
         }
@@ -61,6 +77,11 @@ namespace DSAcs.Queue
         public bool IsEmpty()
         {
             return Front == null;
+        }
+
+        public Queue<T> CastToQueue(object instance)
+        {
+            return (Queue<T>)instance;
         }
     }
 }

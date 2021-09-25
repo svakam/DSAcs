@@ -11,7 +11,7 @@ namespace DSAcs.Queue
     {
         public NodeS Dequeue();
         public void Enqueue(T data);
-        public object Peek();
+        public T Peek();
         public bool IsEmpty();
     }
 }
