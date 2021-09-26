@@ -11,15 +11,16 @@ namespace DSATest
     [TestClass]
     public class QueueTests
     {
+        // consider instantiating both class types (generic vs. non-generic) in a list/arr, and loop through test methods per class type
         [TestMethod]
         public void Instantiation()
         {
-            Queue<int> queue = new();
+            QueueG<int> queue = new();
             Assert.IsNotNull(queue);
             Assert.IsNull(queue.Front);
             Assert.IsNull(queue.Back);
 
-            Queue<int> queue2 = new(2);
+            QueueG<int> queue2 = new(2);
             Assert.IsNotNull(queue2);
             Assert.IsNotNull(queue2.Front.Data);
             Assert.IsNotNull(queue2.Back.Data);
@@ -27,7 +28,7 @@ namespace DSATest
         [TestMethod]
         public void TestEnqueue()
         {
-            Queue<string> queue = new("hi");
+            QueueG<string> queue = new("hi");
             queue.Enqueue("hello");
             Assert.AreEqual("hi", queue.Front.Data);
             Assert.AreEqual("hello", queue.Back.Data);
@@ -38,10 +39,10 @@ namespace DSATest
         [TestMethod]
         public void TestDequeue()
         {
-            Queue<int> queueNull = new();
+            QueueG<int> queueNull = new();
             //Assert.ThrowsException(queue.Dequeue);
 
-            Queue<int> queue = new(1);
+            QueueG<int> queue = new(1);
             queue.Dequeue();
             Assert.IsNull(queue.Front);
             Assert.IsNull(queue.Back);
@@ -67,7 +68,7 @@ namespace DSATest
         [TestMethod]
         public void TestPeek()
         {
-            Queue<string> queue = new("hi");
+            QueueG<string> queue = new("hi");
             object front = queue.Peek();
             Assert.AreEqual("hi", front);
             queue.Enqueue("hello");
@@ -81,7 +82,7 @@ namespace DSATest
         [TestMethod]
         public void TestIsEmpty()
         {
-            Queue<string> queue = new();
+            QueueG<string> queue = new();
             Assert.IsTrue(queue.IsEmpty());
             queue.Enqueue("hi");
             Assert.IsFalse(queue.IsEmpty());

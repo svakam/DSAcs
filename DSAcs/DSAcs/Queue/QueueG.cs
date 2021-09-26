@@ -7,16 +7,18 @@ using DSAcs.Nodes;
 
 namespace DSAcs.Queue
 {
-    public class Queue : QueueBase, IQueue
+    // queue is open at both ends (2 pointers), with direction front to back
+    public class QueueG<T> : QueueBase, IQueueG<T>
     {
-        public Queue(object data)
+        public QueueG() { }
+        public QueueG(T data)
         {
             Node node = new NodeS(data);
             Front = node;
             Back = node;
         }
 
-        public void Enqueue(object data)
+        public void Enqueue(T data)
         {
             Node node = new NodeS(data);
             if (IsEmpty())
@@ -48,11 +50,11 @@ namespace DSAcs.Queue
             }
         }
 
-        public object Peek()
+        public T Peek()
         {
             if (Front != null)
             {
-                return Front.Data;
+                return (T) Front.Data;
             }
             throw new ArgumentNullException("Queue is empty.");
         }

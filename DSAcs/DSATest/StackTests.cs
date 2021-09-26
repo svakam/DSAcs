@@ -36,6 +36,7 @@ namespace DSATest
         }
 
         [TestMethod]
+
         public void TestPop()
         {
             Stack<int> stack = new(3);
