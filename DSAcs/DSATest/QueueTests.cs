@@ -11,7 +11,7 @@ namespace DSATest
     [TestClass]
     public class QueueTests
     {
-        // consider instantiating both class types (generic vs. non-generic) in a list/arr, and loop through test methods per class type
+        // consider instantiating both class types (generic vs. non-generic) in a list/arr and looping through test methods per class type
         [TestMethod]
         public void Instantiation()
         {
