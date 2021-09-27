@@ -31,15 +31,18 @@ namespace DSATest
             Assert.IsNull(ll.Current);
             ll.Add(2);
             Assert.AreEqual(2, ll.Head.Data);
-            ll.Add(3);
+            ll.Add(new NodeS(3));
             Assert.AreEqual(2, ll.Head.Data);
             Assert.AreEqual(3, ll.Head.Next.Data);
 
             // test add at nth location in list
             LinkedListS<int> ll2 = new();
             // assert throws exception if adding at a location larger than size or negative n
-            ll2.Add(2);
-            ll2.Add(3);
+            ll2.Add(2, 0);
+            Assert.AreEqual(2, ll2.Head.Data);
+            ll2.Add(3, 1);
+            Assert.AreEqual(2, ll2.Head.Data);
+            Assert.AreEqual(3, ll2.Head.Next.Data);
             ll2.Add(4, 1);
             Assert.AreEqual(2, ll2.Head.Data);
             Assert.AreEqual(4, ll2.Head.Next.Data);
@@ -49,8 +52,9 @@ namespace DSATest
             Assert.AreEqual(2, ll2.Head.Next.Data);
             Assert.AreEqual(4, ll2.Head.Next.Next.Data);
             Assert.AreEqual(3, ll2.Head.Next.Next.Next.Data);
-            ll2.Add(6, 5); // 52436
+            ll2.Add(6, 4); // 52436
             Assert.AreEqual(6, ll2.Head.Next.Next.Next.Next.Data);
+            // test for out of range
         }
 
         [TestMethod]
