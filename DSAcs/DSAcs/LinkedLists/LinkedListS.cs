@@ -21,7 +21,6 @@ namespace DSAcs.LinkedLists
             if (Head == null)
             {
                 Head = node;
-                Current = node;
             }
             else
             {
@@ -30,38 +29,32 @@ namespace DSAcs.LinkedLists
                     Current = Current.Next;
                 }
                 Current.Next = node;
-                ResetCurr();
-            } // consider refactoring to an AddBase() and assign property Current to node, then reset Current to null after base is done
+            }
             Size++;
+            ResetCurr();
         }
 
         // add //
         public void Add(T data)
         {
             NodeS node = new(data);
-            if (Head == null)
-            {
-                Head = node;
-                Current = node;
-            }
-            else
-            {
-                while (Current.Next != null)
-                {
-                    Current = Current.Next;
-                }
-                Current.Next = node;
-                ResetCurr();
-            }
-            Size++;
+            Add(node);
         }
 
         // traverse to 1 before the desired insert position, input node gets current.next and current.next gets input
+        // edge cases for inserting at 0, 1, and beyond
         public void Add(T data, int n)
         {
             if (n < 0 || (n > Size && Head != null)) throw new ArgumentOutOfRangeException($"{n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
 
             NodeS node = new(data);
+            Add(node, n);
+        }
+
+        public void Add(NodeS node, int n)
+        {
+            if (n < 0 || (n > Size && Head != null)) throw new ArgumentOutOfRangeException($"{n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
+
             if (Head == null)
             {
                 Head = node;
@@ -95,29 +88,10 @@ namespace DSAcs.LinkedLists
             ResetCurr();
         }
 
-        public void Add(NodeS node, int n)
-        {
-            if (n < 0 || n >= Size) throw new ArgumentOutOfRangeException($"{n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
-            
-            
-
-            Size++;
-        }
-
         public void AddFirst(T data)
         {
             NodeS node = new(data);
-            if (Head == null)
-            {
-                Head = node;
-            }
-            else
-            {
-                node.Next = Head;
-                Head = node;
-            }
-            Size++;
-            Current = Head;
+            AddFirst(node);
         }
 
         public void AddFirst(NodeS node)
@@ -132,7 +106,7 @@ namespace DSAcs.LinkedLists
                 Head = node;
             }
             Size++;
-            Current = Head;
+            ResetCurr();
         }
 
         // remove //
