@@ -8,6 +8,9 @@ namespace DSAcs.LinkedLists
 {
     public interface ILinkedList
     {
+        // create //
+        public void Create(int[] values);
+
         // add //
         // add last
         public void Add(object data);
@@ -36,7 +39,7 @@ namespace DSAcs.LinkedLists
 
         // merge, split //
         // split at n'th node
-        public LinkedList[] Split(int n);
+        public LinkedListBase[] Split(int n);
         // merge two lists
         //public static LinkedList Merge(LinkedList A, LinkedList B);
         // sort ascending
