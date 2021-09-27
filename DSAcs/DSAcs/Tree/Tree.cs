@@ -110,6 +110,8 @@ namespace DSAcs.Tree
             // recursion:
                 // print current
                 // enqueue left (enqueue will check if null)
+                // enqueue right
+                // dequeue curr, move to next in queue
         }
     }
 }

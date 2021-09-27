@@ -9,7 +9,6 @@ C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\DSAcs.pdb
 C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.dll
 C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\ref\DSAcs.dll
 C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.pdb
-C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.csprojAssemblyReference.cache
 C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\DSAcs.deps.json
 C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\DSAcs.dll
 C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\bin\Debug\net5.0\ref\DSAcs.dll
@@ -22,3 +21,4 @@ C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.csproj.Cor
 C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.dll
 C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\ref\DSAcs.dll
 C:\Users\v-akams\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.pdb
+C:\Users\vikra\Development\DSAcs\DSAcs\DSAcs\obj\Debug\net5.0\DSAcs.csprojAssemblyReference.cache

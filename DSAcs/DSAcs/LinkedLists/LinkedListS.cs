@@ -7,32 +7,67 @@ using DSAcs.Nodes;
 
 namespace DSAcs.LinkedLists
 { // should implement ILinkedList
-    class LinkedListS : LinkedList
+    public class LinkedListS<T> : LinkedList
     {
-        NodeS head;
-        Node current; // polymorphic 
-        // add //
-        public void Add(object data)
+        public LinkedListS()
         {
-            NodeS node = new(data);
-            if (head == null)
+            Head = null;
+            Current = null;
+            Size = 0;
+        }
+
+        public void Add(NodeS node)
+        {
+            if (Head == null)
             {
-                head = node;
-                current = node;
+                Head = node;
+                Current = node;
             }
             else
             {
-                current.Next = node;
-                current = current.Next;
+                while (Current.Next != null)
+                {
+                    Current = Current.Next;
+                }
+                Current.Next = node;
+            } // consider refactoring to an AddBase() and assign property Current to node, then reset Current to null after base is done
+        }
+
+        // add //
+        public void Add(T data)
+        {
+            NodeS node = new(data);
+            if (Head == null)
+            {
+                Head = node;
+                Current = node;
+            }
+            else
+            {
+                while (Current.Next != null)
+                {
+                    Current = Current.Next;
+                }
+                Current.Next = node;
             }
         }
 
-        public void Add(object data, int n)
+        public void Add(NodeS node, int n)
         {
+            if (n < 0 || n >= Size) throw new ArgumentOutOfRangeException("Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
+            for (int i = 0; i <=n; i++)
+            {
 
+            }
         }
 
-        public void AddFirst(object data)
+        public void Add(T data, int n)
+        {
+            if (n < 0 || n >= Size) throw new ArgumentOutOfRangeException("Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
+            NodeS node = new NodeS(data);
+        }
+
+        public void AddFirst(T data)
         {
 
         }
