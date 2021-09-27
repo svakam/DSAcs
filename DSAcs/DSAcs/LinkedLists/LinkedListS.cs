@@ -30,6 +30,7 @@ namespace DSAcs.LinkedLists
                     Current = Current.Next;
                 }
                 Current.Next = node;
+                ResetCurr();
             } // consider refactoring to an AddBase() and assign property Current to node, then reset Current to null after base is done
             Size++;
         }
@@ -50,6 +51,7 @@ namespace DSAcs.LinkedLists
                     Current = Current.Next;
                 }
                 Current.Next = node;
+                ResetCurr();
             }
             Size++;
         }
@@ -72,6 +74,7 @@ namespace DSAcs.LinkedLists
                 }
                 node.Next = Current.Next;
                 Current.Next = node;
+                ResetCurr();
             }
             Size++;
         }
@@ -79,20 +82,26 @@ namespace DSAcs.LinkedLists
         {
             if (n < 0 || n >= Size) throw new ArgumentOutOfRangeException("Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
             if (Head == null && n > 0) throw new IndexOutOfRangeException("Cannot declare a location input greater than 0 if the linked list is empty.");
-            NodeS node = new NodeS(data);
+            NodeS node = new(data);
             if (Head == null && n == 0)
             {
                 Head = node;
-                Current = node;
+                Current = Head;
             }
             else
             {
-                for (int i = 0; i <= n - 1; i++)
+                Console.WriteLine($"curr: {Current.Data}");
+                for (int i = 0; i < n - 1; i++)
                 {
                     Current = Current.Next;
                 }
                 node.Next = Current.Next;
                 Current.Next = node;
+                Console.WriteLine($"curr: {Current.Data}");
+                Console.WriteLine(Head.Data);
+                Console.WriteLine(Head.Next.Data);
+                Console.WriteLine(Head.Next.Next.Data);
+                ResetCurr();
             }
             Size++;
         }
@@ -110,7 +119,9 @@ namespace DSAcs.LinkedLists
                 Head = node;
             }
             Size++;
+            Current = Head;
         }
+
         public void AddFirst(NodeS node)
         {
             if (Head == null)
@@ -123,6 +134,7 @@ namespace DSAcs.LinkedLists
                 Head = node;
             }
             Size++;
+            Current = Head;
         }
 
         // remove //
@@ -191,6 +203,11 @@ namespace DSAcs.LinkedLists
         public void MergeSortDescending()
         {
 
+        }
+
+        private void ResetCurr()
+        {
+            Current = Head;
         }
     }
 }
