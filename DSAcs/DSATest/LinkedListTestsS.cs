@@ -54,13 +54,53 @@ namespace DSATest
             Assert.AreEqual(3, ll2.Head.Next.Next.Next.Data);
             ll2.Add(6, 4); // 52436
             Assert.AreEqual(6, ll2.Head.Next.Next.Next.Next.Data);
+            ll2.AddFirst(7); // 752436
+            Assert.AreEqual(7, ll2.Head.Data);
+            Assert.AreEqual(5, ll2.Head.Next.Data);
+            Assert.AreEqual(2, ll2.Head.Next.Next.Data);
             // test for out of range
         }
 
         [TestMethod]
         public override void TestRemoveAndClean()
         {
-
+            Node s;
+            ll = new();
+            ll.AddFirst(5);
+            ll.AddFirst(2);
+            ll.Add(3); 
+            ll.Add(4);
+            ll.Add(7);
+            ll.Add(9);
+            ll.Add(8); // 2534798
+            s = ll.Remove();
+            Assert.AreEqual(8, s.Data); // 253479
+            Assert.AreEqual(2, ll.Head.Data);
+            Assert.AreEqual(5, ll.Head.Next.Data);
+            s = ll.RemoveFirst();
+            Assert.AreEqual(2, s.Data); // 53479
+            Assert.AreEqual(5, ll.Head.Data);
+            Assert.AreEqual(3, ll.Head.Next.Data);
+            s = ll.Remove(0); // 3479
+            Assert.AreEqual(5, s.Data);
+            Assert.AreEqual(3, ll.Head.Data);
+            Assert.AreEqual(4, ll.Head.Next.Data);
+            s = ll.Remove(2); // 349
+            Assert.AreEqual(7, s.Data);
+            Assert.AreEqual(3, ll.Head.Data);
+            Assert.AreEqual(4, ll.Head.Next.Data);
+            Assert.AreEqual(9, ll.Head.Next.Next.Data);
+            s = ll.Remove(2); // 34
+            Assert.AreEqual(9, s.Data);
+            Assert.AreEqual(3, ll.Head.Data);
+            Assert.AreEqual(4, ll.Head.Data);
+            ll.Add(10);
+            ll.Add(11);
+            ll.Add(12);
+            ll.Clean();
+            Assert.IsNull(ll.Head);
+            Assert.IsNull(ll.Current);
+            
         }
 
         [TestMethod]

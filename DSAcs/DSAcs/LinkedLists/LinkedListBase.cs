@@ -13,4 +13,11 @@ namespace DSAcs.LinkedLists
         public Node Current { get; set; }
         public int Size { get; set; }
     }
+
+    public enum NodeLocation
+    {
+        BEGINNING,
+        END,
+        MIDDLE
+    }
 }
