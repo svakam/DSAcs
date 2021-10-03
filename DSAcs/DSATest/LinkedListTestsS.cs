@@ -73,12 +73,13 @@ namespace DSATest
             ll.Add(7);
             ll.Add(9);
             ll.Add(8); // 2534798
-            s = ll.Remove();
-            Assert.AreEqual(8, s.Data); // 253479
+            s = ll.Remove(); // 253479
+            Assert.IsNotNull(s);
+            Assert.AreEqual(8, s.Data);
             Assert.AreEqual(2, ll.Head.Data);
             Assert.AreEqual(5, ll.Head.Next.Data);
-            s = ll.RemoveFirst();
-            Assert.AreEqual(2, s.Data); // 53479
+            s = ll.RemoveFirst(); // 53479
+            Assert.AreEqual(2, s.Data);
             Assert.AreEqual(5, ll.Head.Data);
             Assert.AreEqual(3, ll.Head.Next.Data);
             s = ll.Remove(0); // 3479
@@ -93,7 +94,7 @@ namespace DSATest
             s = ll.Remove(2); // 34
             Assert.AreEqual(9, s.Data);
             Assert.AreEqual(3, ll.Head.Data);
-            Assert.AreEqual(4, ll.Head.Data);
+            Assert.AreEqual(4, ll.Head.Next.Data);
             ll.Add(10);
             ll.Add(11);
             ll.Add(12);
@@ -106,13 +107,41 @@ namespace DSATest
         [TestMethod]
         public override void TestSize()
         {
-
+            ll = new();
+            Assert.AreEqual(0, ll.Size);
+            ll.Add(2);
+            Assert.AreEqual(1, ll.Size);
+            ll.Add(4, 1);
+            Assert.AreEqual(2, ll.Size);
+            ll.AddFirst(5);
+            Assert.AreEqual(3, ll.Size);
+            ll.Remove();
+            Assert.AreEqual(2, ll.Size);
+            ll.RemoveFirst();
+            Assert.AreEqual(1, ll.Size);
+            ll.Remove(0);
+            Assert.AreEqual(0, ll.Size);
         }
 
         [TestMethod]
         public override void TestPeek()
         {
-
+            ll = new();
+            // test peek on null list, greater than size, etc.
+            ll.Add(2);
+            Assert.AreEqual(2, ll.PeekLast());
+            Assert.AreEqual(2, ll.PeekFirst());
+            Assert.AreEqual(2, ll.Peek(0));
+            ll.Add(3);
+            Assert.AreEqual(2, ll.PeekFirst());
+            Assert.AreEqual(3, ll.Peek(1));
+            Assert.AreEqual(3, ll.PeekLast());
+            ll.Add(4);
+            Assert.AreEqual(2, ll.PeekFirst());
+            Assert.AreEqual(2, ll.Peek(0));
+            Assert.AreEqual(3, ll.Peek(1));
+            Assert.AreEqual(4, ll.Peek(2));
+            Assert.AreEqual(4, ll.PeekLast());
         }
 
         [TestMethod]

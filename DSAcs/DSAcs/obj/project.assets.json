@@ -33,6 +33,7 @@
         "https://msazure.pkgs.visualstudio.com/_packaging/Official/nuget/v3/index.json": {},
         "https://msazure.pkgs.visualstudio.com/_packaging/synthetics/nuget/v3/index.json": {},
         "https://msblox.pkgs.visualstudio.com/_packaging/AzureGenevaMonitoring/nuget/v3/index.json": {},
+        "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseUnified/nuget/v3/index.json": {},
         "https://msdata.pkgs.visualstudio.com/_packaging/A365_Workspace/nuget/v3/index.json": {},
         "https://msdata.pkgs.visualstudio.com/_packaging/BigData/nuget/v3/index.json": {},
         "https://msdata.pkgs.visualstudio.com/_packaging/SqlUnified/nuget/v3/index.json": {}

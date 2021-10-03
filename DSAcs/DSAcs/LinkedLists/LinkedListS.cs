@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DSAcs.Nodes;
+using DSAcs.Base;
 
 namespace DSAcs.LinkedLists
 { // should implement ILinkedList
@@ -114,16 +115,17 @@ namespace DSAcs.LinkedLists
             Node temp;
             if (Head.Next == null)
             {
-                temp = Head.Next;
+                temp = Head;
                 Head = null;
                 ResetCurr();
                 return temp;
             }
 
-            for (int i = 0; i < Size - 1; i++)
+            for (int i = 0; i < Size - 2; i++)
             {
                 Current = Current.Next;
             }
+
             temp = Remove(Current, NodeLocation.END);
 
             Size--;
@@ -132,7 +134,7 @@ namespace DSAcs.LinkedLists
             return temp;
         }
 
-        // removes the specified node
+        // uses reference node to remove at input location
         // does the actual removal work; handles all cases except null and length-of-1, which are both handled by wrappers
         public Node Remove(Node current, NodeLocation location)
         {
@@ -180,13 +182,17 @@ namespace DSAcs.LinkedLists
                 temp = Head;
                 Head = null;
             }
-            else if (n == Size)
+            else if (n == Size - 1)
             {
-                for (int i = 0; i < Size; i++)
+                for (int i = 0; i < Size - 2; i++)
                 {
                     Current = Current.Next;
                 }
                 temp = Remove(Current, NodeLocation.END);
+            }
+            else if (n == 0)
+            {
+                temp = Remove(Current, NodeLocation.BEGINNING);
             }
             else
             {
@@ -230,20 +236,32 @@ namespace DSAcs.LinkedLists
         }
 
         // peek//
-        //public object PeekFirst()
-        //{
+        public T PeekFirst()
+        {
+            if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
+            return (T) Head.Data;
+        }
 
-        //}
+        public T PeekLast()
+        {
+            if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
+            for (int i = 0; i < Size; i++)
+            {
+                Current = Current.Next;
+            }
+            return (T) Current.Data;
+        }
 
-        //public object PeekLast()
-        //{
-
-        //}
-
-        //public object Peek(int n)
-        //{
-
-        //}
+        public object Peek(int n)
+        {
+            if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
+            if (n > Size - 1) throw new ArgumentOutOfRangeException("Cannot peek on an index larger than the current size of list.");
+            for (int i = 0; i < n; i++)
+            {
+                Current = Current.Next;
+            }
+            return Current.Data;
+        }
 
         // merge, split //
         //public LinkedList[] Split(int n)
