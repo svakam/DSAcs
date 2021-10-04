@@ -244,23 +244,30 @@ namespace DSAcs.LinkedLists
 
         public T PeekLast()
         {
+            Node temp;
             if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < Size - 1; i++)
             {
                 Current = Current.Next;
             }
-            return (T) Current.Data;
+            Console.WriteLine(Current.Data);
+            temp = Current;
+            ResetCurr();
+            return (T) temp.Data;
         }
 
-        public object Peek(int n)
+        public T Peek(int n)
         {
+            Node temp;
             if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
             if (n > Size - 1) throw new ArgumentOutOfRangeException("Cannot peek on an index larger than the current size of list.");
             for (int i = 0; i < n; i++)
             {
                 Current = Current.Next;
             }
-            return Current.Data;
+            temp = Current;
+            ResetCurr();
+            return (T) temp.Data;
         }
 
         // merge, split //
