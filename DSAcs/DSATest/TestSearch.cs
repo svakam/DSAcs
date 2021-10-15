@@ -57,5 +57,12 @@ namespace DSATest
             Assert.AreEqual(3, BinarySearch.RunRecursion(arr, 20, low, high));
             Assert.AreEqual(1, BinarySearch.RunRecursion(arr, 4, low, high));
         }
+
+        //[TestMethod]
+        //public void TestTime()
+        //{
+        //    int[] arr = new int[] { 3, 6, 10, 12, 15 };
+        //    Search.Time(BinarySearch.Run(arr, 2));
+        //}
     }
 }

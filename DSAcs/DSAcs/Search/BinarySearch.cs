@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Search
 {
-    public static class BinarySearch
+    public static class BinarySearch // derive from search for stopwatch
     {
         // returns position where input element is located, else return null
         public static int? Run(int[] list, int number)
@@ -15,11 +15,10 @@ namespace DSAcs.Search
 
             int low = 0;
             int high = list.Length - 1;
-            int mid;
 
             while (low <= high) // check between low and high, including when narrowed down to 1 element (low == high)
             {
-                mid = (low + high) / 2;
+                int mid = (low + high) / 2;
 
                 int guess = list[mid];
                 if (guess < number)
