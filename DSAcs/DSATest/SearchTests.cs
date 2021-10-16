@@ -9,7 +9,7 @@ using DSAcs.Search;
 namespace DSATest
 {
     [TestClass]
-    public class TestSearch
+    public class SearchTests
     {
         [TestMethod]
         public void TestBinarySearch()
