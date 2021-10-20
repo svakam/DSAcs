@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Sort
 {
-    public class SelectionSort : Helper
+    public class SelectionSort : Helper // select the smallest or largest every iteration and sort it in the array
     {
         // iterate over all elements, store index of where the smallest element is, and swap ith element with where current smallest element is
         public static int[] Ascending(int[] arr)
