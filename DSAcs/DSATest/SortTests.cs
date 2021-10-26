@@ -11,6 +11,7 @@ namespace DSATest
     [TestClass]
     public class SortTests
     {
+        int[] expectedAsc = new int[] { -8, -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         [TestMethod]
         public void TestSelectionSortAsc()
         {
@@ -71,5 +72,18 @@ namespace DSATest
                 Assert.AreEqual(expected[i], actual[i]);
             }
         }
+
+        [TestMethod]
+        public void TestInsertionSortAsc()
+        {
+            int[] arr = new int[] { -1, -8, 5, 3, 8, 7, 6, 9, 10, 1, 2, 4 };
+            int[] actual = InsertionSort.Ascending(arr);
+
+        }
+
+        // [TestMethod]
+        // public void TestInsertionSortDesc()
+        // {
+        // }
     }
 }
