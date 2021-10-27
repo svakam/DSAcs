@@ -90,5 +90,17 @@ namespace DSATest
         // public void TestInsertionSortDesc()
         // {
         // }
+
+        [TestMethod]
+        public void TestMergeSortAsc()
+        {
+            int[] arr = new int[] { -1, -8, 5, 3, 8, 7, 6, 9, 10, 1, 2, 4 };
+            MergeSort.Ascending(arr);
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Assert.AreEqual(expectedAsc[i], arr[i]);
+            }
+        }
     }
 }
