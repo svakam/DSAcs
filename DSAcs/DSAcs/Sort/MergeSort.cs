@@ -15,17 +15,18 @@ namespace DSAcs.Sort
 
         public static void Ascending(int[] arr, int[] helper, int low, int high)
         {
-            if (low < high)
+            if (low < high) // this method runs only if subarray is greater than 1 length
             {
                 int mid = (low + high) / 2;
                 Ascending(arr, helper, low, mid);
-                Ascending(arr, helper, mid + 1, high);
+                Ascending(arr, helper, mid + 1, high); // recurse on two halves of the given array/subarray
                 Merge(arr, helper, low, mid, high);
             }
         }
 
         public static void Merge(int[] arr, int[] helper, int low, int mid, int high)
         {
+            // copy both halves into helper
             for (int i = low; i <= high; i++)
             {
                 helper[i] = arr[i];
@@ -35,6 +36,8 @@ namespace DSAcs.Sort
             int helperRight = mid + 1;
             int current = low;
 
+            // iterate through helper array
+            // compare left and right half, copying back the smaller of the two elements into the original array
             while (helperLeft <= mid && helperRight <= high)
             {
                 if (helper[helperLeft] <= helper[helperRight])
@@ -50,6 +53,9 @@ namespace DSAcs.Sort
                 current++;
             }
 
+            // copy the rest of the left side of the array into the target array
+            // won't be copied if the left has already been fully copied over
+            // don't need to copy the right half because it's already been already there
             int remaining = mid - helperLeft;
             for (int i = 0; i <= remaining; i++)
             {
