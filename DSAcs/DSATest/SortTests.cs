@@ -102,5 +102,30 @@ namespace DSATest
                 Assert.AreEqual(expectedAsc[i], arr[i]);
             }
         }
+
+        [TestMethod]
+        public void TestQuickSortAsc()
+        {
+            int[] arr = new int[] { -1, -8, 5, 3, 8, 7, 6, 9, 10, 1, 2, 4 };
+
+            // https://www.techiedelight.com/enumerate-an-enum-csharp/
+            foreach (PivotMethod pivotMethod in Enum.GetValues(typeof(PivotMethod)))
+            {
+                QuickSort.Ascending(arr, pivotMethod);
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    Assert.AreEqual(expectedAsc[i], arr[i]);
+                }
+                
+                // reset array to unsorted
+                arr = new int[] { -1, -8, 5, 3, 8, 7, 6, 9, 10, 1, 2, 4 };
+            }
+            //QuickSort.Ascending(arr, PivotMethod.MIDDLE);
+            //QuickSort.Ascending(arr, PivotMethod.FIRST);
+            //QuickSort.Ascending(arr, PivotMethod.LAST);
+            //QuickSort.Ascending(arr, PivotMethod.RANDOM);
+            //QuickSort.Ascending(arr, PivotMethod.MEDIANOFTHREE);
+
+        }
     }
 }
