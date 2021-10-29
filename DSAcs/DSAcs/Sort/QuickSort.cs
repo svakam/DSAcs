@@ -31,7 +31,7 @@ namespace DSAcs.Sort
 
         // pick a pivot point, swap all elements around the pivot until all elements left of pivot are smaller than all elements on the right of pivot
         private static int Partition(int[] arr, int left, int right)
-        {
+        {   
             int pivotIndex = SetPivot(arr, left, right, MethodOfPivot);
             int pivot = arr[pivotIndex];
 
@@ -40,7 +40,7 @@ namespace DSAcs.Sort
                 while (arr[left] < pivot) left++; // find element on left of pivot that's larger than pivot and which should be swapped to the right with an element that's smaller than or is the pivot
                 while (arr[right] > pivot) right--; // find element on right of pivot that's smaller than pivot and which should be swapped to the left with an element that's larger than or is the pivot
 
-                if (left <= right)
+                if (left <= right) // swap the given elements left and right of the pivot; potential exists for swapping on the pivot/same element
                 {
                     Swap(arr, left, right);
 
