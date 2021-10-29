@@ -15,12 +15,12 @@ namespace DSAcs.Sort
 
         public static void Ascending(int[] arr, int[] helper, int low, int high)
         {
-            if (low < high) // this method runs only if subarray is greater than 1 length
+            if (low < high) // no recursion if subarray is just 1 element
             {
                 int mid = (low + high) / 2;
                 Ascending(arr, helper, low, mid);
                 Ascending(arr, helper, mid + 1, high); // recurse on two halves of the given array/subarray
-                Merge(arr, helper, low, mid, high);
+                Merge(arr, helper, low, mid, high); // sort and 'merge' the two halves back into the array
             }
         }
 
