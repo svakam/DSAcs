@@ -17,6 +17,7 @@ namespace DSAcs.Sort
 
         public static void Ascending(int[] arr, int left, int right)
         {
+            // partition, then sort each side around pivot in each
             int indexToPartitionOn = Partition(arr, left, right);
             if (left < indexToPartitionOn - 1) // if there is still a left side to quick sort (size of subset is > 1)
             {
