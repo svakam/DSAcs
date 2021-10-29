@@ -31,26 +31,26 @@ namespace DSAcs.Sort
             return arr;
         }
 
-        public static int[] Descending(int[] arr)
-        {
-            int idxOfLargest;
+        //public static int[] Descending(int[] arr)
+        //{
+        //    int idxOfLargest;
             
-            for (int i = 0; i < arr.Length - 1; i++)
-            {
-                idxOfLargest = i;
-                for (int j = i + 1; j < arr.Length; j++)
-                {
-                    if (arr[j] > arr[idxOfLargest])
-                    {
-                        idxOfLargest = j;
-                    }
-                }
+        //    for (int i = 0; i < arr.Length - 1; i++)
+        //    {
+        //        idxOfLargest = i;
+        //        for (int j = i + 1; j < arr.Length; j++)
+        //        {
+        //            if (arr[j] > arr[idxOfLargest])
+        //            {
+        //                idxOfLargest = j;
+        //            }
+        //        }
 
-                // swap
-                arr = Swap(arr, i, idxOfLargest);
-            }
+        //        // swap
+        //        arr = Swap(arr, i, idxOfLargest);
+        //    }
 
-            return arr;
-        }
+        //    return arr;
+        //}
     }
 }

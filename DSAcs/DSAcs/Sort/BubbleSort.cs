@@ -46,32 +46,32 @@ namespace DSAcs.Sort
             return arr;
         }
         
-        public static int[] Descending(int[] arr)
-        {
-            StringBuilder sb = new StringBuilder("initial: ");
-            for (int i = 0; i < arr.Length; i++)
-            {
-                sb.Append(arr[i]);
-            }
-            Console.WriteLine(sb.ToString());
-            for (int i = arr.Length - 1; i > 0; i--)
-            {
-                for (int j = arr.Length - 1; j > arr.Length - i; j--)
-                {
-                    if (arr[j] > arr[j - 1])
-                    {
-                        arr = Swap(arr, j, j - 1);
-                    }
-                }
-                int k = i - arr.Length;
-                sb = new StringBuilder($"on {k}");
-                for (k = 0; k < arr.Length; k++)
-                {
-                    sb.Append(arr[k]);
-                }
-                Console.WriteLine(sb.ToString());
-            }
-            return arr;
-        }
+        //public static int[] Descending(int[] arr)
+        //{
+        //    StringBuilder sb = new StringBuilder("initial: ");
+        //    for (int i = 0; i < arr.Length; i++)
+        //    {
+        //        sb.Append(arr[i]);
+        //    }
+        //    Console.WriteLine(sb.ToString());
+        //    for (int i = arr.Length - 1; i > 0; i--)
+        //    {
+        //        for (int j = arr.Length - 1; j > arr.Length - i; j--)
+        //        {
+        //            if (arr[j] > arr[j - 1])
+        //            {
+        //                arr = Swap(arr, j, j - 1);
+        //            }
+        //        }
+        //        int k = i - arr.Length;
+        //        sb = new StringBuilder($"on {k}");
+        //        for (k = 0; k < arr.Length; k++)
+        //        {
+        //            sb.Append(arr[k]);
+        //        }
+        //        Console.WriteLine(sb.ToString());
+        //    }
+        //    return arr;
+        //}
     }
 }
