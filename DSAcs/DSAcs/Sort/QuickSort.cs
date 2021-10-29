@@ -19,11 +19,11 @@ namespace DSAcs.Sort
         {
             // partition, then sort each side around pivot in each
             int indexToPartitionOn = Partition(arr, left, right);
-            if (left < indexToPartitionOn - 1) // if there is still a left side to quick sort (size of subset is > 1)
+            if (left < indexToPartitionOn - 1) // if there is still a left side to quick sort (size of subset is > 1), then recurse to re-partition it and swap
             {
                 Ascending(arr, left, indexToPartitionOn - 1);
             }
-            if (indexToPartitionOn < right) // if there is still a right side to quick sort (size of subset is > 1)
+            if (indexToPartitionOn < right) // if there is still a right side to quick sort (size of subset is > 1), then recurse to re-partition it and swap
             {
                 Ascending(arr, indexToPartitionOn, right);
             }
