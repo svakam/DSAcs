@@ -127,5 +127,16 @@ namespace DSATest
             //QuickSort.Ascending(arr, PivotMethod.MEDIANOFTHREE);
 
         }
+
+        [TestMethod]
+        public void TestHeapSortAsc()
+        {
+            int[] arr = new int[] { -1, -8, 5, 3, 8, 7, 6, 9, 10, 1, 2, 4 };
+            HeapSort.Ascending(arr);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Assert.AreEqual(expectedAsc[i], arr[i]);
+            }
+        }
     }
 }

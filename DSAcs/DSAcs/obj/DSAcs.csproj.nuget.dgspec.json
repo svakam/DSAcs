@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vikra\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj": {}
+    "C:\\Users\\v-akams\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vikra\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj": {
+    "C:\\Users\\v-akams\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vikra\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj",
+        "projectUniqueName": "C:\\Users\\v-akams\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj",
         "projectName": "DSAcs",
-        "projectPath": "C:\\Users\\vikra\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj",
-        "packagesPath": "C:\\Users\\vikra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vikra\\Development\\DSAcs\\DSAcs\\DSAcs\\obj\\",
+        "projectPath": "C:\\Users\\v-akams\\Development\\DSAcs\\DSAcs\\DSAcs\\DSAcs.csproj",
+        "packagesPath": "C:\\Users\\v-akams\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\v-akams\\Development\\DSAcs\\DSAcs\\DSAcs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vikra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\v-akams\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json": {},
+          "https://msazure.pkgs.visualstudio.com/DefaultCollection/_apis/packaging/Official/nuget/index.json": {},
+          "https://msazure.pkgs.visualstudio.com/_packaging/Official/nuget/v3/index.json": {},
+          "https://msazure.pkgs.visualstudio.com/_packaging/synthetics/nuget/v3/index.json": {},
+          "https://msblox.pkgs.visualstudio.com/_packaging/AzureGenevaMonitoring/nuget/v3/index.json": {},
+          "https://msdata.pkgs.visualstudio.com/A365/_packaging/SynapseUnified/nuget/v3/index.json": {},
+          "https://msdata.pkgs.visualstudio.com/_packaging/A365_Workspace/nuget/v3/index.json": {},
+          "https://msdata.pkgs.visualstudio.com/_packaging/BigData/nuget/v3/index.json": {},
+          "https://msdata.pkgs.visualstudio.com/_packaging/SqlUnified/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
@@ -54,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.208\\RuntimeIdentifierGraph.json"
         }
       }
     }
