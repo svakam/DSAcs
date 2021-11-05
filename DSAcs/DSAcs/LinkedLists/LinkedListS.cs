@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -281,25 +280,34 @@ namespace DSAcs.LinkedLists
 
         //}
 
-        public void SortAscending()
-        {
+        //public void SortAscending()
+        //{
 
-        }
+        //}
 
-        public void SortDescending()
-        {
+        //public void SortDescending()
+        //{
 
-        }
+        //}
 
-        public void MergeSortAscending()
-        {
+        //public LinkedListS<T> MergeSortAscending(LinkedListS<T> A, LinkedListS<T> B)
+        //{
+        //    // if either list is null and other isn't, return non-null
+        //    // if both lists null, return null
+        //    if (A == null && B != null) return B;
+        //    else if (A != null && B == null) return A;
+        //    else if (A == null && B == null) return null;
 
-        }
+        //    Node runnerA = A.Head.Next;
+        //    Node runnerB = B.Head.Next;
 
-        public void MergeSortDescending()
-        {
+            
+        //}
 
-        }
+        //public void MergeSortDescending()
+        //{
+
+        //}
 
         private void ResetCurr()
         {

@@ -39,16 +39,24 @@ namespace DSAcs.LinkedLists
 
         // merge, split //
         // split at n'th node
-        public LinkedListBase[] Split(int n);
-        // merge two lists
-        //public static LinkedList Merge(LinkedList A, LinkedList B);
+        //public LinkedListBase[] Split(int n);
         // sort ascending
-        public void SortAscending();
+        //public void SortAscending();
         // sort descending
-        public void SortDescending();
+        //public void SortDescending();
         // mergesort two lists ascending
         public void MergeSortAscending();
         // mergesort two lists descending
-        public void MergeSortDescending();
+        //public void MergeSortDescending();
+
+        // other //
+        public int ReturnKthToLast(int k);
+        // partition list around value x such that all nodes less than x come before all nodes greater than or equal to x
+        public void Partition(int x);
+
+        //public LinkedListS SumList(LinkedListS A, LinkedListS B);
+        //public bool IsPalindrome(LinkedListS list);
+        // public bool TwoListsIntersect(LinkedListS A, LinkedListS B);
+        // public bool IsCircular();
     }
 }
