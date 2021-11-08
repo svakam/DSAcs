@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSAcs.LinkedLists
 {
-    public interface ILinkedListG<T> : ILinkedList
+    public interface ILinkedListG<T> : ILinkedList // inherits non-generic LL methods
     {
 
     }
