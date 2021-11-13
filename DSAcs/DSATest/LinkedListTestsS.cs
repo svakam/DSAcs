@@ -147,7 +147,28 @@ namespace DSATest
         [TestMethod]
         public override void TestSplit()
         {
+            ll = new();
+            ll.Add(2);
+            ll.Add(3);
+            ll.Add(4);
+            ll.Add(5);
+            Node[] heads = ll.Split(1); // split after index 1 AKA 2nd node
+            Assert.AreEqual(2, heads[0].Data);
+            Assert.AreEqual(4, heads[1].Data);
+            Assert.AreEqual(2, heads.Length);
 
+            ll = new();
+            ll.Add(2);
+            ll.Add(3);
+            Node[] heads2 = ll.Split(1);
+            Assert.AreEqual(2, heads2[0].Data);
+            Assert.AreEqual(1, heads2.Length);
+
+            //ll = new();
+            //ll.Add(2);
+            // assert throws exception
+            //Assert.AreEqual(2, heads3[0].Data);
+            //Assert.AreEqual(1, heads3.Length);
         }
 
         [TestMethod]

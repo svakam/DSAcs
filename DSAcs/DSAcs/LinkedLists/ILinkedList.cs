@@ -6,24 +6,24 @@ using DSAcs.LinkedLists;
 
 namespace DSAcs.LinkedLists
 {
-    public interface ILinkedList
+    public interface ILinkedList<T>
     {
         // create //
-        public void Create(int[] values);
+        //public void Create(object[] values);
 
         // add //
         // add last
-        public void Add(object data);
+        public void Add(NodeS node);
         // insert at nth node
-        public void Add(object data, int n);
-        // add first
-        public void AddFirst(object data);
+        public void Add(T data, int n);
+        public void AddFirst(NodeS node);
 
         // remove //
         // remove last
         public Node Remove();
         // remove at n'th node
-        public Node Remove(object data, int n);
+        public Node Remove(Node current, NodeLocation location);
+        public Node Remove(int n);
         // remove first
         public Node RemoveFirst();
         // clean list
@@ -31,24 +31,24 @@ namespace DSAcs.LinkedLists
 
         // peek //
         // peek first
-        public object PeekFirst();
+        public T PeekFirst();
         // peek last
-        public object PeekLast();
+        public T PeekLast();
         // peek n'th node
-        public object Peek(int n);
+        public T Peek(int n);
 
         // merge, split //
         // split at n'th node
-        public LinkedListBase[] Split(int n);
+        public Node[] Split(int n);
         // merge two lists
         //public static LinkedList Merge(LinkedList A, LinkedList B);
         // sort ascending
-        public void SortAscending();
+        //public void SortAscending();
         // sort descending
-        public void SortDescending();
+        //public void SortDescending();
         // mergesort two lists ascending
-        public void MergeSortAscending();
+        //public void MergeSortAscending();
         // mergesort two lists descending
-        public void MergeSortDescending();
+        //public void MergeSortDescending();
     }
 }

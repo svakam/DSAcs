@@ -8,7 +8,7 @@ using DSAcs.Base;
 
 namespace DSAcs.LinkedLists
 { // should implement ILinkedList
-    public class LinkedListS<T> : LinkedListBase
+    public class LinkedListS<T> : LinkedListBase, ILinkedList<T>
     {
         public LinkedListS()
         {
@@ -164,12 +164,6 @@ namespace DSAcs.LinkedLists
             }
         }
 
-        // removes all nodes with a value of data from the list
-        //public Node Remove(T data)
-        //{
-
-        //}
-
         // removes at specified location from list
         public Node Remove(int n)
         {
@@ -271,10 +265,32 @@ namespace DSAcs.LinkedLists
         }
 
         // merge, split //
-        //public LinkedList[] Split(int n)
-        //{
+        // split list after nth index
+        public Node[] Split(int n)
+        {
+            // if list size is smaller than 2, can't split
+            if (Size < 2) throw new InvalidOperationException("Cannot split a list with a size smaller than 1.");
+            
+            Node[] heads;
+            // if index is at the end, no splitting required; return the full list
+            if (n == Size - 1)
+            {
+                heads = new Node[1];
+                heads[0] = Head;
+                return heads;
+            }
 
-        //}
+            heads = new Node[2];
+            heads[0] = Head;
+            for (int i = 0; i < n; i++)
+            {
+                Current = Current.Next;
+            }
+            NodeS head2 = (NodeS) Current.Next;
+            Current.Next = null;
+            heads[1] = head2;
+            return heads;
+        }
 
         //public static LinkedList Merge(LinkedListS A, LinkedListS B)
         //{

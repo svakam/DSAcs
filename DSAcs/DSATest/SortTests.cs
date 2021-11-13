@@ -111,6 +111,7 @@ namespace DSATest
             // https://www.techiedelight.com/enumerate-an-enum-csharp/
             foreach (PivotMethod pivotMethod in Enum.GetValues(typeof(PivotMethod)))
             {
+                Console.WriteLine($"Running test on {pivotMethod}.");
                 QuickSort.Ascending(arr, pivotMethod);
                 for (int i = 0; i < arr.Length; i++)
                 {
