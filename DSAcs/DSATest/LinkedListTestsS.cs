@@ -172,22 +172,37 @@ namespace DSATest
         }
 
         [TestMethod]
-        public override void TestMerge()
+        public override void TestMergeAsc()
         {
+            LinkedListS<int> a = new();
+            a.Add(4);
+            a.Add(8);
+            a.Add(15);
+            a.Add(19);
+            LinkedListS<int> b = new();
+            b.Add(7);
+            b.Add(9);
+            b.Add(10);
+            b.Add(16);
+            LinkedListS<int> merged = new();
+            merged.Add(4);
+            merged.Add(7);
+            merged.Add(8);
+            merged.Add(9);
+            merged.Add(10);
+            merged.Add(15);
+            merged.Add(16);
+            merged.Add(19);
+            Node mergedList = LinkedListS<int>.MergeAsc(a, b);
 
+            Node currentExp = merged.Head;
+            Node currentAct = mergedList;
+            while (currentExp != null)
+            {
+                Assert.AreEqual(currentExp.Data, currentAct.Data);
+                currentExp = currentExp.Next;
+                currentAct = currentAct.Next;
+            }
         }
-
-        [TestMethod]
-        public override void TestSorting()
-        {
-
-        }
-
-        [TestMethod]
-        public override void TestMergeSorting()
-        {
-
-        }
-
     }
 }

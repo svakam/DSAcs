@@ -30,13 +30,6 @@ namespace DSATest
         public abstract void TestSplit();
 
         [TestMethod]
-        public abstract void TestMerge();
-
-        [TestMethod]
-        public abstract void TestSorting();
-
-        [TestMethod]
-        public abstract void TestMergeSorting();
-
+        public abstract void TestMergeAsc();
     }
 }

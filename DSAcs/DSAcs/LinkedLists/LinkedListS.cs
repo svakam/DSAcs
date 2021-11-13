@@ -291,20 +291,64 @@ namespace DSAcs.LinkedLists
             return heads;
         }
 
-        //public static LinkedList Merge(LinkedListS A, LinkedListS B)
-        //{
+        // merge two sorted lists in-place and return head of sorted list
+        public static Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B)
+        {
+            // if both lists are empty, then merged list is also empty
+            // if one of the lists is empty, then merged list is the other list
+            if (A.Head == null) return B.Head;
+            if (B.Head == null) return A.Head;
 
-        //}
+            // set head to smallest
+            Node mergedHead;
+            if ((int)A.Head.Data <= (int)B.Head.Data)
+            {
+                mergedHead = A.Head;
+                A.Head = A.Head.Next;
+            }
+            else
+            {
+                mergedHead = B.Head;
+                B.Head = B.Head.Next;
+            }
 
-        //public void SortAscending()
-        //{
+            // start tail
+            Node mergedTail = mergedHead;
 
-        //}
+            // create merged list while neither heads are null
+            while (A.Head != null && B.Head != null)
+            {
+                // set a temp holder to least value between the heads so the head can be moved up to compare the next two
+                Node temp;
+                if ((int)A.Head.Data <= (int)B.Head.Data)
+                {
+                    temp = A.Head;
+                    A.Head = A.Head.Next;
+                }
+                else
+                {
+                    temp = B.Head;
+                    B.Head = B.Head.Next;
+                }
 
-        //public void SortDescending()
-        //{
+                // set what the tail's pointing to to where temp is and set the tail to temp; this orders the merged list and sets tail to end of current merged list
+                mergedTail.Next = temp;
+                mergedTail = temp;
+            }
 
-        //}
+            // if one of the heads aren't null, set what merged tail's next ref to the head
+            if (A.Head != null)
+            {
+                mergedTail.Next = A.Head;
+            }
+            else if (B.Head != null)
+            {
+                mergedTail.Next = B.Head;
+            }
+
+            // return the merged head
+            return mergedHead;
+        }
 
         private void ResetCurr()
         {
