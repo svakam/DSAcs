@@ -49,6 +49,16 @@ namespace DSAcs.LinkedLists
         // mergesort two lists ascending
         //public void MergeSortAscending();
         // mergesort two lists descending
+
+        // other //
+        public int ReturnKthToLast(int k);
+        // partition list around value x such that all nodes less than x come before all nodes greater than or equal to x
+        public void Partition(int x);
+
+        //public LinkedListS SumList(LinkedListS A, LinkedListS B);
+        //public bool IsPalindrome(LinkedListS list);
+        // public bool TwoListsIntersect(LinkedListS A, LinkedListS B);
+        // public bool IsCircular();
         //public void MergeSortDescending();
     }
 }
