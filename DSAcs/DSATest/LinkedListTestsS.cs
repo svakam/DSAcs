@@ -174,6 +174,7 @@ namespace DSATest
         [TestMethod]
         public override void TestMergeAsc()
         {
+            LinkedListS<int> l = new();
             LinkedListS<int> a = new();
             a.Add(4);
             a.Add(8);
@@ -193,7 +194,7 @@ namespace DSATest
             merged.Add(15);
             merged.Add(16);
             merged.Add(19);
-            Node mergedList = LinkedListS<int>.MergeAsc(a, b);
+            Node mergedList = l.MergeAsc(a, b);
 
             Node currentExp = merged.Head;
             Node currentAct = mergedList;

@@ -40,11 +40,11 @@ namespace DSAcs.LinkedLists
         // merge, split //
         // split at n'th node
         public Node[] Split(int n);
-        // merge two lists
-        //public static Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B);
 
+        public Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B);
 
         // other //
+        public bool IsLoop();
         //public int ReturnKthToLast(int k);
         // partition list around value x such that all nodes less than x come before all nodes greater than or equal to x
         //public void Partition(int x);
