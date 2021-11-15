@@ -350,6 +350,26 @@ namespace DSAcs.LinkedLists
             return mergedHead;
         }
 
+        // Floyd's cycle-finding algorithm
+        // set fast current to traverse list twice as fast; while neither pointers are still on a node and fast current's next is a node, move tracers
+        // and check for landing on same node; fast will eventually catch up with slow if it's a cycle
+        public bool IsLoop()
+        {
+            Node FastCurrent = Head;
+            int counter = 0;
+            while (Current != null && FastCurrent != null && FastCurrent.Next != null)
+            {
+                Console.WriteLine($"counter: {counter}");
+                Console.WriteLine($"current: {Current.Data}");
+                Console.WriteLine($"fast: {FastCurrent.Data}");
+                Current = Current.Next;
+                FastCurrent = FastCurrent.Next.Next;
+                if (Current == FastCurrent) return true;
+                counter++;
+            }
+            return false;
+        }
+
         private void ResetCurr()
         {
             Current = Head;

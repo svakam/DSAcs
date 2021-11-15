@@ -205,5 +205,23 @@ namespace DSATest
                 currentAct = currentAct.Next;
             }
         }
+
+        [TestMethod]
+        public override void TestIsLoop()
+        {
+            LinkedListS<int> l = new();
+            l.Add(2);
+            l.Add(3);
+            l.Add(4);
+            l.Add(5);
+            l.Current.Next.Next.Next = l.Head;
+            Assert.IsTrue(l.IsLoop());
+
+            LinkedListS<int> m = new();
+            m.Add(2);
+            m.Add(3);
+            m.Add(4);
+            Assert.IsFalse(m.IsLoop());
+        }
     }
 }

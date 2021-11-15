@@ -31,5 +31,8 @@ namespace DSATest
 
         [TestMethod]
         public abstract void TestMergeAsc();
+
+        [TestMethod]
+        public abstract void TestIsLoop();
     }
 }
