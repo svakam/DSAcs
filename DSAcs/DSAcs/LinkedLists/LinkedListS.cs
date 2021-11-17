@@ -36,7 +36,6 @@ namespace DSAcs.LinkedLists
                 }
                 Current.Next = node;
             }
-            Size++;
             ResetCurr();
         }
 
@@ -81,8 +80,6 @@ namespace DSAcs.LinkedLists
                     }
                 }
             }
-
-            Size++;
             ResetCurr();
         }
 
@@ -102,7 +99,6 @@ namespace DSAcs.LinkedLists
                 node.Next = Head;
                 Head = node;
             }
-            Size++;
             ResetCurr();
         }
 
@@ -127,7 +123,6 @@ namespace DSAcs.LinkedLists
 
             temp = Remove(Current, NodeLocation.END);
 
-            Size--;
             ResetCurr();
 
             return temp;
@@ -196,7 +191,6 @@ namespace DSAcs.LinkedLists
                 temp = Remove(Current, NodeLocation.MIDDLE);
             }
 
-            Size--;
             ResetCurr();
             return temp;
         }
@@ -216,7 +210,6 @@ namespace DSAcs.LinkedLists
 
             temp = Remove(Head, NodeLocation.BEGINNING);
 
-            Size--;
             ResetCurr();
             return temp;
         }
@@ -378,13 +371,13 @@ namespace DSAcs.LinkedLists
                 Current = Current.Next;
             }
             removed = RemoveAtCurrentOnly(Current);
-            Size--;
             return removed;
         }
 
         // keep ref to next node, copy data from next into current (effectively 'removing' this data) and point to next's next
         public Node RemoveAtCurrentOnly(Node current)
         {
+            if (current.Next == null) throw new InvalidOperationException("Cannot remove at current only at the last node of hte list.");
             Node temp = current.Next;
             
             // swap step isn't necessary, but useful for testing; swap the removed val into temp (later removed)
@@ -395,6 +388,43 @@ namespace DSAcs.LinkedLists
             current.Next = temp.Next;
             temp.Next = null;
             return temp;
+        }
+
+        // get size difference, move pointer on longer list up by difference, move both pointers up by 1 until intersection found, else return null
+        public Node GetIntersectionOfTwoListsSimple(LinkedListS<T> a, LinkedListS<T> b)
+        {
+            int lengthDiffAFromB = a.Size - b.Size;
+            Console.WriteLine(lengthDiffAFromB);
+            bool aLongerThanB = false;
+            Console.WriteLine(aLongerThanB);
+            if (lengthDiffAFromB < 0) aLongerThanB = true;
+            int lengthDiff = Math.Abs(lengthDiffAFromB);
+
+            if (lengthDiff != 0)
+            {
+                if (aLongerThanB)
+                {
+                    for (int i = 0; i < lengthDiff; i++)
+                    {
+                        a.Current = a.Current.Next;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < lengthDiff; i++)
+                    {
+                        b.Current = b.Current.Next;
+                    }
+                }
+            }
+
+            while (a.Current != null & b.Current != null)
+            {
+                if (a.Current == b.Current) return a.Current;
+                a.Current = a.Current.Next;
+                b.Current = b.Current.Next;
+            }
+            return null;
         }
 
         private void ResetCurr()

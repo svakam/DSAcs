@@ -37,5 +37,8 @@ namespace DSATest
 
         [TestMethod]
         public abstract void TestRemoveKthNodeFromEnd();
+
+        [TestMethod]
+        public abstract void TestGetIntersectionOfTwoListsSimple();
     }
 }
