@@ -45,7 +45,7 @@ namespace DSAcs.LinkedLists
 
         // other //
         public bool IsLoop();
-        //public int ReturnKthToLast(int k);
+        public Node RemoveKthNodeFromEnd(int k);
         // partition list around value x such that all nodes less than x come before all nodes greater than or equal to x
         //public void Partition(int x);
 

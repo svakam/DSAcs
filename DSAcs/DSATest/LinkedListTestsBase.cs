@@ -34,5 +34,8 @@ namespace DSATest
 
         [TestMethod]
         public abstract void TestIsLoop();
+
+        [TestMethod]
+        public abstract void TestRemoveKthNodeFromEnd();
     }
 }

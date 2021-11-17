@@ -359,15 +359,42 @@ namespace DSAcs.LinkedLists
             int counter = 0;
             while (Current != null && FastCurrent != null && FastCurrent.Next != null)
             {
-                Console.WriteLine($"counter: {counter}");
-                Console.WriteLine($"current: {Current.Data}");
-                Console.WriteLine($"fast: {FastCurrent.Data}");
                 Current = Current.Next;
                 FastCurrent = FastCurrent.Next.Next;
                 if (Current == FastCurrent) return true;
                 counter++;
             }
             return false;
+        }
+
+        public Node RemoveKthNodeFromEnd(int k)
+        {
+            if (k > Size) throw new ArgumentOutOfRangeException("Cannot remove a node out of range of this list.");
+            int numTimesToTraverse = Size - k;
+
+            Node removed;
+            for (int i = 0; i < numTimesToTraverse; i++)
+            {
+                Current = Current.Next;
+            }
+            removed = RemoveAtCurrentOnly(Current);
+            Size--;
+            return removed;
+        }
+
+        // keep ref to next node, copy data from next into current (effectively 'removing' this data) and point to next's next
+        public Node RemoveAtCurrentOnly(Node current)
+        {
+            Node temp = current.Next;
+            
+            // swap step isn't necessary, but useful for testing; swap the removed val into temp (later removed)
+            object removedVal = temp.Data;
+            temp.Data = current.Data;
+            current.Data = removedVal;
+
+            current.Next = temp.Next;
+            temp.Next = null;
+            return temp;
         }
 
         private void ResetCurr()

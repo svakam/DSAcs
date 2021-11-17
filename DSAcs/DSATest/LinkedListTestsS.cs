@@ -223,5 +223,27 @@ namespace DSATest
             m.Add(4);
             Assert.IsFalse(m.IsLoop());
         }
+
+        [TestMethod]
+        public override void TestRemoveKthNodeFromEnd()
+        {
+            LinkedListS<int> l = new();
+            l.Add(2);
+            l.Add(3);
+            l.Add(4);
+            l.Add(5);
+            l.Add(6);
+            Node removedNode = l.RemoveKthNodeFromEnd(5);
+            Assert.AreEqual(4, l.Size);
+            Assert.AreEqual(2, removedNode.Data);
+            Node curr = l.Head;
+            int data = 3;
+            for (int i = 0; i < l.Size; i++)
+            {
+                Assert.AreEqual(data, curr.Data);
+                curr = curr.Next;
+                data++;
+            }
+        }
     }
 }
