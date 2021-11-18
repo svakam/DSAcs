@@ -350,14 +350,15 @@ namespace DSAcs.LinkedLists
         public bool IsLoop()
         {
             Node FastCurrent = Head;
-            int counter = 0;
+            int loopsDone = 0;
             while (Current != null && FastCurrent != null && FastCurrent.Next != null)
             {
                 Current = Current.Next;
                 FastCurrent = FastCurrent.Next.Next;
                 if (Current == FastCurrent) return true;
-                counter++;
+                loopsDone++;
             }
+            Console.WriteLine($"loops done: {loopsDone}");
             return false;
         }
 
