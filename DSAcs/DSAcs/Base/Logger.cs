@@ -10,7 +10,7 @@ namespace DSAcs.Base
     {
         public static void Log(object log)
         {
-            Console.WriteLine(log.ToString());
+            System.Diagnostics.Debug.WriteLine(log.ToString());
         }
     }
 }
