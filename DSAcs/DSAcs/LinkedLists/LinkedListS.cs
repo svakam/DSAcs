@@ -286,6 +286,8 @@ namespace DSAcs.LinkedLists
         // merge two sorted lists in-place and return head of sorted list
         public Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B)
         {
+            // Head of each list will act as runner to optimize memory
+
             // if both lists are empty, then merged list is also empty
             // if one of the lists is empty, then merged list is the other list
             if (A.Head == null) return B.Head;
