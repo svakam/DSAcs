@@ -53,7 +53,6 @@ namespace DSAcs.Sort
         //    {
         //        sb.Append(arr[i]);
         //    }
-        //    Console.WriteLine(sb.ToString());
         //    for (int i = arr.Length - 1; i > 0; i--)
         //    {
         //        for (int j = arr.Length - 1; j > arr.Length - i; j--)
@@ -69,7 +68,6 @@ namespace DSAcs.Sort
         //        {
         //            sb.Append(arr[k]);
         //        }
-        //        Console.WriteLine(sb.ToString());
         //    }
         //    return arr;
         //}
