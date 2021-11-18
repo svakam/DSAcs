@@ -241,9 +241,10 @@ namespace DSAcs.LinkedLists
 
         public T Peek(int n)
         {
+            int size = Size;
             Node temp;
             if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
-            if (n > Size - 1) throw new ArgumentOutOfRangeException("Cannot peek on an index larger than the current size of list.");
+            if (n > size - 1) throw new ArgumentOutOfRangeException("Cannot peek on an index larger than the current size of list.");
             for (int i = 0; i < n; i++)
             {
                 Current = Current.Next;
