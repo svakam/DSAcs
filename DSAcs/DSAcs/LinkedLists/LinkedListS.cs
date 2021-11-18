@@ -9,12 +9,7 @@ namespace DSAcs.LinkedLists
 { // should implement ILinkedList
     public class LinkedListS<T> : LinkedListBase, ILinkedList<T>
     {
-        public LinkedListS()
-        {
-            Head = null;
-            Current = null;
-            Size = 0;
-        }
+        public LinkedListS() : base() { }
 
         // add //
         public void Add(T data)
@@ -107,6 +102,7 @@ namespace DSAcs.LinkedLists
         public Node Remove()
         {
             if (Head == null) throw new InvalidOperationException("Cannot remove from an empty list.");
+            int size = Size;
             Node temp;
             if (Head.Next == null)
             {
@@ -116,7 +112,7 @@ namespace DSAcs.LinkedLists
                 return temp;
             }
 
-            for (int i = 0; i < Size - 2; i++)
+            for (int i = 0; i < size - 2; i++) // move up to 2nd to last
             {
                 Current = Current.Next;
             }
@@ -161,18 +157,19 @@ namespace DSAcs.LinkedLists
         // removes at specified location from list
         public Node Remove(int n)
         {
-            if (n < 0 || n > Size) throw new ArgumentOutOfRangeException($"Input location {n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
+            int size = Size;
+            if (n < 0 || n > size) throw new ArgumentOutOfRangeException($"Input location {n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
             if (Head == null) throw new InvalidOperationException("Cannot remove from an empty list.");
 
             Node temp;
-            if (Size == 1)
+            if (size == 1)
             {
                 temp = Head;
                 Head = null;
             }
-            else if (n == Size - 1)
+            else if (n == size - 1)
             {
-                for (int i = 0; i < Size - 2; i++)
+                for (int i = 0; i < size - 2; i++)
                 {
                     Current = Current.Next;
                 }
@@ -230,13 +227,13 @@ namespace DSAcs.LinkedLists
 
         public T PeekLast()
         {
+            int size = Size;
             Node temp;
             if (Head == null) throw new InvalidOperationException("Cannot peek on an empty list.");
-            for (int i = 0; i < Size - 1; i++)
+            for (int i = 0; i < size - 1; i++)
             {
                 Current = Current.Next;
             }
-            Console.WriteLine(Current.Data);
             temp = Current;
             ResetCurr();
             return (T) temp.Data;
@@ -260,12 +257,13 @@ namespace DSAcs.LinkedLists
         // split list after nth index
         public Node[] Split(int n)
         {
+            int size = Size;
             // if list size is smaller than 2, can't split
-            if (Size < 2) throw new InvalidOperationException("Cannot split a list with a size smaller than 1.");
+            if (size < 2) throw new InvalidOperationException("Cannot split a list with a size smaller than 1.");
             
             Node[] heads;
             // if index is at the end, no splitting required; return the full list
-            if (n == Size - 1)
+            if (n == size - 1)
             {
                 heads = new Node[1];
                 heads[0] = Head;
@@ -362,8 +360,9 @@ namespace DSAcs.LinkedLists
 
         public Node RemoveKthNodeFromEnd(int k)
         {
-            if (k > Size) throw new ArgumentOutOfRangeException("Cannot remove a node out of range of this list.");
-            int numTimesToTraverse = Size - k;
+            int size = Size;
+            if (k > size) throw new ArgumentOutOfRangeException("Cannot remove a node out of range of this list.");
+            int numTimesToTraverse = size - k;
 
             Node removed;
             for (int i = 0; i < numTimesToTraverse; i++)
@@ -394,9 +393,7 @@ namespace DSAcs.LinkedLists
         public Node GetIntersectionOfTwoListsSimple(LinkedListS<T> a, LinkedListS<T> b)
         {
             int lengthDiffAFromB = a.Size - b.Size;
-            Console.WriteLine(lengthDiffAFromB);
             bool aLongerThanB = false;
-            Console.WriteLine(aLongerThanB);
             if (lengthDiffAFromB < 0) aLongerThanB = true;
             int lengthDiff = Math.Abs(lengthDiffAFromB);
 
@@ -425,11 +422,6 @@ namespace DSAcs.LinkedLists
                 b.Current = b.Current.Next;
             }
             return null;
-        }
-
-        private void ResetCurr()
-        {
-            Current = Head;
         }
     }
 }

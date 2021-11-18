@@ -11,22 +11,39 @@ namespace DSAcs.LinkedLists
     {
         public Node Head { get; set; }
         public Node Current { get; set; }
-        public int Size {
-            get { return GetSize(); }
-            set { }
+        public int Size 
+        {
+            get
+            {
+                return GetSize();
+            }
+            set
+            { }
+        }
+
+        protected LinkedListBase()
+        {
+            Head = null;
+            Current = null;
+            Size = 0;
         }
 
         private int GetSize()
         {
+            Node temp = Head;
             if (Head == null) return 0;
-            while (Current != null)
+            int sizeCounter = 0;
+            while (temp != null)
             {
-                Console.WriteLine(Current.Data);
-                Size++;
-                Console.WriteLine(Size);
-                Current = Current.Next;
+                sizeCounter++;
+                temp = temp.Next;
             }
-            return Size;
+            return sizeCounter;
+        }
+
+        protected void ResetCurr()
+        {
+            Current = Head;
         }
     }
 
