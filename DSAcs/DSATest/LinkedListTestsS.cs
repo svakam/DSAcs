@@ -109,18 +109,20 @@ namespace DSATest
         {
             ll = new();
             Assert.AreEqual(0, ll.Size);
-            ll.Add(2);
+            ll.Add(100);
             Assert.AreEqual(1, ll.Size);
+            ll.Add(3);
+            Assert.AreEqual(2, ll.Size);
             ll.Add(4, 1);
-            Assert.AreEqual(2, ll.Size);
-            ll.AddFirst(5);
             Assert.AreEqual(3, ll.Size);
+            ll.AddFirst(5);
+            Assert.AreEqual(4, ll.Size);
             ll.Remove();
-            Assert.AreEqual(2, ll.Size);
+            Assert.AreEqual(3, ll.Size);
             ll.RemoveFirst();
-            Assert.AreEqual(1, ll.Size);
+            Assert.AreEqual(2, ll.Size);
             ll.Remove(0);
-            Assert.AreEqual(0, ll.Size);
+            Assert.AreEqual(1, ll.Size);
         }
 
         [TestMethod]
