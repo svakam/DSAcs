@@ -4,10 +4,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DSAcs.Nodes;
 using DSAcs.Base;
+using DSAcs.Stack;
 
 namespace DSAcs.LinkedLists
 { // should implement ILinkedList
-    public class LinkedListS<T> : LinkedListBase, ILinkedList<T>
+    public class LinkedListS<T> : LinkedListBase<T>, ILinkedList<T>
     {
         public LinkedListS() : base() { }
 
@@ -393,9 +394,12 @@ namespace DSAcs.LinkedLists
             return temp;
         }
 
-        // get size difference, move pointer on longer list up by difference, move both pointers up by 1 until intersection found, else return null
         public Node GetIntersectionOfTwoListsSimple(LinkedListS<T> a, LinkedListS<T> b)
         {
+            // get size difference
+            // move pointer on longer list up by difference
+            // move both pointers up by 1 until intersection found, else return null
+
             int lengthDiffAFromB = a.Size - b.Size;
             bool aLongerThanB = false;
             if (lengthDiffAFromB < 0) aLongerThanB = true;
@@ -426,6 +430,55 @@ namespace DSAcs.LinkedLists
                 b.Current = b.Current.Next;
             }
             return null;
+        }
+
+        // push each list - node by node - to its own stack, with node addresses as data of stack
+        // pop a node off each list simultaneously
+        // if addresses match between each popped, store in temp variable and continue popping
+        // when addresses don't match, the temp variable holds the first intersecting node; return it
+        public Node GetIntersectionOfTwoListsStack(LinkedListS<T> a, LinkedListS<T> b)
+        {
+            // for an intersection to occur, there must be two lists
+            // assumption made that two lists can technically exist if two pointers point to the same head of a 'list'
+            if (a == null || b == null) return null;
+
+            Stack<T> stackA = new();
+            Stack<T> stackB = new();
+
+            while (a.Current != null)
+            {
+                stackA.Push(CastToNodeS(a.Current));
+                a.Current = a.Current.Next;
+            }
+            while (b.Current != null)
+            {
+                stackB.Push(CastToNodeS(b.Current));
+                b.Current = b.Current.Next;
+            }
+
+            Node intersection = null;
+
+            int counter = 1;
+            while (stackA.Top == stackB.Top)
+            {
+                System.Diagnostics.Debug.WriteLine($"a{counter}: {stackA.Top.Data}");
+                System.Diagnostics.Debug.WriteLine($"b{counter}: {stackB.Top.Data}");
+                Node poppedA = stackA.Pop();
+                Node poppedB = stackB.Pop();
+                counter++;
+
+                if (poppedA == poppedB)
+                {
+                    intersection = poppedA;
+                }
+            }
+
+            return intersection;
+        }
+
+        private NodeS CastToNodeS(Node node)
+        {
+            return (NodeS)node;
         }
     }
 }

@@ -7,7 +7,7 @@ using DSAcs.Nodes;
 
 namespace DSAcs.LinkedLists
 {
-    public abstract class LinkedListBase
+    public abstract class LinkedListBase<T>
     {
         public Node Head { get; set; }
         public Node Current { get; set; }

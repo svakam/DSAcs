@@ -40,5 +40,8 @@ namespace DSATest
 
         [TestMethod]
         public abstract void TestGetIntersectionOfTwoListsSimple();
+
+        [TestMethod]
+        public abstract void TestGetIntersectionOfTwoListsStack();
     }
 }

@@ -47,6 +47,7 @@ namespace DSAcs.LinkedLists
         public bool IsLoop();
         public Node RemoveKthNodeFromEnd(int k);
         public Node GetIntersectionOfTwoListsSimple(LinkedListS<T> a, LinkedListS<T> b);
+        public Node GetIntersectionOfTwoListsStack(LinkedListS<T> a, LinkedListS<T> b);
         // partition list around value x such that all nodes less than x come before all nodes greater than or equal to x
         //public void Partition(int x);
 

@@ -265,5 +265,23 @@ namespace DSATest
             Node intersection = l.GetIntersectionOfTwoListsSimple(l, m);
             Assert.AreEqual(m.Head.Next.Next, intersection);
         }
+
+        [TestMethod]
+        public override void TestGetIntersectionOfTwoListsStack()
+        {
+            LinkedListS<int> l = new();
+            LinkedListS<int> m = new();
+            l.Add(2);
+            l.Add(4);
+            l.Add(6);
+            l.Add(8);
+            l.Add(10);
+            m.Add(3);
+            m.Add(5);
+            m.Head.Next.Next = l.Head.Next.Next;
+            Assert.AreEqual(m.Head.Next.Next, l.Head.Next.Next);
+            Node intersection = l.GetIntersectionOfTwoListsStack(l, m);
+            Assert.AreEqual(m.Head.Next.Next, intersection);
+        }
     }
 }
