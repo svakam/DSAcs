@@ -53,7 +53,5 @@ namespace DSAcs.LinkedLists
 
         //public LinkedListS SumList(LinkedListS A, LinkedListS B);
         //public bool IsPalindrome(LinkedListS list);
-        // public bool IsCircular();
-        //public void MergeSortDescending();
     }
 }
