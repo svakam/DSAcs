@@ -23,6 +23,7 @@ namespace DSAcs.Queue
 
             NodeS temp = (NodeS)Front;
             Front = Front.Next;
+            temp.Next = null;
             if (Front == null) Back = null;
             return temp;
         }
