@@ -208,5 +208,24 @@ namespace DSAcs.Tree
         //    }
         //    return height;
         //}
+
+        public int MaxValueOfBT(Tree tree)
+        {
+            return MaxValueOfBT(tree.Root, int.MinValue);
+        }
+        private int MaxValueOfBT(TreeNode node, int max)
+        {
+            if (node == null) return max;
+
+            // base
+            if ((int)node.Data > max) max = (int)node.Data;
+
+            // recursive
+
+            //int maxFromLeft = MaxValueOfBT(node.Left, max);
+            //int maxFromRight = MaxValueOfBT(node.Right, max);
+            //return Math.Max(maxFromLeft, maxFromRight);
+            return Math.Max(MaxValueOfBT(node.Left, max), MaxValueOfBT(node.Right, max));
+        }
     }
 }

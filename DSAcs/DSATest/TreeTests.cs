@@ -75,5 +75,30 @@ namespace DSATest
             int height = tree.GetMaxDepthRecursive(tree);
             Assert.AreEqual(6, height);
         }
+        
+        [TestMethod]
+        public void TestMaxValueBT()
+        {
+            Tree tree = new(
+                new TreeNode(1,
+                    new TreeNode(2,
+                        new TreeNode(3,
+                            null, new TreeNode(1000,
+                                new TreeNode(5,
+                                    new TreeNode(7, null, null),
+                                    new TreeNode(8, null, null)),
+                                new TreeNode(6,
+                                    null,
+                                    new TreeNode(9, null, null)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+
+            int max = tree.MaxValueOfBT(tree);
+            Assert.AreEqual(1000, max);
+        }
     }
 }
