@@ -162,7 +162,7 @@ namespace DSAcs.Tree
         }
         public int GetMaxDepthRecursive(TreeNode node)
         {
-            if (node == null) return -1; // when a node is null, returns as -1, but will return as 0 when adding its parent (-1 + 1)
+            if (node == null) return 0; // when a node is null, returns as -1, but will return as 0 when adding its parent (-1 + 1)
 
             int lDepth = GetMaxDepthRecursive(node.Left);
             int rDepth = GetMaxDepthRecursive(node.Right);
@@ -177,23 +177,34 @@ namespace DSAcs.Tree
             }
         }
 
-        //public int GetMaxDepthIterative(TreeNode node)
+        //public int GetMaxDepthIterative(TreeNode root)
         //{
         //    // base case
-        //    if (node == null) return 0;
+        //    if (root == null) return 0;
 
         //    QueueG<TreeNode> q = new();
 
-        //    q.Enqueue(node);
+        //    // enqueue tree root
+        //    q.Enqueue(root);
         //    int height = 0;
 
+        //    // while queue is full, a current level exists to be processed
         //    while (!q.IsEmpty())
         //    {
+        //        // increment height for this level
         //        height++;
 
-        //        TreeNode temp = q.Dequeue();
-        //        if (temp.Left != null) q.Enqueue(temp.Left);
-        //        if (temp.Right != null) q.Enqueue(temp.Right);
+        //        // get number of nodes in this level
+        //        int nodesInCurrLevelProcessed = q.Count();
+        //        // process current level's nodes only and add its children to queue
+        //        while (nodesInCurrLevelProcessed != 0)
+        //        {
+        //            TreeNode temp = q.Dequeue(); // dequeue current level's nodes one by one and add children to queue
+        //            if (temp.Left != null) q.Enqueue(temp.Left);
+        //            if (temp.Right != null) q.Enqueue(temp.Right);
+        //            nodesInCurrLevelProcessed--;
+        //        }
+        //        // at this point, next level is enqueued; increment height at next loop
         //    }
         //    return height;
         //}
