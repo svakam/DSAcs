@@ -125,10 +125,10 @@ namespace DSAcs.Tree
 
             // base case: if root's left and right aren't null, increment count
             int count = 0;
-            if (Root.Left != null && Root.Right != null) count++;
+            if (node.Left != null && node.Right != null) count++;
 
             // recursive case: add current call's count to calls on left and right
-            count += CountFullNodesDFS(Root.Left) + CountFullNodesDFS(node.Right);
+            count += CountFullNodesDFS(node.Left) + CountFullNodesDFS(node.Right);
             return count;
         }
 
