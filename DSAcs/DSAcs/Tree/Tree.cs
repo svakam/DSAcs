@@ -119,7 +119,7 @@ namespace DSAcs.Tree
         {
             return CountFullNodesDFS(tree.Root);
         }
-        private int CountFullNodesDFS(TreeNode node)
+        public int CountFullNodesDFS(TreeNode node)
         {
             if (node == null) return 0;
 
@@ -160,7 +160,7 @@ namespace DSAcs.Tree
         {
             return GetMaxDepthRecursive(tree.Root);
         }
-        private int GetMaxDepthRecursive(TreeNode node)
+        public int GetMaxDepthRecursive(TreeNode node)
         {
             if (node == null) return 0; // when a node is null, returns as -1, but will return as 0 when adding its parent (-1 + 1)
 
@@ -213,7 +213,7 @@ namespace DSAcs.Tree
         {
             return MaxValueOfBT(tree.Root, int.MinValue);
         }
-        private int MaxValueOfBT(TreeNode node, int max)
+        public int MaxValueOfBT(TreeNode node, int max)
         {
             if (node == null) return max;
 
@@ -226,6 +226,18 @@ namespace DSAcs.Tree
             //int maxFromRight = MaxValueOfBT(node.Right, max);
             //return Math.Max(maxFromLeft, maxFromRight);
             return Math.Max(MaxValueOfBT(node.Left, max), MaxValueOfBT(node.Right, max));
+        }
+
+        public int MaxValueOfBST(Tree tree)
+        {
+            return MaxValueOfBST(tree.Root);
+        }
+        public int MaxValueOfBST(TreeNode node)
+        {
+            TreeNode rightMost = node;
+            while (node.Right != null) rightMost = node.Right;
+            System.Diagnostics.Debug.WriteLine(rightMost.Data);
+            return (int)rightMost.Data;
         }
     }
 }
