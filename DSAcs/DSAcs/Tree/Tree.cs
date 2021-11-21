@@ -155,5 +155,26 @@ namespace DSAcs.Tree
 
         //    return count;
         //}
+
+        public int GetMaxDepth(Tree tree)
+        {
+            return GetMaxDepth(tree.Root);
+        }
+        public int GetMaxDepth(TreeNode node)
+        {
+            if (node == null) return -1; // when a node is null, returns as -1, but will return as 0 when adding its parent (-1 + 1)
+
+            int lDepth = GetMaxDepth(node.Left);
+            int rDepth = GetMaxDepth(node.Right);
+
+            if (lDepth > rDepth)
+            {
+                return lDepth + 1; // counting the current node + the left subtree height
+            }
+            else
+            {
+                return rDepth + 1; // counting the current node + the right subtree height
+            }
+        }
     }
 }
