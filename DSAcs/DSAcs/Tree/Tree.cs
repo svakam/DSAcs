@@ -239,5 +239,23 @@ namespace DSAcs.Tree
             System.Diagnostics.Debug.WriteLine(rightMost.Data);
             return (int)rightMost.Data;
         }
+
+        public bool ValidateBST(Tree tree)
+        {
+            return ValidateBST(tree.Root, int.MinValue, int.MaxValue);
+        }
+        public bool ValidateBST(TreeNode node, int allowedMin, int allowedMax)
+        {
+            if (node == null) return true; // empty subtree is a true BST; if reach bottom without any falses, whole result returns true
+
+            // base
+            if ((int)node.Data < allowedMin || (int)node.Data > allowedMax) return false;
+
+            // recursive:
+            // when moving left, left MUST be smaller than current so constrain max by current - 1
+            // when moving right, right MUST be larger than current so constrain min by current + 1
+            // if either return false, whole result returns false
+            return (ValidateBST(node.Left, allowedMin, (int)node.Data - 1) && ValidateBST(node.Right, (int)node.Data + 1, allowedMax));
+        }
     }
 }
