@@ -50,5 +50,30 @@ namespace DSATest
             int fullNodes = tree.CountFullNodesDFS(tree);
             Assert.AreEqual(2, fullNodes);
         }
+
+        [TestMethod]
+        public void TestMaxDepth()
+        {
+            Tree tree = new(
+                new TreeNode(1,
+                    new TreeNode(2,
+                        new TreeNode(3,
+                            null, new TreeNode(4,
+                                new TreeNode(5,
+                                    new TreeNode(7, null, null), 
+                                    new TreeNode(8, null, null)), 
+                                new TreeNode(6, 
+                                    null, 
+                                    new TreeNode(9, null, null)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+
+            int height = tree.GetMaxDepthRecursive(tree);
+            Assert.AreEqual(6, height);
+        }
     }
 }
