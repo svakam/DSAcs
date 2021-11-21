@@ -36,5 +36,19 @@ namespace DSATest
             Assert.AreEqual("426531", tree2.Traverse(Tree.TraversalType.POSTORDER));
             //Assert.AreEqual("123456", tree2.Traverse(Tree.TraversalType.BREADTHFIRST)); -- resolve runtime vs. compile-time construct of queue
         }
+
+        [TestMethod]
+        public void TestCountFullNodes()
+        {
+            Tree tree = new(new TreeNode(1, 
+                new TreeNode(2, 
+                new TreeNode(3, 
+                null, new TreeNode(4, 
+                new TreeNode(5, 
+                new TreeNode(7, null, null), new TreeNode(8, null, null)), new TreeNode(6, null, new TreeNode(9)))))));
+
+            int fullNodes = tree.CountFullNodesDFS(tree);
+            Assert.AreEqual(2, fullNodes);
+        }
     }
 }

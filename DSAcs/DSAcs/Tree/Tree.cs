@@ -123,12 +123,12 @@ namespace DSAcs.Tree
         {
             if (node == null) return 0;
 
-            // base case: if root's left and right aren't null, increment count
             int count = 0;
-            if (node.Left != null && node.Right != null) count++;
-
             // recursive case: add current call's count to calls on left and right
             count += CountFullNodesDFS(node.Left) + CountFullNodesDFS(node.Right);
+            // base case: if root's left and right aren't null, increment count
+            if (node.Left != null && node.Right != null) count++;
+
             return count;
         }
 
@@ -176,5 +176,26 @@ namespace DSAcs.Tree
                 return rDepth + 1; // counting the current node + the right subtree height
             }
         }
+
+        //public int GetMaxDepthIterative(TreeNode node)
+        //{
+        //    // base case
+        //    if (node == null) return 0;
+
+        //    QueueG<TreeNode> q = new();
+
+        //    q.Enqueue(node);
+        //    int height = 0;
+
+        //    while (!q.IsEmpty())
+        //    {
+        //        height++;
+
+        //        TreeNode temp = q.Dequeue();
+        //        if (temp.Left != null) q.Enqueue(temp.Left);
+        //        if (temp.Right != null) q.Enqueue(temp.Right);
+        //    }
+        //    return height;
+        //}
     }
 }
