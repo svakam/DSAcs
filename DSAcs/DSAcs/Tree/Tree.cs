@@ -113,5 +113,47 @@ namespace DSAcs.Tree
                 // enqueue right
                 // dequeue curr, move to next in queue
         }
+
+        // traverse tree in postorder; if node is full, increment count and add returned values of left and right subtrees
+        public int CountFullNodesDFS(Tree tree)
+        {
+            return CountFullNodesDFS(tree.Root);
+        }
+        public int CountFullNodesDFS(TreeNode node)
+        {
+            if (node == null) return 0;
+
+            // base case: if root's left and right aren't null, increment count
+            int count = 0;
+            if (Root.Left != null && Root.Right != null) count++;
+
+            // recursive case: add current call's count to calls on left and right
+            count += CountFullNodesDFS(Root.Left) + CountFullNodesDFS(node.Right);
+            return count;
+        }
+
+        // iterative sol'n using a queue: check if a given node has both children; if so, increment count and enqueue its children
+        //public int CountFullNodesBFS()
+        //{
+        //    if (Root == null) return 0;
+
+        //    QueueG<TreeNode> q = new();
+        //    q.Enqueue(Root);
+
+        //    int count = 0;
+        //    while (!q.IsEmpty())
+        //    {
+        //        TreeNode temp = q.Dequeue();
+        //        if (temp.Left != null && temp.Right != null)
+        //        {
+        //            count++;
+        //        }
+
+        //        if (temp.Left != null) q.Enqueue(temp.Left);
+        //        if (temp.Right != null) q.Enqueue(temp.Right);
+        //    }
+
+        //    return count;
+        //}
     }
 }
