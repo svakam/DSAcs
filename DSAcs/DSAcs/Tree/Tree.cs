@@ -248,14 +248,15 @@ namespace DSAcs.Tree
         {
             if (node == null) return true; // empty subtree is a true BST; if reach bottom without any falses, whole result returns true
 
+            int value = (int)node.Data;
             // base
-            if ((int)node.Data < allowedMin || (int)node.Data > allowedMax) return false;
+            if (value < allowedMin || value > allowedMax) return false;
 
             // recursive:
             // when moving left, left MUST be smaller than current so constrain max by current - 1
             // when moving right, right MUST be larger than current so constrain min by current + 1
             // if either return false, whole result returns false
-            return (ValidateBST(node.Left, allowedMin, (int)node.Data - 1) && ValidateBST(node.Right, (int)node.Data + 1, allowedMax));
+            return ValidateBST(node.Left, allowedMin, value - 1) && ValidateBST(node.Right, value + 1, allowedMax);
         }
     }
 }
