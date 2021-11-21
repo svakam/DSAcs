@@ -119,7 +119,7 @@ namespace DSAcs.Tree
         {
             return CountFullNodesDFS(tree.Root);
         }
-        public int CountFullNodesDFS(TreeNode node)
+        private int CountFullNodesDFS(TreeNode node)
         {
             if (node == null) return 0;
 
@@ -160,7 +160,7 @@ namespace DSAcs.Tree
         {
             return GetMaxDepthRecursive(tree.Root);
         }
-        public int GetMaxDepthRecursive(TreeNode node)
+        private int GetMaxDepthRecursive(TreeNode node)
         {
             if (node == null) return 0; // when a node is null, returns as -1, but will return as 0 when adding its parent (-1 + 1)
 
