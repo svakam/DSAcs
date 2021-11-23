@@ -123,5 +123,25 @@ namespace DSATest
             int max = BST.MaxValueOfBST(BST);
             Assert.AreEqual(100, max);
         }
+        [TestMethod]
+        public void TestInsert()
+        {
+            Tree BST = new(
+                new TreeNode(50,
+                    new TreeNode(25,
+                        new TreeNode(15,
+                            new TreeNode(5, null, null),
+                            new TreeNode(20, null, null)),
+                        new TreeNode(35,
+                            new TreeNode(30, null, null),
+                            new TreeNode(40, null, null))
+                        ),
+                    new TreeNode(75,
+                        new TreeNode(60, null, null),
+                        new TreeNode(100, null, null)
+                        )
+                    )
+                );
+        }
     }
 }
