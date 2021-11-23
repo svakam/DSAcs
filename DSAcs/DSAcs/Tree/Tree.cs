@@ -8,10 +8,9 @@ using DSAcs.Queue;
 
 namespace DSAcs.Tree
 {
-    public class Tree
+    public class Tree : TreeBase
     {
         protected TreeNode Root { get; set; }
-        protected TraversalType Traversal { get; set; }
         protected StringBuilder Sb { get; set; }
 
         public Tree() { }
@@ -28,13 +27,6 @@ namespace DSAcs.Tree
         // preorder: root, left, right
         // in order: left, root, right
         // postorder: left, right, root
-        public enum TraversalType
-        {
-            PREORDER,
-            INORDER,
-            POSTORDER,
-            BREADTHFIRST
-        }
 
         public string Traverse(TraversalType traversalType)
         {
@@ -236,8 +228,17 @@ namespace DSAcs.Tree
         {
             TreeNode rightMost = node;
             while (node.Right != null) rightMost = node.Right;
-            System.Diagnostics.Debug.WriteLine(rightMost.Data);
             return (int)rightMost.Data;
+        }
+        public int MinValueOfVST(Tree tree)
+        {
+            return MinValueOfBST(tree.Root);
+        }
+        public int MinValueOfBST(TreeNode node)
+        {
+            TreeNode leftMost = node;
+            while (node.Left != null) leftMost = leftMost.Left;
+            return (int)leftMost.Data;
         }
 
         public bool ValidateBST(Tree tree)
@@ -258,5 +259,85 @@ namespace DSAcs.Tree
             // if either return false, whole result returns false
             return ValidateBST(node.Left, allowedMin, value - 1) && ValidateBST(node.Right, value + 1, allowedMax);
         }
+
+        public bool IsBSTBalanced(Tree tree)
+        {
+            return IsBSTBalanced(tree.Root);
+        }
+        public bool IsBSTBalanced(TreeNode node)
+        {
+            if (node == null) return true;
+
+            return Math.Abs(GetMaxDepthRecursive(node.Left) - GetMaxDepthRecursive(node.Right)) <= 1;
+        }
+
+        public void Insert(int val)
+        {
+            if (Root == null) Root = new TreeNode(val);
+            Insert(Root, val);
+        }
+        public void Insert(TreeNode node, int val)
+        {
+            if ((int)node.Data < val)
+            {
+                if (node.Right != null) Insert(node.Right, val);
+                else node.Right = new TreeNode(val);
+            }
+            else
+            {
+                if (node.Left != null) Insert(node.Left, val);
+                else node.Left = new TreeNode(val);
+            }
+        }
+
+        public void Remove(int val)
+        {
+            if (Root == null) throw new InvalidOperationException("Cannot remove from an empty tree.");
+            //if (Remove(Root, val)) throw new ArgumentException("Could not find this value in the current tree.");
+        }
+        //public void Remove(TreeNode node, int val)
+        //{
+        //    if (node == null) return;
+        //    if ((int)node.Data == val)
+        //    {
+        //        // replace current node with in-order precursor or successor depending on enum input
+        //        TreeNode replacementVal;
+        //        if (RemovalMethod == RemoveMethod.INORDERPRECURSOR)
+        //        {
+        //            replacementVal = RemoveAndGetMaxValueOfBST(node.Left);
+        //        }
+        //        else
+        //        {
+        //            replacementVal = RemoveAndGetMinValueOfBST(node.Right);
+        //        }
+        //        node.Data = replacementVal;
+        //    }
+        //    else if ((int) node.Data > val)
+        //    {
+        //        Remove(node.Left, val);
+        //    }
+        //    else
+        //    {
+        //        Remove(node.Right, val);
+        //    }
+        //}
+        //private TreeNode RemoveAndGetMinValueOfBST(TreeNode node)
+        //{
+        //    TreeNode leftMost = node;
+        //    while (leftMost.Left.Left != null) leftMost = leftMost.Left; // traverse to parent of the min node; condition assumes balanced subtree
+
+        //    TreeNode temp = leftMost.Left;
+        //    leftMost.Left = null;
+        //    return temp;
+        //}
+        //private TreeNode RemoveAndGetMaxValueOfBST(TreeNode node)
+        //{
+        //    TreeNode rightMost = node;
+        //    while (rightMost.Right.Right != null) rightMost = rightMost.Right; // traverse to parent of max node; assuming balanced subtree
+
+        //    TreeNode temp = rightMost.Right;
+        //    rightMost.Right = null;
+        //    return temp;
+        //}
     }
 }
