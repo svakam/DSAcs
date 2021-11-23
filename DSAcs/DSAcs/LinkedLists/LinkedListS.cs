@@ -476,7 +476,7 @@ namespace DSAcs.LinkedLists
             return intersection;
         }
 
-        private NodeS CastToNodeS(Node node)
+        private static NodeS CastToNodeS(Node node)
         {
             return (NodeS)node;
         }
