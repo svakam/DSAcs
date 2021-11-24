@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public class NodeS : Node
+    public class NodeS<T> : Node<T>
     {
-        public NodeS(object data=null, NodeS next=null) : base(data) { }
+        public NodeS(T data, NodeS<T> next=null) : base(data) 
+        {
+            Next = next;
+        }
     }
 }

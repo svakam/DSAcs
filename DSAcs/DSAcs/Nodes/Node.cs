@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public abstract class Node
+    public abstract class Node<T>
     {
-        public object Data { get; set; }
-        public Node Next { get; set; }
+        public T Data { get; set; }
+        public Node<T> Next { get; set; }
 
-        public Node(object data=null, Node next=null)
+        public Node(T data)
         {
             Data = data;
-            this.Next = next;
         }
 
         // Data {get; set;} same as:
