@@ -7,16 +7,18 @@ using DSAcs.Nodes;
 
 namespace DSAcs.Queue
 {
-    public class Queue : QueueBase, IQueue
+    // queue is open at both ends (2 pointers), with direction front to back
+    public class Queue<T> : QueueBase, IQueue<T>
     {
-        public Queue(object data)
+        public Queue() { }
+        public Queue(T data)
         {
             Node node = new NodeS(data);
             Front = node;
             Back = node;
         }
 
-        public void Enqueue(object data)
+        public void Enqueue(T data)
         {
             Node node = new NodeS(data);
             if (IsEmpty())
@@ -47,12 +49,22 @@ namespace DSAcs.Queue
                 Back = Back.Next;
             }
         }
+        public NodeS Dequeue()
+        {
+            if (Front == null) throw new InvalidOperationException("Cannot dequeue from an empty queue.");
 
-        public object Peek()
+            NodeS temp = (NodeS)Front;
+            Front = Front.Next;
+            temp.Next = null;
+            if (Front == null) Back = null;
+            return temp;
+        }
+
+        public T Peek()
         {
             if (Front != null)
             {
-                return Front.Data;
+                return (T) Front.Data;
             }
             throw new ArgumentNullException("Queue is empty.");
         }

@@ -94,7 +94,7 @@ namespace DSAcs.Tree
              generic is a compile-time construct, thus cannot use type at runtime; need to construct _instance_ of the generic type at runtime
              https://stackoverflow.com/questions/17519078/initializing-a-generic-variable-from-a-c-sharp-type-variable 
             */
-            var type = typeof(QueueG<>).MakeGenericType(node.Data.GetType());
+            var type = typeof(Queue<>).MakeGenericType(node.Data.GetType());
             dynamic context = Activator.CreateInstance(type);
             type.GetMethod("Enqueue").Invoke(context, null);
             

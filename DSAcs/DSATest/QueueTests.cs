@@ -15,12 +15,12 @@ namespace DSATest
         [TestMethod]
         public void Instantiation()
         {
-            QueueG<int> queue = new();
+            Queue<int> queue = new();
             Assert.IsNotNull(queue);
             Assert.IsNull(queue.Front);
             Assert.IsNull(queue.Back);
 
-            QueueG<int> queue2 = new(2);
+            Queue<int> queue2 = new(2);
             Assert.IsNotNull(queue2);
             Assert.IsNotNull(queue2.Front.Data);
             Assert.IsNotNull(queue2.Back.Data);
@@ -28,7 +28,7 @@ namespace DSATest
         [TestMethod]
         public void TestEnqueue()
         {
-            QueueG<string> queue = new("hi");
+            Queue<string> queue = new("hi");
             queue.Enqueue("hello");
             Assert.AreEqual("hi", queue.Front.Data);
             Assert.AreEqual("hello", queue.Back.Data);
@@ -39,10 +39,10 @@ namespace DSATest
         [TestMethod]
         public void TestDequeue()
         {
-            QueueG<int> queueNull = new();
+            Queue<int> queueNull = new();
             //Assert.ThrowsException(queue.Dequeue);
 
-            QueueG<int> queue = new(1);
+            Queue<int> queue = new(1);
             queue.Dequeue();
             Assert.IsNull(queue.Front);
             Assert.IsNull(queue.Back);
@@ -68,7 +68,7 @@ namespace DSATest
         [TestMethod]
         public void TestPeek()
         {
-            QueueG<string> queue = new("hi");
+            Queue<string> queue = new("hi");
             object front = queue.Peek();
             Assert.AreEqual("hi", front);
             queue.Enqueue("hello");
@@ -82,7 +82,7 @@ namespace DSATest
         [TestMethod]
         public void TestIsEmpty()
         {
-            QueueG<string> queue = new();
+            Queue<string> queue = new();
             Assert.IsTrue(queue.IsEmpty());
             queue.Enqueue("hi");
             Assert.IsFalse(queue.IsEmpty());

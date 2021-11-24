@@ -7,11 +7,11 @@ using DSAcs.Nodes;
 
 namespace DSAcs.Queue
 {
-    public interface IQueue
+    public interface IQueue<T>
     {
         public NodeS Dequeue();
-        public void Enqueue(object data);
-        public object Peek();
+        public void Enqueue(T data);
+        public T Peek();
         public bool IsEmpty();
     }
 }

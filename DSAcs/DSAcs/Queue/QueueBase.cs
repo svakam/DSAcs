@@ -17,17 +17,6 @@ namespace DSAcs.Queue
             Back = null;
         }
 
-        public NodeS Dequeue()
-        {
-            if (Front == null) throw new InvalidOperationException("Cannot dequeue from an empty queue.");
-
-            NodeS temp = (NodeS)Front;
-            Front = Front.Next;
-            temp.Next = null;
-            if (Front == null) Back = null;
-            return temp;
-        }
-
         public bool IsEmpty()
         {
             return Front == null;
