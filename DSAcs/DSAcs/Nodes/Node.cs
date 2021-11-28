@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public abstract class Node<T>
+    public abstract class Node
     {
-        public T Data { get; set; }
-        public Node<T> Next { get; set; }
+        public object Data { get; set; }
+        public Node Next { get; set; }
 
-        public Node(T data)
+        public Node(object data)
         {
             Data = data;
         }

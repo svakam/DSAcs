@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public class NodeS<T> : Node<T>
+    public class NodeS : Node
     {
-        public NodeS(T data, NodeS<T> next=null) : base(data) 
+        public NodeS(object data, NodeS next=null) : base(data) 
         {
             Next = next;
         }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public class TreeNode<T> : Node<T>
+    public class TreeNode : Node
     {
-        public TreeNode<T> Left { get; set; }
-        public TreeNode<T> Right { get; set; }
+        public TreeNode Left { get; set; }
+        public TreeNode Right { get; set; }
 
-        public TreeNode(T data, TreeNode<T> left=null, TreeNode<T> right=null) : base(data)
+        public TreeNode(object data, TreeNode left=null, TreeNode right=null) : base(data)
         {
             Left = left;
             Right = right;
