@@ -8,7 +8,7 @@ using DSAcs.Queue;
 
 namespace DSAcs.Tree
 {
-    public class Tree : TreeBase
+    public class Tree
     {
         protected TreeNode Root { get; set; }
         protected StringBuilder Sb { get; set; }

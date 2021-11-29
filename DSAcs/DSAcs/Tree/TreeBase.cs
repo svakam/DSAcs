@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Tree
 {
-    public class TreeBase
-    {
-    }
-
     public enum TraversalType
     {
         PREORDER,
