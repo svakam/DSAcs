@@ -1,8 +1,6 @@
-﻿using System;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using DSAcs.Nodes;
 using DSAcs.Tree;
-using DSAcs.Nodes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DSATest
 {
@@ -14,10 +12,10 @@ namespace DSATest
         {
             Tree treeNullData = new();
             Assert.IsNotNull(treeNullData);
-            Assert.IsNull(treeNullData.Traverse(Tree.TraversalType.PREORDER));
+            Assert.IsNull(treeNullData.Traverse(TraversalType.PREORDER));
 
             Tree tree1 = new(new TreeNode(1));
-            Assert.AreEqual("1", tree1.Traverse(Tree.TraversalType.PREORDER));
+            Assert.AreEqual("1", tree1.Traverse(TraversalType.PREORDER));
 
             Tree tree2 = new(new TreeNode(1, // root
                 new TreeNode(2, // l
@@ -31,9 +29,9 @@ namespace DSATest
                 )
             );
             Assert.IsNotNull(tree2);
-            Assert.AreEqual("124356", tree2.Traverse(Tree.TraversalType.PREORDER));
-            Assert.AreEqual("421563", tree2.Traverse(Tree.TraversalType.INORDER));
-            Assert.AreEqual("426531", tree2.Traverse(Tree.TraversalType.POSTORDER));
+            Assert.AreEqual("124356", tree2.Traverse(TraversalType.PREORDER));
+            Assert.AreEqual("421563", tree2.Traverse(TraversalType.INORDER));
+            Assert.AreEqual("426531", tree2.Traverse(TraversalType.POSTORDER));
             //Assert.AreEqual("123456", tree2.Traverse(Tree.TraversalType.BREADTHFIRST)); -- resolve runtime vs. compile-time construct of queue
         }
 

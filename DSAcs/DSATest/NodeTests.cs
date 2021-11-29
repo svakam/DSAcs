@@ -19,11 +19,8 @@ namespace DSATest
         [TestMethod]
         public void TestNodeCreation()
         {
-            Node node = new NodeS();
-            object data = node.Data;
-            Assert.IsNull(data);
-            data = "hello";
-            Assert.IsNotNull(data);
+            Node node = new NodeS("hello");
+            Assert.IsNotNull(node.Data);
         }
 
         [TestMethod]

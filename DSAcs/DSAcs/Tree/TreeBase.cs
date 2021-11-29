@@ -8,8 +8,6 @@ namespace DSAcs.Tree
 {
     public class TreeBase
     {
-        protected static TraversalType Traversal { get; set; }
-        protected static RemoveMethod RemovalMethod { get; set; }
     }
 
     public enum TraversalType

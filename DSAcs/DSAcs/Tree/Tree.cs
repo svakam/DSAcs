@@ -12,6 +12,8 @@ namespace DSAcs.Tree
     {
         protected TreeNode Root { get; set; }
         protected StringBuilder Sb { get; set; }
+        public static TraversalType Traversal { get; set; }
+        protected static RemoveMethod RemovalMethod { get; set; }
 
         public Tree() { }
         public Tree(TreeNode root=null)
