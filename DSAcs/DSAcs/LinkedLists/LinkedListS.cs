@@ -436,7 +436,7 @@ namespace DSAcs.LinkedLists
         // pop a node off each list simultaneously
         // if addresses match between each popped, store in temp variable and continue popping
         // when addresses don't match, the temp variable holds the first intersecting node; return it
-        public Node GetIntersectionOfTwoListsStack(LinkedListS<T> a, LinkedListS<T> b)
+        public static Node GetIntersectionOfTwoListsStack(LinkedListS<T> a, LinkedListS<T> b)
         {
             // for an intersection to occur, there must be two lists
             // assumption made that two lists can technically exist if two pointers point to the same head of a 'list'
@@ -459,12 +459,14 @@ namespace DSAcs.LinkedLists
             Node intersection = null;
 
             int counter = 1;
-            while (stackA.Top == stackB.Top)
+            if (stackA.Top == stackB.Top)
             {
                 System.Diagnostics.Debug.WriteLine($"a{counter}: {stackA.Top.Data}");
                 System.Diagnostics.Debug.WriteLine($"b{counter}: {stackB.Top.Data}");
                 Node poppedA = stackA.Pop();
                 Node poppedB = stackB.Pop();
+                System.Diagnostics.Debug.WriteLine($"a{counter}: {poppedA.Data}");
+                System.Diagnostics.Debug.WriteLine($"b{counter}: {poppedB.Data}");
                 counter++;
 
                 if (poppedA == poppedB)
