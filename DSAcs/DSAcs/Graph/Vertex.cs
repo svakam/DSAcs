@@ -8,6 +8,6 @@ namespace DSAcs.Graph
 {
     public class Vertex
     {
-        object Data { get; set; }
+        public object Data { get; set; }
     }
 }
