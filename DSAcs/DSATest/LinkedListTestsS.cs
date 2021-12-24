@@ -275,12 +275,16 @@ namespace DSATest
             l.Add(4);
             l.Add(6);
             l.Add(8);
-            l.Add(10);
+            l.Add(10); 
             m.Add(3);
             m.Add(5);
             m.Head.Next.Next = l.Head.Next.Next;
             Assert.AreEqual(m.Head.Next.Next, l.Head.Next.Next);
-            Node intersection = l.GetIntersectionOfTwoListsStack(l, m);
+            Assert.IsNull(m.Head.Next.Next.Next.Next.Next);
+            Assert.IsNull(l.Head.Next.Next.Next.Next.Next);
+            Assert.IsNotNull(m.Head.Next.Next.Next.Next);
+            Assert.IsNotNull(l.Head.Next.Next.Next.Next);
+            Node intersection = LinkedListS<int>.GetIntersectionOfTwoListsStack(l, m);
             Assert.AreEqual(m.Head.Next.Next, intersection);
         }
     }
