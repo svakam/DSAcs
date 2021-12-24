@@ -447,12 +447,12 @@ namespace DSAcs.LinkedLists
 
             while (a.Current != null)
             {
-                stackA.Push(CastToNodeS(a.Current));
+                stackA.Push((NodeS)a.Current);
                 a.Current = a.Current.Next;
             }
             while (b.Current != null)
             {
-                stackB.Push(CastToNodeS(b.Current));
+                stackB.Push((NodeS)b.Current);
                 b.Current = b.Current.Next;
             }
 
@@ -474,11 +474,6 @@ namespace DSAcs.LinkedLists
             }
 
             return intersection;
-        }
-
-        private static NodeS CastToNodeS(Node node)
-        {
-            return (NodeS)node;
         }
     }
 }
