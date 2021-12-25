@@ -10,9 +10,11 @@ namespace DSAcs.Nodes
     {
         public LLNode Head { get; set; }
         public LLNode Current { get; set; }
+        public LLNode Next { get; set; }
         public LLNode(object data) : base(data) 
         {
             Head = null;
+            Next = null;
             Current = null;
         }
     }

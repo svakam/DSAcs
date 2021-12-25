@@ -8,10 +8,6 @@ namespace DSAcs.Nodes
 {
     public class NodeS : LLNode
     {
-        public NodeS Next { get; set; }
-        public NodeS(object data, NodeS next=null) : base(data)
-        {
-            Next = next;
-        }
+        public NodeS(object data) : base(data) { }
     }
 }
