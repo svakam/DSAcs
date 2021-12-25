@@ -9,9 +9,7 @@ namespace DSAcs.LinkedLists
 {
     public abstract class LinkedListBase<T>
     {
-        public Node Head { get; set; }
-        public Node Current { get; set; }
-        public int Size 
+        public int Size
         {
             get
             {
@@ -20,7 +18,8 @@ namespace DSAcs.LinkedLists
             set
             { }
         }
-
+        public LLNode Head { get; set; }
+        public LLNode Current { get; set; }
         protected LinkedListBase()
         {
             Head = null;
@@ -30,7 +29,7 @@ namespace DSAcs.LinkedLists
 
         private int GetSize()
         {
-            Node temp = Head;
+            LLNode temp = Head;
             if (Head == null) return 0;
             int sizeCounter = 0;
             while (temp != null)

@@ -12,7 +12,8 @@ namespace DSAcs.LinkedLists
     {
         public LinkedListS() : base() { }
 
-        // add //
+        // -------- add -------- //
+
         public void Add(T data)
         {
             NodeS node = new(data);
@@ -34,9 +35,6 @@ namespace DSAcs.LinkedLists
             }
             ResetCurr();
         }
-
-        // traverse to 1 before the desired insert position, input node gets current.next and current.next gets input
-        // edge cases for inserting at 0, 1, and beyond
         public void Add(T data, int n)
         {
             if (n < 0 || (n > Size && Head != null)) throw new ArgumentOutOfRangeException($"Input location {n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
@@ -44,47 +42,35 @@ namespace DSAcs.LinkedLists
             NodeS node = new(data);
             Add(node, n);
         }
-        public void Add(NodeS node, int n)
+        public void Add(LLNode node, int n)
         {
-            if (n < 0 || n > Size) throw new ArgumentOutOfRangeException($"Input location {n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
+            if (n < 0 || n > Size) throw new ArgumentOutOfRangeException($"Invalid insert location {n}: insert location must be 0 < n < LinkedListBase<T>.Size - 1.");
 
             if (Head == null)
             {
                 Head = node;
+                return;
             }
-            else
+            if (n == 0)
             {
-                for (int i = 0; i < n - 1; i++)
-                {
-                    Current = Current.Next;
-                }
-                if (Current.Next == null)
-                {
-                    Current.Next = node;
-                }
-                else
-                {
-                    if (n == 0)
-                    {
-                        node.Next = Head;
-                        Head = node;
-                    }
-                    else
-                    {
-                        node.Next = Current.Next;
-                        Current.Next = node;
-                    }
-                }
+                AddFirst(node);
+                return;
             }
+            for (int i = 0; i < n - 1; i++)
+            {
+                Current = Current.Next;
+                node.Next = Current.Next;
+                Current.Next = node;
+            }
+
             ResetCurr();
         }
-
         public void AddFirst(T data)
         {
             NodeS node = new(data);
             AddFirst(node);
         }
-        public void AddFirst(NodeS node)
+        public void AddFirst(LLNode node)
         {
             if (Head == null)
             {
@@ -100,114 +86,73 @@ namespace DSAcs.LinkedLists
 
         // remove //
         // by default removes from the end; traverse to 1 before
-        public Node Remove()
+        public NodeS Remove()
         {
             if (Head == null) throw new InvalidOperationException("Cannot remove from an empty list.");
-            int size = Size;
-            Node temp;
+            int n = Size;
+            NodeS temp;
             if (Head.Next == null)
             {
-                temp = Head;
+                temp = (NodeS) Head;
                 Head = null;
                 ResetCurr();
                 return temp;
             }
 
-            for (int i = 0; i < size - 2; i++) // move up to 2nd to last
+            for (int i = 0; i < n - 2; i++) // 
             {
                 Current = Current.Next;
             }
-
-            temp = Remove(Current, NodeLocation.END);
+            temp = (NodeS) Current.Next;
+            Current.Next = null;
 
             ResetCurr();
 
             return temp;
-        }
-
-        // uses reference node to remove at input location
-        // does the actual removal work; handles all cases except null and length-of-1, which are both handled by wrappers
-        public Node Remove(Node current, NodeLocation location)
-        {
-            Node temp;
-            switch (location)
-            {
-                case NodeLocation.END:
-                    temp = current.Next;
-                    current.Next = null;
-                    return temp;
-
-                case NodeLocation.BEGINNING:
-                    Head = Head.Next;
-                    temp = current;
-                    temp.Next = null;
-                    return temp;
-
-                case NodeLocation.MIDDLE:
-                    Node before = current;
-                    current = current.Next;
-                    Node after = current.Next;
-                    before.Next = after;
-                    current.Next = null;
-                    return current;
-                default:
-                    return current;
-            }
         }
 
         // removes at specified location from list
-        public Node Remove(int n)
+        public NodeS Remove(int n)
         {
             int size = Size;
-            if (n < 0 || n > size) throw new ArgumentOutOfRangeException($"Input location {n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
+            if (n < 0 || n >= size) throw new ArgumentOutOfRangeException($"Input location {n}: Cannot declare a location input less than 0 for linked lists; location must be 0 < n < LinkedList<T>.Size - 1.");
             if (Head == null) throw new InvalidOperationException("Cannot remove from an empty list.");
 
-            Node temp;
+            NodeS temp;
+
             if (size == 1)
             {
-                temp = Head;
+                temp = (NodeS) Head;
                 Head = null;
+                return temp;
             }
-            else if (n == size - 1)
+            
+            for (int i = 0; i < n - 1; i++)
             {
-                for (int i = 0; i < size - 2; i++)
-                {
-                    Current = Current.Next;
-                }
-                temp = Remove(Current, NodeLocation.END);
+                Current = Current.Next;
             }
-            else if (n == 0)
-            {
-                temp = Remove(Current, NodeLocation.BEGINNING);
-            }
-            else
-            {
-                for (int i = 0; i < n - 1; i++)
-                {
-                    Current = Current.Next;
-                }
-                temp = Remove(Current, NodeLocation.MIDDLE);
-            }
+            temp = (NodeS) Current.Next;
+            Current.Next = temp.Next;
+            temp.Next = null;
 
             ResetCurr();
             return temp;
         }
 
-        public Node RemoveFirst()
+        public NodeS RemoveFirst()
         {
             if (Head == null) throw new InvalidOperationException("Cannot remove from an empty list.");
 
-            Node temp;
+            NodeS temp = (NodeS) Head;
             if (Head.Next == null)
             {
-                temp = Head;
                 Head = null;
                 ResetCurr();
                 return temp;
             }
 
-            temp = Remove(Head, NodeLocation.BEGINNING);
-
+            Head = Head.Next;
+            temp.Next = null;
             ResetCurr();
             return temp;
         }
@@ -257,22 +202,22 @@ namespace DSAcs.LinkedLists
 
         // merge, split //
         // split list after nth index
-        public Node[] Split(int n)
+        public NodeS[] Split(int n)
         {
             int size = Size;
             // if list size is smaller than 2, can't split
             if (size < 2) throw new InvalidOperationException("Cannot split a list with a size smaller than 1.");
             
-            Node[] heads;
+            LLNode[] heads;
             // if index is at the end, no splitting required; return the full list
             if (n == size - 1)
             {
-                heads = new Node[1];
+                heads = new NodeS[1];
                 heads[0] = Head;
-                return heads;
+                return (NodeS[]) heads;
             }
 
-            heads = new Node[2];
+            heads = new NodeS[2];
             heads[0] = Head;
             for (int i = 0; i < n; i++)
             {
@@ -281,7 +226,7 @@ namespace DSAcs.LinkedLists
             NodeS head2 = (NodeS) Current.Next;
             Current.Next = null;
             heads[1] = head2;
-            return heads;
+            return (NodeS[]) heads;
         }
 
         // merge two sorted lists in-place and return head of sorted list
