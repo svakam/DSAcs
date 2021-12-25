@@ -8,18 +8,7 @@ namespace DSAcs.Nodes
 {
     public class TreeNode : Node
     {
-        private TreeNode left;
-        public TreeNode Left {
-            get
-            {
-                return left;
-            }
-            set
-            {
-                Next = value;
-                left = (TreeNode)Next;
-            }
-        }
+        public TreeNode Left { get; set; }
         public TreeNode Right { get; set; }
 
         public TreeNode(object data=null, TreeNode left=null, TreeNode right=null) : base(data)

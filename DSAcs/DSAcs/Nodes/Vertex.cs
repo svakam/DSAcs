@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public class NodeS : LLNode
+    public class Vertex : Node
     {
-        public NodeS Next { get; set; }
-        public NodeS(object data, NodeS next=null) : base(data)
+        public bool Seen { get; set; }
+
+        public Vertex(object data) : base(data) 
         {
-            Next = next;
+            Seen = false;
         }
     }
 }

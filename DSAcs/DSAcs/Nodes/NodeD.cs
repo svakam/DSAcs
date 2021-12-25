@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DSAcs.Nodes
 {
-    public class NodeD : Node
+    public class NodeD : LLNode
     {
         public NodeD Prev { get; set; }
+        public NodeD Next { get; set; }
 
         public NodeD(object data, NodeD prev=null, NodeD next=null) : base(data)
         {
