@@ -19,16 +19,16 @@ namespace DSATest
         [TestMethod]
         public void TestNodeCreation()
         {
-            Node node = new NodeS("hello");
+            LLNode node = new NodeS("hello");
             Assert.IsNotNull(node.Data);
         }
 
         [TestMethod]
         public void TestNodeS()
         {
-            Node nodeS = new NodeS("hello");
+            LLNode nodeS = new NodeS("hello");
             nodeS.Next = new NodeS("hi");
-            Node curr = nodeS.Next;
+            LLNode curr = nodeS.Next;
             Assert.IsNotNull(curr);
         }
 

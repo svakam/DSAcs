@@ -13,14 +13,14 @@ namespace DSAcs.Queue
         public Queue() { }
         public Queue(T data)
         {
-            Node node = new NodeS(data);
+            NodeS node = new(data);
             Front = node;
             Back = node;
         }
 
         public void Enqueue(T data)
         {
-            Node node = new NodeS(data);
+            NodeS node = new(data);
             if (IsEmpty())
             {
                 Front = node;
@@ -29,7 +29,7 @@ namespace DSAcs.Queue
             else
             {
                 Back.Next = node;
-                Back = Back.Next;
+                Back = (NodeS) Back.Next;
             }
 
         }
@@ -46,7 +46,7 @@ namespace DSAcs.Queue
             else
             {
                 Back.Next = node;
-                Back = Back.Next;
+                Back = (NodeS) Back.Next;
             }
         }
         public NodeS Dequeue()
@@ -54,7 +54,7 @@ namespace DSAcs.Queue
             if (Front == null) throw new InvalidOperationException("Cannot dequeue from an empty queue.");
 
             NodeS temp = (NodeS)Front;
-            Front = Front.Next;
+            Front = (NodeS) Front.Next;
             temp.Next = null;
             if (Front == null) Back = null;
             return temp;

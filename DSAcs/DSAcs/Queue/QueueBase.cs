@@ -9,8 +9,8 @@ namespace DSAcs.Queue
 {
     public abstract class QueueBase
     {
-        public Node Front { get; set; }
-        public Node Back { get; set; }
+        public NodeS Front { get; set; }
+        public NodeS Back { get; set; }
         public QueueBase()
         {
             Front = null;

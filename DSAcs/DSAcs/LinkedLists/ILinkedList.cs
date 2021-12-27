@@ -20,12 +20,11 @@ namespace DSAcs.LinkedLists
 
         // remove //
         // remove last
-        public Node Remove();
+        public NodeS Remove();
         // remove at n'th node
-        public Node Remove(Node current, NodeLocation location);
-        public Node Remove(int n);
+        public NodeS Remove(int n);
         // remove first
-        public Node RemoveFirst();
+        public NodeS RemoveFirst();
         // clean list
         public void Clean();
 
@@ -39,15 +38,15 @@ namespace DSAcs.LinkedLists
 
         // merge, split //
         // split at n'th node
-        public Node[] Split(int n);
+        //public Node[] Split(int n);
 
-        public Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B);
+        //public Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B);
 
         // other //
         public bool IsLoop();
-        public Node RemoveKthNodeFromEnd(int k);
-        public Node GetIntersectionOfTwoListsSimple(LinkedListS<T> a, LinkedListS<T> b);
-        public Node GetIntersectionOfTwoListsStack(LinkedListS<T> a, LinkedListS<T> b);
+        //public Node RemoveKthNodeFromEnd(int k);
+        //public Node GetIntersectionOfTwoListsSimple(LinkedListS<T> a, LinkedListS<T> b);
+        //public Node GetIntersectionOfTwoListsStack(LinkedListS<T> a, LinkedListS<T> b);
         // partition list around value x such that all nodes less than x come before all nodes greater than or equal to x
         //public void Partition(int x);
 

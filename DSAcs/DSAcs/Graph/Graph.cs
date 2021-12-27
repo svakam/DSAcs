@@ -13,29 +13,33 @@ namespace DSAcs.Graph
         public LinkedListS<Vertex> Vertices { get; set; }
         public LinkedListS<Edge> EdgeList { get; set; }
         public int[][] AdjacencyMatrix { get; set; }
-        public LinkedListS<Vertex> AdjacencyList { get; set; }
+        public LinkedListS<Edge> AdjacencyList { get; set; }
         public StorageUsed StorageUsed { get; set; }
 
-        public void DFS(Vertex v)
+        public Graph()
+        {
+            if (StorageUsed == StorageUsed.EDGELIST)
+            {
+
+            }
+            else if (StorageUsed == StorageUsed.ADJACENCYMATRIX)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        public void DFS(object start)
         {
             while (Vertices.Current != null)
             {
-                if (Vertices.Current.Data == v.Data)
+                Vertex v = (Vertex) Vertices.Current.Data;
+                if (v == start)
                 {
                     v.Seen = true;
-
-                    if (StorageUsed == StorageUsed.EDGELIST)
-                    {
-                        
-                    }
-                    else if (StorageUsed == StorageUsed.ADJACENCYMATRIX)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
                 }
             }
 

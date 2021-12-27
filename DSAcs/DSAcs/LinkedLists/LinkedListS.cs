@@ -42,7 +42,7 @@ namespace DSAcs.LinkedLists
             NodeS node = new(data);
             Add(node, n);
         }
-        public void Add(LLNode node, int n)
+        public void Add(NodeS node, int n)
         {
             if (n < 0 || n > Size) throw new ArgumentOutOfRangeException($"Invalid insert location {n}: insert location must be 0 < n < LinkedListBase<T>.Size - 1.");
 
@@ -70,7 +70,7 @@ namespace DSAcs.LinkedLists
             NodeS node = new(data);
             AddFirst(node);
         }
-        public void AddFirst(LLNode node)
+        public void AddFirst(NodeS node)
         {
             if (Head == null)
             {
@@ -230,44 +230,44 @@ namespace DSAcs.LinkedLists
         }
 
         // merge two sorted lists in-place and return head of sorted list
-        public Node MergeAsc(LinkedListS<T> A, LinkedListS<T> B)
+        public NodeS MergeAsc(LinkedListS<T> A, LinkedListS<T> B)
         {
             // Head of each list will act as runner to optimize memory
 
             // if both lists are empty, then merged list is also empty
             // if one of the lists is empty, then merged list is the other list
-            if (A.Head == null) return B.Head;
-            if (B.Head == null) return A.Head;
+            if (A.Head == null) return (NodeS) B.Head;
+            if (B.Head == null) return (NodeS) A.Head;
 
             // set head to smallest
-            Node mergedHead;
+            NodeS mergedHead;
             if ((int)A.Head.Data <= (int)B.Head.Data)
             {
-                mergedHead = A.Head;
+                mergedHead = (NodeS) A.Head;
                 A.Head = A.Head.Next;
             }
             else
             {
-                mergedHead = B.Head;
+                mergedHead = (NodeS) B.Head;
                 B.Head = B.Head.Next;
             }
 
             // start tail
-            Node mergedTail = mergedHead;
+            NodeS mergedTail = mergedHead;
 
             // create merged list while neither heads are null
             while (A.Head != null && B.Head != null)
             {
                 // set a temp holder to least value between the heads so the head can be moved up to compare the next two
-                Node temp;
+                NodeS temp;
                 if ((int)A.Head.Data <= (int)B.Head.Data)
                 {
-                    temp = A.Head;
+                    temp = (NodeS) A.Head;
                     A.Head = A.Head.Next;
                 }
                 else
                 {
-                    temp = B.Head;
+                    temp = (NodeS) B.Head;
                     B.Head = B.Head.Next;
                 }
 
@@ -295,12 +295,12 @@ namespace DSAcs.LinkedLists
         // and check for landing on same node; fast will eventually catch up with slow if it's a cycle
         public bool IsLoop()
         {
-            Node FastCurrent = Head;
+            NodeS FastCurrent = (NodeS) Head;
             int loopsDone = 0;
             while (Current != null && FastCurrent != null && FastCurrent.Next != null)
             {
                 Current = Current.Next;
-                FastCurrent = FastCurrent.Next.Next;
+                FastCurrent = (NodeS) FastCurrent.Next.Next;
                 if (Current == FastCurrent) return true;
                 loopsDone++;
             }
@@ -308,26 +308,26 @@ namespace DSAcs.LinkedLists
             return false;
         }
 
-        public Node RemoveKthNodeFromEnd(int k)
+        public NodeS RemoveKthNodeFromEnd(int k)
         {
             int size = Size;
             if (k > size) throw new ArgumentOutOfRangeException("Cannot remove a node out of range of this list.");
             int numTimesToTraverse = size - k;
 
-            Node removed;
+            NodeS removed;
             for (int i = 0; i < numTimesToTraverse; i++)
             {
                 Current = Current.Next;
             }
-            removed = RemoveAtCurrentOnly(Current);
+            removed = RemoveAtCurrentOnly((NodeS) Current);
             return removed;
         }
 
         // keep ref to next node, copy data from next into current (effectively 'removing' this data) and point to next's next
-        public Node RemoveAtCurrentOnly(Node current)
+        public NodeS RemoveAtCurrentOnly(NodeS current)
         {
             if (current.Next == null) throw new InvalidOperationException("Cannot remove at current only at the last node of hte list.");
-            Node temp = current.Next;
+            NodeS temp = (NodeS) current.Next;
             
             // swap step isn't necessary, but useful for testing; swap the removed val into temp (later removed)
             object removedVal = temp.Data;
