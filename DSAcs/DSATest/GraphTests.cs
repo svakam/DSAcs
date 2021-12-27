@@ -30,7 +30,7 @@ namespace DSATest
             g.Vertices.Add(new Vertex("Antarctica"));
             while (g.Vertices.Current != null)
             {
-                Assert.AreEqual("Vertex", g.Vertices.Current.Data.GetType().ToString());
+                Assert.AreEqual("DSAcs.Nodes.Vertex", g.Vertices.Current.Data.GetType().ToString());
                 g.Vertices.Current = g.Vertices.Current.Next;
             }
         }
@@ -48,6 +48,9 @@ namespace DSATest
             g.Vertices.Add(new Vertex("Damascus"));
             g.Vertices.Add(new Vertex("Egypt"));
             g.Vertices.Add(new Vertex("Rio de Janiero"));
+
+            g.EdgeList = new LinkedListS<Edge>();
+            g.EdgeList.Add(new Edge())
         }
     }
 }
