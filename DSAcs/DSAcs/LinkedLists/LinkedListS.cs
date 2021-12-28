@@ -49,6 +49,7 @@ namespace DSAcs.LinkedLists
             if (Head == null)
             {
                 Head = node;
+                ResetCurr();
                 return;
             }
             if (n == 0)
@@ -59,9 +60,12 @@ namespace DSAcs.LinkedLists
             for (int i = 0; i < n - 1; i++)
             {
                 Current = Current.Next;
-                node.Next = Current.Next;
-                Current.Next = node;
             }
+            if (Current.Next != null)
+            {
+                node.Next = Current.Next;
+            }
+            Current.Next = node;
 
             ResetCurr();
         }
