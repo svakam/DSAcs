@@ -130,14 +130,21 @@ namespace DSAcs.LinkedLists
                 Head = null;
                 return temp;
             }
-            
-            for (int i = 0; i < n - 1; i++)
+            if (n == 0)
             {
-                Current = Current.Next;
+                temp = (NodeS)Current;
+                Head = Current.Next;
             }
-            temp = (NodeS) Current.Next;
-            Current.Next = temp.Next;
-            temp.Next = null;
+            else
+            {
+                for (int i = 0; i < n - 1; i++)
+                {
+                    Current = Current.Next;
+                }
+                temp = (NodeS)Current.Next;
+                Current.Next = temp.Next;
+                temp.Next = null;
+            }
 
             ResetCurr();
             return temp;
