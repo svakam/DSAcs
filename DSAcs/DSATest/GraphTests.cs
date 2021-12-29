@@ -60,6 +60,31 @@ namespace DSATest
             Assert.AreEqual("Hilversum", g.GetEdgeEnd("Seattle"));
             Assert.AreEqual("Egypt", g.GetEdgeEnd("Damascus"));
             Assert.AreEqual("Antarctica", g.GetEdgeEnd("Egypt"));
+            Assert.AreEqual("Seattle", g.GetEdgeEnd("Rio de Janiero"));
+        }
+
+        [TestMethod]
+        public void TestDFSEdgeList()
+        {
+            Graph g = new();
+            g.Vertices = new();
+            Assert.IsNotNull(g.Vertices);
+            g.Vertices.Add(new Vertex("Seattle"));
+            g.Vertices.Add(new Vertex("Antarctica"));
+            g.Vertices.Add(new Vertex("Hilversum"));
+            g.Vertices.Add(new Vertex("Melbourne"));
+            g.Vertices.Add(new Vertex("Damascus"));
+            g.Vertices.Add(new Vertex("Egypt"));
+            g.Vertices.Add(new Vertex("Rio de Janiero"));
+            g.AddEdge("Seattle", "Hilversum", true);
+            g.AddEdge("Hilversum", "Melbourne", true);
+            g.AddEdge("Melbourne", "Damascus", true);
+            g.AddEdge("Damascus", "Egypt", true);
+            g.AddEdge("Egypt", "Antarctica", true);
+            g.AddEdge("Antarctica", "Rio de Janiero", true);
+            g.AddEdge("Rio de Janiero", "Seattle", true);
+            string output = g.DFS("Seattle");
+            Assert.AreEqual("Seattle Hilversum Melbourne Damascus Egypt Antarctica Rio de Janiero ", output);
         }
     }
 }

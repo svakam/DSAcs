@@ -8,16 +8,16 @@ namespace DSAcs.Graph
         public Vertex End { get; set; }
         public int Weight { get; set; }
 
-        public Edge(object start, object end)
+        public Edge(Vertex start, Vertex end)
         {
-            Start = new Vertex(start);
-            End = new Vertex(end);
+            Start = start;
+            End = end;
         }
 
-        public Edge(object start, object end, int weight)
+        public Edge(Vertex start, Vertex end, int weight)
         {
-            Start = new Vertex(start);
-            End = new Vertex(end);
+            Start = start;
+            End = end;
             Weight = weight;
         }
     }

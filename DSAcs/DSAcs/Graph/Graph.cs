@@ -16,6 +16,7 @@ namespace DSAcs.Graph
         public LinkedListS<Edge> AdjacencyList { get; set; }
         public StorageType StorageUsed { get; set; }
         public bool IsWeighted { get; set; }
+        public StringBuilder Sb { get; set; }
 
         public Graph() { }
         public Graph(LinkedListS<object> vertices, StorageType storageUsed)
@@ -80,22 +81,29 @@ namespace DSAcs.Graph
             Vertices.Add(v);
         }
 
-        public void DFS(object start)
+        public string DFS(object start)
         {
+            Sb = new StringBuilder();
             if (StorageUsed == StorageType.EDGELIST)
             {
+                // get starting vertex (if not null) and recurse
                 Vertex v = SearchVertex(start);
                 if (v != null)
                 {
                     v.Seen = true;
-                    Console.WriteLine(v.Data);
-                    DFSHelper(v);
+                    Sb.Append(v.Data).Append(' ');
+                    return DFSHelper(v);
                 }
+                ResetSeenVertices();
+                return "";
             }
-            ResetSeenVertices();
+            else
+            {
+                return "";
+            }
             //throw new ArgumentException("Vertex does not exist in this graph.");
         }
-        public void DFSHelper(Vertex v)
+        public string DFSHelper(Vertex v)
         {
             // iterate through edge list to find next connection
             if (StorageUsed == StorageType.EDGELIST)
@@ -104,13 +112,21 @@ namespace DSAcs.Graph
                 if (!u.Seen)
                 {
                     u.Seen = true;
-                    Console.WriteLine(u.Data);
-                    DFSHelper(u);
+                    Sb.Append(u.Data).Append(' ').ToString();
+                    return DFSHelper(u);
                 }
+                else
+                {
+                    return Sb.ToString();
+                }
+            }
+            else
+            {
+                return "";
             }
         }
 
-        private bool VertexExists(object a)
+        private Vertex GetVertex(object a)
         {
             // search for vertex in the lista
             // if exists, mark as seen and return true
@@ -122,11 +138,11 @@ namespace DSAcs.Graph
                 Vertex currVertex = (Vertex) curr.Data;
                 if (currVertex.Data == a)
                 {
-                    return true;
+                    return currVertex;
                 }
                 curr = (NodeS) curr.Next;
             }
-            return false;
+            return null;
         }
         private Vertex SearchVertex(object a)
         {
@@ -147,9 +163,9 @@ namespace DSAcs.Graph
         {
             if (Vertices == null) throw new InvalidOperationException("Cannot add an edge on an empty graph.");
 
-            bool aExists = VertexExists(a);
-            bool bExists = VertexExists(b);
-            if (aExists && bExists)
+            Vertex vA = GetVertex(a);
+            Vertex vB = GetVertex(b);
+            if (vA != null && vB != null)
             {
                 if (StorageUsed == StorageType.EDGELIST)
                 {
@@ -157,13 +173,13 @@ namespace DSAcs.Graph
                     {
                         EdgeList = new LinkedListS<Edge>();
                     }
-                    Edge e = new(a, b);
+                    Edge e = new(vA, vB);
                     EdgeList.Add(e);
 
                     // if undirected
                     if (!isDirected)
                     {
-                        Edge er = new(b, a);
+                        Edge er = new(vB, vA);
                         EdgeList.Add(er);
                     }
                 }
@@ -172,7 +188,7 @@ namespace DSAcs.Graph
             }
             else
             {
-                throw new ArgumentException($"Cannot add edge. First parameter exists: {aExists}. Second parameter exists: {bExists}.");
+                throw new ArgumentException($"Cannot add edge - either one or both parameters do not exist as vertices in this graph. First parameter was {vA}; second parameter was {vB}.");
             }
         }
         public Vertex GetEdgeEnd(Vertex a)
