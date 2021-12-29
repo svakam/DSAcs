@@ -49,8 +49,17 @@ namespace DSATest
             g.Vertices.Add(new Vertex("Egypt"));
             g.Vertices.Add(new Vertex("Rio de Janiero"));
 
-            g.EdgeList = new LinkedListS<Edge>();
-            g.EdgeList.Add(new Edge())
+            g.AddEdge("Seattle", "Hilversum", true);
+            g.AddEdge("Hilversum", "Melbourne", true);
+            g.AddEdge("Melbourne", "Damascus", true);
+            g.AddEdge("Damascus", "Egypt", true);
+            g.AddEdge("Egypt", "Antarctica", true);
+            g.AddEdge("Antarctica", "Rio de Janiero", true);
+            g.AddEdge("Rio de Janiero", "Seattle", true);
+            Assert.AreEqual("Melbourne", g.GetEdgeEnd("Hilversum"));
+            Assert.AreEqual("Hilversum", g.GetEdgeEnd("Seattle"));
+            Assert.AreEqual("Egypt", g.GetEdgeEnd("Damascus"));
+            Assert.AreEqual("Antarctica", g.GetEdgeEnd("Egypt"));
         }
     }
 }
