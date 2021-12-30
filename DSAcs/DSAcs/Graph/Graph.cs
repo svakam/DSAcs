@@ -110,20 +110,31 @@ namespace DSAcs.Graph
         }
         public string DFSHelper(Vertex v)
         {
-            // iterate through edge list to find next connection
+            // iterate through edge list to find every possible connection from input vertex
+            // print every unseen node and recurse on it
             if (StorageUsed == StorageType.EDGELIST)
             {
-                Vertex u = GetEdgeEnd(v);
-                if (!u.Seen)
+                LLNode curr = EdgeList.Head;
+                while (curr != null)
                 {
-                    u.Seen = true;
-                    Sb.Append(u.Data).Append(' ').ToString();
-                    return DFSHelper(u);
+                    Edge e = (Edge)curr.Data;
+                    if (e.Start == v)
+                    {
+                        Vertex u = e.End;
+                        if (!u.Seen)
+                        {
+                            u.Seen = true;
+                            Sb.Append(u.Data).Append(' ').ToString();
+                            DFSHelper(u);
+                        }
+                        curr = curr.Next;
+                    }
+                    else
+                    {
+                        curr = curr.Next;
+                    }
                 }
-                else
-                {
-                    return Sb.ToString();
-                }
+                return Sb.ToString();
             }
             else
             {

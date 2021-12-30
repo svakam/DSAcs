@@ -76,15 +76,30 @@ namespace DSATest
             g.Vertices.Add(new Vertex("Damascus"));
             g.Vertices.Add(new Vertex("Egypt"));
             g.Vertices.Add(new Vertex("Rio de Janiero"));
-            g.AddEdge("Seattle", "Hilversum", true);
-            g.AddEdge("Hilversum", "Melbourne", true);
-            g.AddEdge("Melbourne", "Damascus", true);
-            g.AddEdge("Damascus", "Egypt", true);
-            g.AddEdge("Egypt", "Antarctica", true);
-            g.AddEdge("Antarctica", "Rio de Janiero", true);
-            g.AddEdge("Rio de Janiero", "Seattle", true);
-            string output = g.DFS("Seattle");
+            g.AddEdge("Seattle", "Hilversum", true);                    // Seattle - Hilversum
+            g.AddEdge("Hilversum", "Melbourne", true); //                |                        \
+            g.AddEdge("Melbourne", "Damascus", true); //                |                         Melbourne
+            g.AddEdge("Damascus", "Egypt", true); //                       |                                 /
+            g.AddEdge("Egypt", "Antarctica", true); //                     Rio                             Damascus
+            g.AddEdge("Antarctica", "Rio de Janiero", true); //            \                    Egypt   -
+            g.AddEdge("Rio de Janiero", "Seattle", true); //                   Antarctica     -
+            string output = g.DFS("Seattle"); 
             Assert.AreEqual("Seattle Hilversum Melbourne Damascus Egypt Antarctica Rio de Janiero ", output);
+            g.CleanEdgeList();
+            g.ResetSeenVertices();
+            g.AddEdge("Seattle", "Melbourne", true);
+            g.AddEdge("Egypt", "Rio de Janiero", true);
+            g.AddEdge("Melbourne", "Rio de Janiero", true);
+            g.AddEdge("Seattle", "Hilversum", true);                    // Seattle - Hilversum
+            g.AddEdge("Hilversum", "Melbourne", true); //                |       --------------  \
+            g.AddEdge("Melbourne", "Damascus", true); //                |                         \- Melbourne
+            g.AddEdge("Damascus", "Egypt", true); //                       |                           /     /
+            g.AddEdge("Egypt", "Antarctica", true); //                     Rio \   ---------------      Damascus
+            g.AddEdge("Antarctica", "Rio de Janiero", true); //            \  -----------   Egypt   -
+            g.AddEdge("Rio de Janiero", "Seattle", true); //                   Antarctica     -
+            output = g.DFS("Seattle");
+            Assert.AreEqual("Seattle Melbourne Rio de Janiero Damascus Egypt Antarctica Hilversum ", output);
         }
     }
 }
+
