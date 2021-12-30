@@ -58,6 +58,7 @@ namespace DSAcs.Graph
             {
                 Vertex v = (Vertex)curr.Data;
                 v.Seen = false;
+                curr = curr.Next;
             }
         }
 
@@ -69,6 +70,10 @@ namespace DSAcs.Graph
             AdjacencyMatrix = null;
             IsWeighted = false;
             StorageUsed = StorageType.NONE;
+        }
+        public void CleanEdgeList()
+        {
+            EdgeList = null;
         }
 
         public void AddVertex(object data)
