@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DSAcs.LinkedLists;
 using DSAcs.Nodes;
+using DSAcs.Queue;
 
 namespace DSAcs.Graph
 {
@@ -75,6 +75,10 @@ namespace DSAcs.Graph
         {
             EdgeList = null;
         }
+        public void CleanSb()
+        {
+            Sb = null;
+        }
 
         public void AddVertex(object data)
         {
@@ -142,6 +146,45 @@ namespace DSAcs.Graph
             }
         }
 
+        public string BFS(object start)
+        {
+            Sb = new StringBuilder();
+            // while queue is not empty,
+            // with given input, mark as seen and enqueue all unseen vertices by scanning edge list
+            // dequeue, mark as seen and queue its unseen
+            Vertex v = SearchVertex(start);
+
+            // set up queue with input
+            Queue<Vertex> q = new();
+            q.Enqueue(v);
+            int currConnectionsToProcess = 1;
+
+            while (!q.IsEmpty())
+            {
+                while (currConnectionsToProcess != 0)
+                {
+                    Vertex dqFront = (Vertex)q.Dequeue().Data;
+                    currConnectionsToProcess--;
+                    if (!dqFront.Seen)
+                    {
+                        dqFront.Seen = true;
+                        Sb.Append(dqFront.Data).Append(' ');
+
+                        // get all edges, increment curr connections by 1, and enqueue next connections
+                        LinkedListS<Vertex> connectedVertices = GetAllConnectionsEdgeList(dqFront);
+                        LLNode curr = connectedVertices.Head;
+                        while (curr != null)
+                        {
+                            q.Enqueue((Vertex)curr.Data);
+                            currConnectionsToProcess++;
+                            curr = curr.Next;
+                        }
+                    }
+                }
+            }
+            return Sb.ToString();
+        }
+
         private Vertex GetVertex(object a)
         {
             // search for vertex in the lista
@@ -207,13 +250,13 @@ namespace DSAcs.Graph
                 throw new ArgumentException($"Cannot add edge - either one or both parameters do not exist as vertices in this graph. First parameter was {vA}; second parameter was {vB}.");
             }
         }
-        public Vertex GetEdgeEnd(Vertex a)
+        public Vertex GetEdgeEnd(Vertex v)
         {
             NodeS curr = (NodeS)EdgeList.Head;
             while (curr != null)
             {
                 Edge e = (Edge)curr.Data;
-                if (e.Start == a)
+                if (e.Start == v)
                 {
                     return e.End;
                 }
@@ -234,6 +277,21 @@ namespace DSAcs.Graph
                 curr = (NodeS)curr.Next;
             }
             return null;
+        }
+        public LinkedListS<Vertex> GetAllConnectionsEdgeList(Vertex v)
+        {
+            LinkedListS<Vertex> connections = new();
+            NodeS curr = (NodeS)EdgeList.Head;
+            while (curr != null)
+            {
+                Edge e = (Edge)curr.Data;
+                if (e.Start == v)
+                {
+                    connections.Add(e.End);
+                }
+                curr = (NodeS)curr.Next;
+            }
+            return connections;
         }
     }
 
