@@ -127,6 +127,18 @@ namespace DSATest
             string output = g.BFS("Seattle");
             Assert.AreEqual("Seattle Melbourne Hilversum Rio de Janiero Damascus Egypt Antarctica ", output);
         }
+
+        [TestMethod]
+        public void TestDFSAdjacencyMatrix()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestBFSAdjacencyMatrix()
+        {
+
+        }
     }
 }
 
