@@ -30,8 +30,12 @@ namespace DSAcs.Tree.Trie
                 // if not, add it as new k-v in map with a new pointer
                 // curr moves to new pointer if creating new,
                 // or moves to next char's TrieNode if that char existed in Trie already
-                TrieNode node = curr.Children[c];
-                if (node == null)
+                TrieNode node;
+                if (curr.Children.ContainsKey(c))
+                {
+                    node = curr.Children[c];
+                }
+                else
                 {
                     node = new TrieNode();
                     curr.Children.Add(c, node);
@@ -55,11 +59,17 @@ namespace DSAcs.Tree.Trie
 
             // recursion
             char c = word[charIndex];
-            TrieNode node = curr.Children[c];
-            if (node == null)
+            TrieNode node;
+            if (curr.Children.ContainsKey(c))
             {
-                curr.Children.Add(c, node);
+                node = curr.Children[c];
             }
+            else
+            {
+                node = new TrieNode();
+                node.Children.Add(c, node);
+            }
+            curr = node;
 
             InsertRecursive(curr, word, charIndex + 1);
         }
@@ -71,8 +81,11 @@ namespace DSAcs.Tree.Trie
             for (int i = 0; i < n; i++)
             {
                 char c = word[i];
+                if (!curr.Children.ContainsKey(c))
+                {
+                    return false;
+                }
                 TrieNode node = curr.Children[c];
-                if (node == null) return false;
                 curr = node;
             }
             return curr.EndOfWord; // ensures end of word after iterated through word
@@ -87,11 +100,12 @@ namespace DSAcs.Tree.Trie
             if (charIndex == word.Length) return curr.EndOfWord;
 
             char c = word[i];
-            TrieNode node = curr.Children[c];
-            if (node == null)
+            if (!curr.Children.ContainsKey(c))
             {
                 return false;
             }
+            TrieNode node = curr.Children[c];
+            curr = node;
             return SearchRecursive(curr, word, charIndex + 1);
         }
 
@@ -116,13 +130,16 @@ namespace DSAcs.Tree.Trie
             }
 
             char c = word[charIndex];
+            if (!curr.Children.ContainsKey(c))
+            {
+                return false;
+            }
             TrieNode node = curr.Children[c];
-            if (node == null) return false;
             bool shouldDeleteCurrNode = Delete(node, word, charIndex + 1);
 
             if (shouldDeleteCurrNode)
             {
-                curr.Children.Remove(c);
+                curr.Children.Remove(c); // remove mapping and also check if no mappings exist
                 return curr.Children.Count == 0;
             }
 
