@@ -35,7 +35,32 @@ namespace DSAcs.Tree.Trie
                 }
                 curr = node;
             }
+            curr.EndOfWord = true; // end of word when moving to last char's next must be marked as true
         }
+
+        public void InsertRecur(string word)
+        {
+            InsertRecursive(Root, word, 0);
+        }
+        public void InsertRecursive(TrieNode curr, string word, int charIndex)
+        {
+            // base case: end of word
+            if (charIndex == word.Length)
+            {
+                curr.EndOfWord = true;
+            }
+
+            // recursion
+            char c = word[charIndex];
+            TrieNode node = curr.Children[c];
+            if (node == null)
+            {
+                curr.Children.Add(c, node);
+            }
+
+            InsertRecursive(curr, word, charIndex + 1);
+        }
+
 
 
     }
