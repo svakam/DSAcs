@@ -61,7 +61,35 @@ namespace DSAcs.Tree.Trie
             InsertRecursive(curr, word, charIndex + 1);
         }
 
+        public bool Search(string word)
+        {
+            TrieNode curr = Root;
+            int n = word.Length;
+            for (int i = 0; i < n; i++)
+            {
+                char c = word[i];
+                TrieNode node = curr.Children[c];
+                if (node == null) return false;
+                curr = node;
+            }
+            return curr.EndOfWord; // ensures end of word after iterated through word
+        }
 
+        public bool SearchRecursive(string word)
+        {
+            return SearchRecursive(Root, word, 0);
+        }
+        public bool SearchRecursive(TrieNode curr, string word, int charIndex)
+        {
+            if (charIndex == word.Length) return curr.EndOfWord;
 
+            char c = word[i];
+            TrieNode node = curr.Children[c];
+            if (node == null)
+            {
+                return false;
+            }
+            return SearchRecursive(curr, word, charIndex + 1);
+        }
     }
 }
