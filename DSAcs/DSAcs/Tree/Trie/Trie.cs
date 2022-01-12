@@ -7,6 +7,9 @@ using DSAcs.Nodes;
 
 namespace DSAcs.Tree.Trie
 {
+
+    // a better (?) implementation via TrieNode array:
+    // https://leetcode.com/problems/implement-trie-prefix-tree/discuss/58943/C-implementation
     public class Trie
     {
         public TrieNode Root { get; set; }
@@ -96,7 +99,6 @@ namespace DSAcs.Tree.Trie
         {
             Delete(Root, word, 0);
         }
-
         public bool Delete(TrieNode curr, string word, int charIndex)
         {
             if (charIndex == word.Length)
