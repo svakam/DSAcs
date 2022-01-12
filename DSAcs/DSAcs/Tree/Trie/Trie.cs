@@ -91,5 +91,40 @@ namespace DSAcs.Tree.Trie
             }
             return SearchRecursive(curr, word, charIndex + 1);
         }
+
+        public void Delete(string word)
+        {
+            Delete(Root, word, 0);
+        }
+
+        public bool Delete(TrieNode curr, string word, int charIndex)
+        {
+            if (charIndex == word.Length)
+            {
+                // only delete node if end of word is reached
+                if (curr.EndOfWord)
+                {
+                    return false;
+                }
+
+                // since word should be deleted, set end of word to false and return whether map is empty
+                // to avoid deleting downstream mappings
+                curr.EndOfWord = false;
+                return curr.Children.Count == 0;
+            }
+
+            char c = word[charIndex];
+            TrieNode node = curr.Children[c];
+            if (node == null) return false;
+            bool shouldDeleteCurrNode = Delete(node, word, charIndex + 1);
+
+            if (shouldDeleteCurrNode)
+            {
+                curr.Children.Remove(c);
+                return curr.Children.Count == 0;
+            }
+
+            return false;
+        }
     }
 }
