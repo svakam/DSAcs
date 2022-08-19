@@ -16,5 +16,12 @@ namespace DSAcs.Nodes
             Children = new Dictionary<char, TrieNode>();
             EndOfWord = false;
         }
+
+        public TrieNode(Dictionary<char, TrieNode> children, bool endOfWord)        
+        {
+            Children = children;
+            EndOfWord = endOfWord;
+        }
+
     }
 }
