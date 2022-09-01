@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DSAcs.Nodes;
-using System;
+using System.Collections.Generic;
 
 // test class must:
 // use Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -66,6 +66,26 @@ namespace DSATest
             Assert.AreEqual("hello", curr.Data);
             Assert.IsNull(curr.Left);
             Assert.IsNull(curr.Right);
+        }
+
+        [TestMethod]
+        public void TestTrieNode()
+        {
+            TrieNode tnNull = new TrieNode();
+            Assert.IsNotNull(tnNull);
+
+            // test insert
+            TrieNode root = new();
+            root.Children = new Dictionary<char, TrieNode>();
+            TrieNode next = new();
+            root.Children.Add('a', next); // root = {a, next}, F
+            Assert.IsTrue(root.Children.ContainsKey('a'));
+            Assert.IsFalse(root.EndOfWord);
+            TrieNode eow = new();
+            eow.EndOfWord = true;
+            next.Children.Add('b', eow);
+            Assert.AreEqual(root.Children['a'], next);
+            Assert.IsTrue(root.Children['a'].Children['b'].EndOfWord);
         }
     }
 }
