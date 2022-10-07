@@ -24,4 +24,18 @@ namespace DSAcs.Nodes
         }
 
     }
+
+    public class TrieNodeArr
+    {
+        public char C { get; set; }
+        public bool IsWord { get; set; }
+        public TrieNodeArr[] Children { get; set; }
+
+        public TrieNodeArr(char c)
+        {
+            C = c;
+            IsWord = false;
+            Children = new TrieNodeArr[26];
+        }
+    }
 }
