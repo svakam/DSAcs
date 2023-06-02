@@ -15,7 +15,7 @@ using System.Threading.Tasks;
  *                           Node
  *                       /     |      \
  *            Vertex    LLNode   TreeNode
- *                         /       \
+ *                    /       \
  *                  NodeS    NodeD
  */
 

@@ -6,6 +6,30 @@ using DSAcs.LinkedLists;
 using DSAcs.Nodes;
 using DSAcs.Queue;
 
+/* 
+graph general structure, generalized from a tree:
+class Node {
+    neighbors: List<Node>
+    val: int
+}
+types of graphs: UDG, DG, Tree, Forest, DAG
+
+graph representations: Vertex/Edge list, Adjacency Matrix, Adjacency list
+    V/E list T/S
+    easy to represent and visualize 
+    space O(V + E) (vertex list length + edge list length)
+    T(neighbor lookup) = E = worst case V^2 (for every vertex, look up all other vertices)
+
+    adjacency matrix T/S
+    space O(V^2) (each side represents 0-indexed vertex, an intersection between ith and jth vertex represents connection bool
+    T(neighbor lookup) = O(V)
+    best for dense graphs, where 1's >> 0's
+
+    adjacency list T/S - maintains vertex ID mapping from matrix, but replaces matrix with list<vertex id : list<vertex id>> (each vertex's connections)
+    space O(V + E)
+    T(neighbor lookup) = O(V) (iterate through full list to get vertex + its connections)
+
+*/ 
 namespace DSAcs.Graph
 {
     public class Graph
@@ -14,6 +38,7 @@ namespace DSAcs.Graph
         public LinkedListS<Edge> EdgeList { get; set; }
         public int[,] AdjacencyMatrix { get; set; }
         public LinkedListS<Edge> AdjacencyList { get; set; }
+
         public StorageType StorageUsed { get; set; }
         public bool IsWeighted { get; set; }
         public StringBuilder Sb { get; set; }
@@ -110,12 +135,12 @@ namespace DSAcs.Graph
             {
                 return "";
             }
-            //throw new ArgumentException("Vertex does not exist in this graph.");
+            throw new ArgumentException("Vertex does not exist in this graph.");
         }
         public string DFSHelper(Vertex v)
         {
-            // iterate through edge list to find every possible connection from input vertex
-            // print every unseen node and recurse on it
+             // iterate through edge list to find every possible connection from input vertex
+             // print every unseen node and recurse on it
             if (StorageUsed == StorageType.EDGELIST)
             {
                 LLNode curr = EdgeList.Head;
@@ -149,9 +174,9 @@ namespace DSAcs.Graph
         public string BFS(object start)
         {
             Sb = new StringBuilder();
-            // while queue is not empty,
-            // with given input, mark as seen and enqueue all unseen vertices by scanning edge list
-            // dequeue, mark as seen and queue its unseen
+             // while queue is not empty,
+             // with given input, mark as seen and enqueue all unseen vertices by scanning edge list
+             // dequeue, mark as seen and queue its unseen
             Vertex v = SearchVertex(start);
 
             // set up queue with input
@@ -187,9 +212,9 @@ namespace DSAcs.Graph
 
         private Vertex GetVertex(object a)
         {
-            // search for vertex in the lista
-            // if exists, mark as seen and return true
-            // else return false
+             // search for vertex in the list
+             // if exists, mark as seen and return true
+             // else return false
 
             NodeS curr = (NodeS) Vertices.Head;
             while (curr != null)
