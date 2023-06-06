@@ -2,6 +2,7 @@
 
 namespace DSAcs.Graph
 {
+    // ideally a tuple
     public class Edge
     {
         public Vertex Start { get; set; }

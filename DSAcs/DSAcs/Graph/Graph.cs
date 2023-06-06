@@ -29,22 +29,31 @@ graph representations: Vertex/Edge list, Adjacency Matrix, Adjacency list
     space O(V + E)
     T(neighbor lookup) = O(V) (iterate through full list to get vertex + its connections)
 
+    
 */ 
 namespace DSAcs.Graph
 {
     public class Graph
     {
+        // props:
         public LinkedListS<Vertex> Vertices { get; set; }
+        public bool IsDirected { get; set; }
+
+        // V/E List
         public LinkedListS<Edge> EdgeList { get; set; }
+        public bool IsWeighted { get; set; }
+        
+        // AM
         public int[,] AdjacencyMatrix { get; set; }
+        
+        // AL
         public LinkedListS<Edge> AdjacencyList { get; set; }
 
-        public StorageType StorageUsed { get; set; }
-        public bool IsWeighted { get; set; }
+        // misc
         public StringBuilder Sb { get; set; }
 
         public Graph() { }
-        public Graph(LinkedListS<object> vertices, StorageType storageUsed)
+        public Graph(LinkedListS<object> vertices)
         {
             // set up vertices: for each vertex, set up ll with vertex
             if (Vertices != null)
@@ -62,18 +71,9 @@ namespace DSAcs.Graph
                 length++;
             }
 
-            if (storageUsed == StorageType.EDGELIST)
-            {
-                EdgeList = new LinkedListS<Edge>();
-            }
-            else if (storageUsed == StorageType.ADJACENCYLIST)
-            {
-                AdjacencyList = new LinkedListS<Edge>();
-            }
-            else
-            {
-                AdjacencyMatrix = new int[length, length];
-            }
+            EdgeList = new LinkedListS<Edge>();
+            AdjacencyList = new LinkedListS<Edge>();
+            AdjacencyMatrix = new int[length, length];
         }
 
         public void ResetSeenVertices()
@@ -94,7 +94,6 @@ namespace DSAcs.Graph
             AdjacencyList = null;
             AdjacencyMatrix = null;
             IsWeighted = false;
-            StorageUsed = StorageType.NONE;
         }
         public void CleanEdgeList()
         {
@@ -139,36 +138,32 @@ namespace DSAcs.Graph
         }
         public string DFSHelper(Vertex v)
         {
-             // iterate through edge list to find every possible connection from input vertex
-             // print every unseen node and recurse on it
-            if (StorageUsed == StorageType.EDGELIST)
+            // edge list
+            // iterate through edge list to find every possible connection from input vertex
+            // print every unseen node and recurse on it
+            LLNode curr = EdgeList.Head;
+            while (curr != null)
             {
-                LLNode curr = EdgeList.Head;
-                while (curr != null)
+                Edge e = (Edge)curr.Data;
+                if (e.Start == v)
                 {
-                    Edge e = (Edge)curr.Data;
-                    if (e.Start == v)
+                    Vertex u = e.End;
+                    if (!u.Seen)
                     {
-                        Vertex u = e.End;
-                        if (!u.Seen)
-                        {
-                            u.Seen = true;
-                            Sb.Append(u.Data).Append(' ').ToString();
-                            DFSHelper(u);
-                        }
-                        curr = curr.Next;
+                        u.Seen = true;
+                        Sb.Append(u.Data).Append(' ').ToString();
+                        DFSHelper(u);
                     }
-                    else
-                    {
-                        curr = curr.Next;
-                    }
+                    curr = curr.Next;
                 }
-                return Sb.ToString();
+                else
+                {
+                    curr = curr.Next;
+                }
             }
-            else
-            {
-                return "";
-            }
+            
+
+            // return string versions of all outputs
         }
 
         public string BFS(object start)
@@ -318,13 +313,5 @@ namespace DSAcs.Graph
             }
             return connections;
         }
-    }
-
-    public enum StorageType
-    {
-        EDGELIST,
-        ADJACENCYMATRIX,
-        ADJACENCYLIST,
-        NONE
     }
 }
