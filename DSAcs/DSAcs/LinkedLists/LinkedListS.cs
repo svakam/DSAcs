@@ -5,9 +5,17 @@ using System.Threading.Tasks;
 using DSAcs.Nodes;
 using DSAcs.Base;
 using DSAcs.Stack;
+using System.Collections.Generic;
 
 namespace DSAcs.LinkedLists
 { // should implement ILinkedList
+    
+    // allows enumeration over linked list with a foreach loop
+    public static class Extensions
+    {
+        public static IEnumerator<T> GetEnumerator<T>(this IEnumerator<T> enumerator) => enumerator;
+    }
+
     public class LinkedListS<T> : LinkedListBase<T>, ILinkedList<T>
     {
         public LinkedListS() : base() { }
@@ -398,8 +406,8 @@ namespace DSAcs.LinkedLists
             // assumption made that two lists can technically exist if two pointers point to the same head of a 'list'
             if (a == null || b == null) return null;
 
-            Stack<T> stackA = new();
-            Stack<T> stackB = new();
+            DSAcs.Stack.Stack<T> stackA = new();
+            DSAcs.Stack.Stack<T> stackB = new();
 
             while (a.Current != null)
             {
@@ -433,5 +441,6 @@ namespace DSAcs.LinkedLists
 
             return intersection;
         }
+
     }
 }

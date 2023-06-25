@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DSAcs.Hash;
 using DSAcs.LinkedLists;
 using DSAcs.Nodes;
 using DSAcs.Queue;
@@ -15,303 +17,102 @@ class Node {
 types of graphs: UDG, DG, Tree, Forest, DAG
 
 graph representations: Vertex/Edge list, Adjacency Matrix, Adjacency list
-    V/E list T/S
-    easy to represent and visualize 
+    - V/E list T/S
+    easy to represent and visualize - purely a list of edges, where edge = [start, end]
     space O(V + E) (vertex list length + edge list length)
-    T(neighbor lookup) = E = worst case V^2 (for every vertex, look up all other vertices)
+    time neighbor lookup = # E = worst case V^2 (for every vertex, may have to look up all other vertices due to all edges from this vertex going to other vertices)
+    (worst case for graphs is when # edges = (V)(V - 1) = V^2 - most nodes connected to each other, dense graph
+    edges: [H, W],[W, I], [W, R]
 
-    adjacency matrix T/S
+    - adjacency matrix T/S
     space O(V^2) (each side represents 0-indexed vertex, an intersection between ith and jth vertex represents connection bool
-    T(neighbor lookup) = O(V)
+    T(neighbor lookup) = O(V) 
     best for dense graphs, where 1's >> 0's
+    easier to look up neighbors in 2D array over edge list
+    
 
-    adjacency list T/S - maintains vertex ID mapping from matrix, but replaces matrix with list<vertex id : list<vertex id>> (each vertex's connections)
+    - adjacency list T/S - maintains vertex ID mapping from matrix, but replaces matrix with list<vertex id : list<vertex id>> (each vertex's connections)
+    optimizes on top of sparse matrix case (removes storing 0's i.e. non-connections)
     space O(V + E)
     T(neighbor lookup) = O(V) (iterate through full list to get vertex + its connections)
-
+    [<0, [1,2]>, <1, [0]>, <2, [1,0]>]
+    this mapping is like a compressed version of Node class (key = node.val, vals = Node.neighbors)
     
-*/ 
+
+    T/S
+    representation | space   | time (neighbor lookup)
+    ---------------|---------|------------------------
+        V/E list   | O(V + E)|    O(E) = O(V^2)
+    ---------------|---------|------------------------
+       adj matrix  | O(V^2)  |    O(V)
+    ---------------|---------|------------------------
+        adj list   | O(V + E)|    O(V)
+                   |         |
+*/
 namespace DSAcs.Graph
 {
-    public class Graph
+    public class Graph : IGraph
     {
-        // props:
-        public LinkedListS<Vertex> Vertices { get; set; }
-        public bool IsDirected { get; set; }
-
-        // V/E List
-        public LinkedListS<Edge> EdgeList { get; set; }
-        public bool IsWeighted { get; set; }
+        // would implement my own list but trying to run this asap
+        public Vertex[] Vertices { get; set; }
+        public List<Edge> EdgeList { get; set; }
+        // temporary fix - don't want to add enumerator
+        HashSet<object> RegisteredNodeData { get; set; }
         
-        // AM
-        public int[,] AdjacencyMatrix { get; set; }
-        
-        // AL
-        public LinkedListS<Edge> AdjacencyList { get; set; }
-
-        // misc
-        public StringBuilder Sb { get; set; }
-
-        public Graph() { }
-        public Graph(LinkedListS<object> vertices)
+        private bool IsDuplicate(Vertex v)
         {
-            // set up vertices: for each vertex, set up ll with vertex
-            if (Vertices != null)
+            return RegisteredNodeData.Contains(v.Data);
+        }
+
+        public Graph(Vertex[] nodes)
+        {
+            RegisteredNodeData = new();
+            foreach (Vertex v in nodes)
             {
-                CleanGraph();
-            }
-
-            Vertices = new LinkedListS<Vertex>();
-            NodeS curr = (NodeS) vertices.Head;
-            int length = 1;
-            while (curr != null)
-            {
-                AddVertex(curr.Data);
-                curr = (NodeS) curr.Next;
-                length++;
-            }
-
-            EdgeList = new LinkedListS<Edge>();
-            AdjacencyList = new LinkedListS<Edge>();
-            AdjacencyMatrix = new int[length, length];
-        }
-
-        public void ResetSeenVertices()
-        {
-            LLNode curr = Vertices.Head;
-            while (curr != null)
-            {
-                Vertex v = (Vertex)curr.Data;
-                v.Seen = false;
-                curr = curr.Next;
-            }
-        }
-
-        public void CleanGraph()
-        {
-            Vertices = null;
-            EdgeList = null;
-            AdjacencyList = null;
-            AdjacencyMatrix = null;
-            IsWeighted = false;
-        }
-        public void CleanEdgeList()
-        {
-            EdgeList = null;
-        }
-        public void CleanSb()
-        {
-            Sb = null;
-        }
-
-        public void AddVertex(object data)
-        {
-            if (Vertices == null)
-            {
-                Vertices = new();
-            }
-            Vertex v = new(data);
-            Vertices.Add(v);
-        }
-
-        public string DFS(object start)
-        {
-            Sb = new StringBuilder();
-            if (StorageUsed == StorageType.EDGELIST)
-            {
-                // get starting vertex (if not null) and recurse
-                Vertex v = SearchVertex(start);
-                if (v != null)
+                if (IsDuplicate(v))
                 {
-                    v.Seen = true;
-                    Sb.Append(v.Data).Append(' ');
-                    return DFSHelper(v);
-                }
-                ResetSeenVertices();
-                return "";
-            }
-            else
-            {
-                return "";
-            }
-            throw new ArgumentException("Vertex does not exist in this graph.");
-        }
-        public string DFSHelper(Vertex v)
-        {
-            // edge list
-            // iterate through edge list to find every possible connection from input vertex
-            // print every unseen node and recurse on it
-            LLNode curr = EdgeList.Head;
-            while (curr != null)
-            {
-                Edge e = (Edge)curr.Data;
-                if (e.Start == v)
-                {
-                    Vertex u = e.End;
-                    if (!u.Seen)
-                    {
-                        u.Seen = true;
-                        Sb.Append(u.Data).Append(' ').ToString();
-                        DFSHelper(u);
-                    }
-                    curr = curr.Next;
+                    throw new ArgumentException("Duplicate ID found; every node instance must be uniquely identified. Change the ID arg " + v.Data);
                 }
                 else
                 {
-                    curr = curr.Next;
+                    RegisteredNodeData.Add(v.Data);
                 }
             }
-            
-
-            // return string versions of all outputs
+            Vertices = nodes;
+            EdgeList = new List<Edge>();
+            CreateVertexEdgeList(nodes);
         }
 
-        public string BFS(object start)
+        public void Connect(Vertex a, Vertex b, bool two_way_connection = false)
         {
-            Sb = new StringBuilder();
-             // while queue is not empty,
-             // with given input, mark as seen and enqueue all unseen vertices by scanning edge list
-             // dequeue, mark as seen and queue its unseen
-            Vertex v = SearchVertex(start);
-
-            // set up queue with input
-            Queue<Vertex> q = new();
-            q.Enqueue(v);
-            int currConnectionsToProcess = 1;
-
-            while (!q.IsEmpty())
-            {
-                while (currConnectionsToProcess != 0)
-                {
-                    Vertex dqFront = (Vertex)q.Dequeue().Data;
-                    currConnectionsToProcess--;
-                    if (!dqFront.Seen)
-                    {
-                        dqFront.Seen = true;
-                        Sb.Append(dqFront.Data).Append(' ');
-
-                        // get all edges, increment curr connections by 1, and enqueue next connections
-                        LinkedListS<Vertex> connectedVertices = GetAllConnectionsEdgeList(dqFront);
-                        LLNode curr = connectedVertices.Head;
-                        while (curr != null)
-                        {
-                            q.Enqueue((Vertex)curr.Data);
-                            currConnectionsToProcess++;
-                            curr = curr.Next;
-                        }
-                    }
-                }
-            }
-            return Sb.ToString();
+            a.Neighbors.Add(b);
+            if (two_way_connection) b.Neighbors.Add(a);
         }
 
-        private Vertex GetVertex(object a)
+        public void CreateVertexEdgeList(Vertex[] nodes)
         {
-             // search for vertex in the list
-             // if exists, mark as seen and return true
-             // else return false
-
-            NodeS curr = (NodeS) Vertices.Head;
-            while (curr != null)
+            foreach (Vertex v in nodes)
             {
-                Vertex currVertex = (Vertex) curr.Data;
-                if (currVertex.Data == a)
+                foreach (Vertex neighbor in v.Neighbors)
                 {
-                    return currVertex;
+                    EdgeList.Add(new Edge(v.Data, neighbor.Data));
                 }
-                curr = (NodeS) curr.Next;
             }
-            return null;
-        }
-        private Vertex SearchVertex(object a)
-        {
-            NodeS curr = (NodeS)Vertices.Head;
-            while (curr != null)
-            {
-                Vertex currVertex = (Vertex)curr.Data;
-                if (currVertex.Data == a)
-                {
-                    return currVertex;
-                }
-                curr = (NodeS)curr.Next;
-            }
-            return null;
         }
 
-        public void AddEdge(object a, object b, bool isDirected)
+        public void CreateAdjMatrix(Vertex[] nodes)
         {
-            if (Vertices == null) throw new InvalidOperationException("Cannot add an edge on an empty graph.");
+            int N = nodes.Length;
+            // create 0-indexed mapping for each vertex
+            Dictionary<object, int> nodeIdToIndexMapping = new();
+            for (int i = 0; i < N; i++)
+            {
+                nodeIdToIndexMapping[nodes[i].Data] = i;
+            }
 
-            Vertex vA = GetVertex(a);
-            Vertex vB = GetVertex(b);
-            if (vA != null && vB != null)
-            {
-                if (StorageUsed == StorageType.EDGELIST)
-                {
-                    if (EdgeList == null)
-                    {
-                        EdgeList = new LinkedListS<Edge>();
-                    }
-                    Edge e = new(vA, vB);
-                    EdgeList.Add(e);
+            // initialize matrix of matching size
+            int[,] m = new int[N, N];
 
-                    // if undirected
-                    if (!isDirected)
-                    {
-                        Edge er = new(vB, vA);
-                        EdgeList.Add(er);
-                    }
-                }
-                // adjacency matrix
-                // adjacency list
-            }
-            else
-            {
-                throw new ArgumentException($"Cannot add edge - either one or both parameters do not exist as vertices in this graph. First parameter was {vA}; second parameter was {vB}.");
-            }
-        }
-        public Vertex GetEdgeEnd(Vertex v)
-        {
-            NodeS curr = (NodeS)EdgeList.Head;
-            while (curr != null)
-            {
-                Edge e = (Edge)curr.Data;
-                if (e.Start == v)
-                {
-                    return e.End;
-                }
-                curr = (NodeS)curr.Next;
-            }
-            return null;
-        }
-        public object GetEdgeEnd(object a)
-        {
-            NodeS curr = (NodeS)EdgeList.Head;
-            while (curr != null)
-            {
-                Edge e = (Edge)curr.Data;
-                if (e.Start.Data == a)
-                {
-                    return e.End.Data;
-                }
-                curr = (NodeS)curr.Next;
-            }
-            return null;
-        }
-        public LinkedListS<Vertex> GetAllConnectionsEdgeList(Vertex v)
-        {
-            LinkedListS<Vertex> connections = new();
-            NodeS curr = (NodeS)EdgeList.Head;
-            while (curr != null)
-            {
-                Edge e = (Edge)curr.Data;
-                if (e.Start == v)
-                {
-                    connections.Add(e.End);
-                }
-                curr = (NodeS)curr.Next;
-            }
-            return connections;
         }
     }
 }

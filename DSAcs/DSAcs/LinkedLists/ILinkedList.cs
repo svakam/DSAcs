@@ -11,29 +11,23 @@ namespace DSAcs.LinkedLists
         // create //
         //public void Create(object[] values);
 
-        // add //
-        // add last
+
         public void Add(NodeS node);
         // insert at nth node
         public void Add(T data, int n);
         public void AddFirst(NodeS node);
 
-        // remove //
-        // remove last
         public NodeS Remove();
-        // remove at n'th node
         public NodeS Remove(int n);
-        // remove first
         public NodeS RemoveFirst();
-        // clean list
+
         public void Clean();
 
-        // peek //
-        // peek first
+
         public T PeekFirst();
-        // peek last
+
         public T PeekLast();
-        // peek n'th node
+
         public T Peek(int n);
 
         // merge, split //
@@ -52,5 +46,8 @@ namespace DSAcs.LinkedLists
 
         //public LinkedListS SumList(LinkedListS A, LinkedListS B);
         //public bool IsPalindrome(LinkedListS list);
+
+        // enumeration //
+        // public void MoveNext();
     }
 }

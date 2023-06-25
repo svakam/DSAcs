@@ -14,9 +14,9 @@ using System.Threading.Tasks;
 /*       
  *                           Node
  *                       /     |      \
- *            Vertex    LLNode   TreeNode
- *                    /       \
- *                  NodeS    NodeD
+ *                 Vertex    LLNode   TreeNode
+ *                         /       \
+ *                      NodeS    NodeD
  */
 
 namespace DSAcs.Nodes
