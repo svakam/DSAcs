@@ -155,5 +155,24 @@ namespace DSAcs.Graph
             AdjList = adjList;
             return AdjList;
         }
+
+        public Dictionary<object, List<object>> ConvToAdjList(Vertex[] vertices, List<Edge> edgeList, bool isUndirected)
+        {
+            Dictionary<object, List<object>> adjList = new();
+            foreach (Vertex v in vertices)
+            {
+                adjList.Add(v.Data, new List<object>());
+            }
+            foreach (Edge e in edgeList)
+            {
+                adjList[e.Start].Add(e.End);
+                if (isUndirected)
+                {
+                    adjList[e.End].Add(e.Start);
+                }
+            }
+
+            return adjList;
+        }
     }
 }
