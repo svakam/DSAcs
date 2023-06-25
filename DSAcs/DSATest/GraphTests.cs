@@ -59,18 +59,11 @@ Adjacency Matrix:
         readonly Vertex node3 = new(3);
         readonly Vertex node4 = new(4);
         readonly Vertex node5 = new(5);
+        Vertex[] Nodes { get; set; }
 
-        [TestMethod]
-        public void TestInstantiation()
+        public GraphTests()
         {
-            Vertex[] nodes = { node1, node2, node3, node4, node5 };
-            Graph g = new(nodes);
-        }
-
-        [TestMethod]
-        public void TestVertexList()
-        {
-
+            Nodes = new Vertex[] { node1, node2, node3, node4, node5 };
         }
 
         // representations //
@@ -78,7 +71,12 @@ Adjacency Matrix:
         [TestMethod]
         public void TestEdgeList()
         {
-
+            Graph g = new(Nodes);
+            var edgeList = g.CreateVertexEdgeList(Nodes);
+            foreach (Edge e in edgeList)
+            {
+                Console.WriteLine(e.Start.ToString(), e.End.ToString());
+            }
         }
 
         // adjacency matrix
@@ -92,20 +90,19 @@ Adjacency Matrix:
         [TestMethod]
         public void TestAdjacencyMatrix()
         {
-            Vertex[] nodes = { node1, node2, node3, node4, node5 };
-            Graph g = new(nodes);
+            Graph g = new(Nodes);
             g.Connect(node1, node2);
             g.Connect(node1, node3, true);
             g.Connect(node3, node4);
             g.Connect(node4, node5);
             g.Connect(node4, node2);
 
-            int N = nodes.Length;
+            int N = Nodes.Length;
             Dictionary<object, int> nodeIdToIndexMapping = new();
             for (int i = 0; i < N; i++)
             {
-                nodeIdToIndexMapping.Add(nodes[i].Data, i);
-                Console.WriteLine(nodeIdToIndexMapping[nodes[i].Data]);
+                nodeIdToIndexMapping.Add(Nodes[i].Data, i);
+                Console.WriteLine(nodeIdToIndexMapping[Nodes[i].Data]);
             }
 
             // pre-populate with 0s
@@ -124,7 +121,7 @@ Adjacency Matrix:
             }
 
             // map each vertex's connections as 1 in matrix
-            foreach (Vertex v in nodes)
+            foreach (Vertex v in Nodes)
             {
                 object data = v.Data;
                 int rowIdx = nodeIdToIndexMapping[data];
@@ -143,13 +140,35 @@ Adjacency Matrix:
             Assert.AreEqual(m[2][3], 1);
             Assert.AreEqual(m[3][1], 1);
             Assert.AreEqual(m[3][4], 1);
+
+            int[][] matrix = g.CreateAdjMatrix(Nodes);
+            Assert.AreEqual(matrix[0][1], 1);
+            Assert.AreEqual(matrix[0][2], 1);
+            Assert.AreEqual(matrix[1][1], 0);
+            Assert.AreEqual(matrix[2][0], 1);
+            Assert.AreEqual(matrix[2][3], 1);
+            Assert.AreEqual(matrix[3][1], 1);
+            Assert.AreEqual(matrix[3][4], 1);
         }
 
         // adjacency list
+        /* (1, (2,3)),
+         * (2, ()),
+         * (3, (1,4)),
+         * (4, (5,2)),
+         * (5, ())
+         */
         [TestMethod]
         public void TestAdjacencyList()
         {
+            Graph g = new(Nodes);
+            g.Connect(node1, node2);
+            g.Connect(node1, node3, true);
+            g.Connect(node3, node4);
+            g.Connect(node4, node5);
+            g.Connect(node4, node2);
 
+            var adjList = g.CreateAdjList(Nodes);
         }
 
         // traversals //

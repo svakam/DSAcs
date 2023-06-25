@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using DSAcs.Hash;
@@ -55,8 +56,10 @@ namespace DSAcs.Graph
     {
         // would implement my own list but trying to run this asap
         public Vertex[] Vertices { get; set; }
+        public int NumVertices { get; set; }
         public List<Edge> EdgeList { get; set; }
-        // temporary fix - don't want to add enumerator
+        public int[][] AdjMatrix { get; set; }
+        public Dictionary<object, List<object>> AdjList { get; set; }
         HashSet<object> RegisteredNodeData { get; set; }
         
         private bool IsDuplicate(Vertex v)
@@ -66,6 +69,7 @@ namespace DSAcs.Graph
 
         public Graph(Vertex[] nodes)
         {
+            NumVertices = nodes.Length;
             RegisteredNodeData = new();
             foreach (Vertex v in nodes)
             {
@@ -89,7 +93,7 @@ namespace DSAcs.Graph
             if (two_way_connection) b.Neighbors.Add(a);
         }
 
-        public void CreateVertexEdgeList(Vertex[] nodes)
+        public List<Edge> CreateVertexEdgeList(Vertex[] nodes)
         {
             foreach (Vertex v in nodes)
             {
@@ -98,21 +102,58 @@ namespace DSAcs.Graph
                     EdgeList.Add(new Edge(v.Data, neighbor.Data));
                 }
             }
+            return EdgeList;
         }
 
-        public void CreateAdjMatrix(Vertex[] nodes)
+        public int[][] CreateAdjMatrix(Vertex[] nodes)
         {
-            int N = nodes.Length;
             // create 0-indexed mapping for each vertex
             Dictionary<object, int> nodeIdToIndexMapping = new();
-            for (int i = 0; i < N; i++)
+            for (int i = 0; i < NumVertices; i++)
             {
-                nodeIdToIndexMapping[nodes[i].Data] = i;
+                nodeIdToIndexMapping.Add(nodes[i].Data, i);
             }
 
-            // initialize matrix of matching size
-            int[,] m = new int[N, N];
+            // initialize matrix of matching size, fill with 0's
+            int[][] m = new int[NumVertices][];
+            for (int i = 0; i < NumVertices; i++)
+            {
+                m[i] = new int[NumVertices];
+                Array.Fill(m[i], 0);
+            }
+            
+            // map connections to matrix as 1's
+            foreach (Vertex v in nodes)
+            {
+                int rowIdx = nodeIdToIndexMapping[v.Data];
+                var row = m[rowIdx];
+                foreach (Vertex neighbor in v.Neighbors)
+                {
+                    int neighborIdx = nodeIdToIndexMapping[neighbor.Data];
+                    row[neighborIdx] = 1;
+                }
+            }
 
+            AdjMatrix = m;
+            return AdjMatrix;
+        }
+
+        public Dictionary<object, List<object>> CreateAdjList(Vertex[] nodes)
+        {
+            Dictionary<object, List<object>> adjList = new();
+            foreach (Vertex v in nodes)
+            {
+                List<Vertex> neighbors = v.Neighbors;
+                List<object> neighborList = new();
+                foreach (Vertex neighbor in neighbors)
+                {
+                    neighborList.Add(neighbor.Data);
+                }
+                adjList.Add(v.Data, neighborList);
+            }
+
+            AdjList = adjList;
+            return AdjList;
         }
     }
 }
