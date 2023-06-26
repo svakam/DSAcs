@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DSAcs.Hash;
@@ -85,9 +86,11 @@ namespace DSAcs.Graph
             Vertices = nodes;
             EdgeList = new List<Edge>();
             CreateVertexEdgeList(nodes);
+            CreateAdjMatrix(nodes);
+            CreateAdjList(nodes);
         }
 
-        public void Connect(Vertex a, Vertex b, bool two_way_connection = false)
+        public static void Connect(Vertex a, Vertex b, bool two_way_connection = false)
         {
             a.Neighbors.Add(b);
             if (two_way_connection) b.Neighbors.Add(a);
@@ -140,13 +143,17 @@ namespace DSAcs.Graph
 
         public Dictionary<object, List<object>> CreateAdjList(Vertex[] nodes)
         {
+            Console.WriteLine("CreateAdjList");
             Dictionary<object, List<object>> adjList = new();
             foreach (Vertex v in nodes)
             {
+                Console.WriteLine($"key: {v.Data}");
                 List<Vertex> neighbors = v.Neighbors;
+                Console.WriteLine($"neighbors count: {neighbors.Count}");
                 List<object> neighborList = new();
                 foreach (Vertex neighbor in neighbors)
                 {
+                    Console.WriteLine($"neighbor: {neighbor.Data}");
                     neighborList.Add(neighbor.Data);
                 }
                 adjList.Add(v.Data, neighborList);
@@ -173,6 +180,30 @@ namespace DSAcs.Graph
             }
 
             return adjList;
+        }
+
+        // most important graph algo!!!
+        public void DFS(object start)
+        {
+            HashSet<object> visited = new();
+            void Helper(object node)
+            {
+                Console.WriteLine(node.ToString());
+                visited.Add(node);
+                List<object> neighbors = AdjList[node];
+                if (neighbors != null)
+                {
+                    foreach (object neighbor in neighbors)
+                    {
+                        Console.WriteLine(neighbor);
+                        if (!visited.Contains(neighbor))
+                        {
+                            Helper(neighbor);
+                        }
+                    }
+                }
+            }
+            Helper(start);
         }
     }
 }

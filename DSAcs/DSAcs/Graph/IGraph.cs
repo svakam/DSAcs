@@ -12,7 +12,7 @@ namespace DSAcs.Graph
     {
 
         // connect two nodes and declare if 2-way connection
-        public void Connect(Vertex a, Vertex b, bool two_way_connection = false);
+
 
     }
 }

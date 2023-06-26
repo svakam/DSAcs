@@ -60,10 +60,31 @@ Adjacency Matrix:
         readonly Vertex node4 = new(4);
         readonly Vertex node5 = new(5);
         Vertex[] Nodes { get; set; }
+        Graph g { get; set; }
 
         public GraphTests()
         {
             Nodes = new Vertex[] { node1, node2, node3, node4, node5 };
+            Graph.Connect(node1, node2);
+            Graph.Connect(node1, node3, true);
+            Graph.Connect(node3, node4);
+            Graph.Connect(node4, node5);
+            Graph.Connect(node4, node2);
+            g = new(Nodes);
+        }
+
+        [TestMethod]
+        public void TestConnection()
+        {
+            var neighbors = node1.Neighbors;
+            Console.WriteLine($"neighbors count: " + neighbors.Count);
+            Assert.AreEqual(2, neighbors.Count);
+            neighbors = node2.Neighbors;
+            Console.WriteLine($"node 2 neighbors: " + neighbors.Count);
+            Assert.AreEqual(0, neighbors.Count);
+            neighbors = node3.Neighbors;
+            Console.WriteLine($"node 3 neighbors: " + neighbors.Count);
+            Assert.AreEqual(2, neighbors.Count);
         }
 
         // representations //
@@ -71,11 +92,10 @@ Adjacency Matrix:
         [TestMethod]
         public void TestEdgeList()
         {
-            Graph g = new(Nodes);
             var edgeList = g.CreateVertexEdgeList(Nodes);
             foreach (Edge e in edgeList)
             {
-                Console.WriteLine(e.Start.ToString(), e.End.ToString());
+                Console.WriteLine($"{e.Start}, {e.End}");
             }
         }
 
@@ -90,12 +110,6 @@ Adjacency Matrix:
         [TestMethod]
         public void TestAdjacencyMatrix()
         {
-            Graph g = new(Nodes);
-            g.Connect(node1, node2);
-            g.Connect(node1, node3, true);
-            g.Connect(node3, node4);
-            g.Connect(node4, node5);
-            g.Connect(node4, node2);
 
             int N = Nodes.Length;
             Dictionary<object, int> nodeIdToIndexMapping = new();
@@ -161,26 +175,18 @@ Adjacency Matrix:
         [TestMethod]
         public void TestAdjacencyList()
         {
-            Graph g = new(Nodes);
-            g.Connect(node1, node2);
-            g.Connect(node1, node3, true);
-            g.Connect(node3, node4);
-            g.Connect(node4, node5);
-            g.Connect(node4, node2);
-
-            var adjList = g.CreateAdjList(Nodes);
-        }
-
-        // traversals //
-        [TestMethod]
-        public void TestDFSEdgeList()
-        {
-            
-        }
-
-        [TestMethod]
-        public void TestBFSEdgeList()
-        {
+            var adjList = g.AdjList;
+            Console.WriteLine($"count: {adjList.Count}");
+            foreach (var kv in adjList)
+            {
+                // Console.Write($"{kv.Key}: ");
+                // Console.WriteLine($"neighbor count: {kv.Value.Count}");
+                foreach (var neighbor in kv.Value)
+                {
+                    Console.Write($"{neighbor} ");
+                }
+                Console.WriteLine();
+            }
         }
 
         [TestMethod]
@@ -198,7 +204,7 @@ Adjacency Matrix:
         [TestMethod]
         public void TestDFSAdjacencyList()
         {
-
+            g.DFS(Nodes[0].Data);
         }
 
         [TestMethod]
