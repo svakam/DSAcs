@@ -17,7 +17,7 @@ namespace DSATest
       /     \
       v      v
     node2 node3
-      ^     /
+      ^     /     12DONE3DONE45DONEDONE
       |    v
       |---node4
           /
@@ -176,11 +176,11 @@ Adjacency Matrix:
         public void TestAdjacencyList()
         {
             var adjList = g.AdjList;
-            Console.WriteLine($"count: {adjList.Count}");
+            // Console.WriteLine($"count: {adjList.Count}");
             foreach (var kv in adjList)
             {
-                // Console.Write($"{kv.Key}: ");
-                // Console.WriteLine($"neighbor count: {kv.Value.Count}");
+                Console.Write($"{kv.Key}: ");
+                Console.WriteLine($"neighbor count: {kv.Value.Count}");
                 foreach (var neighbor in kv.Value)
                 {
                     Console.Write($"{neighbor} ");
@@ -204,7 +204,8 @@ Adjacency Matrix:
         [TestMethod]
         public void TestDFSAdjacencyList()
         {
-            g.DFS(Nodes[0].Data);
+            string output = g.DFS(g.AdjList);
+            Assert.AreEqual("12DONE3DONE45DONEDONE", output);
         }
 
         [TestMethod]

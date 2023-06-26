@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using DSAcs.Hash;
 using DSAcs.LinkedLists;
@@ -147,13 +148,10 @@ namespace DSAcs.Graph
             Dictionary<object, List<object>> adjList = new();
             foreach (Vertex v in nodes)
             {
-                Console.WriteLine($"key: {v.Data}");
                 List<Vertex> neighbors = v.Neighbors;
-                Console.WriteLine($"neighbors count: {neighbors.Count}");
                 List<object> neighborList = new();
                 foreach (Vertex neighbor in neighbors)
                 {
-                    Console.WriteLine($"neighbor: {neighbor.Data}");
                     neighborList.Add(neighbor.Data);
                 }
                 adjList.Add(v.Data, neighborList);
@@ -183,27 +181,39 @@ namespace DSAcs.Graph
         }
 
         // most important graph algo!!!
-        public void DFS(object start)
+        public string DFS(Dictionary<object, List<object>> adjList)
         {
+            StringBuilder sb = new();
             HashSet<object> visited = new();
             void Helper(object node)
             {
-                Console.WriteLine(node.ToString());
-                visited.Add(node);
-                List<object> neighbors = AdjList[node];
-                if (neighbors != null)
+                // if node's visited, return, else add to visited
+                if (visited.Contains(node))
                 {
-                    foreach (object neighbor in neighbors)
-                    {
-                        Console.WriteLine(neighbor);
-                        if (!visited.Contains(neighbor))
-                        {
-                            Helper(neighbor);
-                        }
-                    }
+                    sb.Append("DONE");
+                    return;
+                }
+                sb.Append(node);
+                visited.Add(node);
+
+                // dfs on neighbors
+                List<object> nodeNeighbors = adjList[node];
+                if (nodeNeighbors.Count == 0) sb.Append("DONE");
+                foreach (object neighbor in nodeNeighbors)
+                {
+                    Helper(neighbor);
                 }
             }
-            Helper(start);
+
+            // iterate over keys in adj list; ensures all sources are visited
+            foreach (var node in adjList.Keys)
+            {
+                if (!visited.Contains(node))
+                {
+                    Helper(node);
+                }
+            }
+            return sb.ToString();
         }
     }
 }
