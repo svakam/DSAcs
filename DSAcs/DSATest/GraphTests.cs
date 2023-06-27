@@ -211,7 +211,10 @@ Adjacency Matrix:
         [TestMethod]
         public void TestBFSAdjacencyList()
         {
-
+            Assert.AreEqual("1", g.BFS(1, g.AdjList, 0));
+            Assert.AreEqual("123", g.BFS(1, g.AdjList, 1));
+            Assert.AreEqual("1234", g.BFS(1, g.AdjList, 2));
+            Assert.AreEqual("12345", g.BFS(1, g.AdjList, 3));
         }
     }
 }

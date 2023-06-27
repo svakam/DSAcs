@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
@@ -180,7 +182,10 @@ namespace DSAcs.Graph
             return adjList;
         }
 
-        // most important graph algo!!!
+        // DFS: most important graph algo!!!
+        // runtime: O(V + E) - every node processed once, worst case every node touched, every edge considered
+        // space: O(V) - every node may exist on queue, and visited hashset contains all nodes
+        // space may go up to O(V + E) if converting from v/e list to adj list
         public string DFS(Dictionary<object, List<object>> adjList)
         {
             StringBuilder sb = new();
@@ -213,6 +218,45 @@ namespace DSAcs.Graph
                     Helper(node);
                 }
             }
+            return sb.ToString();
+        }
+
+        public string BFS(object start, Dictionary<object, List<object>> adjList, int targetLevel)
+        {
+            if (targetLevel == 0) return start.ToString();
+            int currLevel = 0;
+            StringBuilder sb = new();
+            System.Collections.Queue q = new();
+            HashSet<object> visited = new();
+
+            q.Enqueue(start);
+
+            while (q.Count > 0)
+            {
+                int numNodesCurrLvl = q.Count;
+                while (numNodesCurrLvl > 0)
+                {
+                    object curr = q.Dequeue();
+                    visited.Add(curr);
+                    sb.Append(curr);
+
+                    List<object> currNodeNeighbors = adjList[curr];
+                    foreach (object neighbor in currNodeNeighbors)
+                    {
+                        if (!visited.Contains(neighbor))
+                        {
+                            q.Enqueue(neighbor);
+                        }
+                    }
+                    numNodesCurrLvl--;
+                }
+                currLevel++;
+                if (currLevel > targetLevel)
+                {
+                    return sb.ToString();
+                }
+            }
+
             return sb.ToString();
         }
     }

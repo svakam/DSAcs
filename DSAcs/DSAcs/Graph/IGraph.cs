@@ -11,8 +11,9 @@ namespace DSAcs.Graph
     public interface IGraph
     {
 
-        // connect two nodes and declare if 2-way connection
-
+        public string DFS(Dictionary<object, List<object>> adjList);
+        public string BFS(object start, Dictionary<object, List<object>> adjList, int targetLevel);
+        
 
     }
 }
