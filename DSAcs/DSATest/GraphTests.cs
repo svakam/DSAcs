@@ -59,17 +59,26 @@ Adjacency Matrix:
         readonly Vertex node3 = new(3);
         readonly Vertex node4 = new(4);
         readonly Vertex node5 = new(5);
+        readonly Vertex node6 = new(6);
+        readonly Vertex node7 = new(7);
+        readonly Vertex node8 = new(8);
         Vertex[] Nodes { get; set; }
         Graph g { get; set; }
 
         public GraphTests()
         {
-            Nodes = new Vertex[] { node1, node2, node3, node4, node5 };
+            Nodes = new Vertex[] { node1, node2, node3, node4, node5, node6, node7, node8 };
             Graph.Connect(node1, node2);
-            Graph.Connect(node1, node3, true);
+            Graph.Connect(node1, node3, true); // 2-way adds cycle
             Graph.Connect(node3, node4);
             Graph.Connect(node4, node5);
             Graph.Connect(node4, node2);
+
+            // island
+            Graph.Connect(node6, node7);
+            Graph.Connect(node7, node8);
+            Graph.Connect(node8, node6);
+
             g = new(Nodes);
         }
 
@@ -205,7 +214,7 @@ Adjacency Matrix:
         public void TestDFSAdjacencyList()
         {
             string output = g.DFS(g.AdjList);
-            Assert.AreEqual("12DONE3DONE45DONEDONE", output);
+            Assert.AreEqual("12DONE3DONE45DONEDONE678DONE", output);
         }
 
         [TestMethod]
@@ -215,6 +224,18 @@ Adjacency Matrix:
             Assert.AreEqual("123", g.BFS(1, g.AdjList, 1));
             Assert.AreEqual("1234", g.BFS(1, g.AdjList, 2));
             Assert.AreEqual("12345", g.BFS(1, g.AdjList, 3));
+        }
+
+        [TestMethod]
+        public void TestHasCycle()
+        {
+            Assert.IsTrue(g.HasCycle(g.AdjList));
+        }
+
+        [TestMethod]
+        public void TestHasCycleDP()
+        {
+            Assert.IsTrue(g.HasCycleDP(g.AdjList));
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
@@ -166,10 +167,15 @@ namespace DSAcs.Graph
         public Dictionary<object, List<object>> ConvToAdjList(Vertex[] vertices, List<Edge> edgeList, bool isUndirected)
         {
             Dictionary<object, List<object>> adjList = new();
+
+            // initialize adj list with ids as keys
             foreach (Vertex v in vertices)
             {
                 adjList.Add(v.Data, new List<object>());
             }
+
+            // start edge = key, end = item in list
+            // if bidirectional, counts for end to start
             foreach (Edge e in edgeList)
             {
                 adjList[e.Start].Add(e.End);
@@ -181,6 +187,24 @@ namespace DSAcs.Graph
 
             return adjList;
         }
+
+
+
+        // DFS vs BFS
+        /*
+         * DFS                |  BFS
+         * -------------------|----------------------
+         * May be faster for  | Generally faster for 
+         * far away nodes     | nearby nodes
+         * -------------------|----------------------
+         * Will likely take   | Guaranteed to find path
+         * suboptimal route to| of least # of edges
+         * node               |
+         * ------------------------------------------
+         * Uses stack         | Uses queue
+         *                    |
+         *
+         */
 
         // DFS: most important graph algo!!!
         // runtime: O(V + E) - every node processed once, worst case every node touched, every edge considered
@@ -221,6 +245,9 @@ namespace DSAcs.Graph
             return sb.ToString();
         }
 
+        // typically the most optimal traversal to find a target node
+        // runtime/space complexity: O(V + E)
+        // same as DFS
         public string BFS(object start, Dictionary<object, List<object>> adjList, int targetLevel)
         {
             if (targetLevel == 0) return start.ToString();
@@ -258,6 +285,94 @@ namespace DSAcs.Graph
             }
 
             return sb.ToString();
+        }
+
+        // premise: if a node already exists in a current path, it's a cycle
+        public bool HasCycle(Dictionary<object, List<object>> adjList)
+        {
+            bool DfsHelper(object node, HashSet<object> path)
+            {
+                if (path.Contains(node))
+                {
+                    return true;
+                }
+                path.Add(node);
+
+                Console.WriteLine($"{node}");
+
+                foreach (object neighbor in adjList[node])
+                {
+                    // dfs allows each path to be explored for possible cycle, and return out true if exists
+                    if (DfsHelper(neighbor, path))
+                    {
+                        return true;
+                    }
+                }
+
+                // backtracking allows exploring a current path and removing it from consideration 
+                // once the work is done on the path
+                path.Remove(node);
+                return false;
+            }
+
+            // return DfsHelper(start, new HashSet<object>()); // this assumes the start node can access all other nodes
+
+            // to check for islands, we could iterate over every node and run DfsHelper() on it, but that would be runtime O(V) * O(V + E) ~ O(V^2 + VE)
+            // dp solution: if we are sure a particular node N doesn't have a cycle, we can put it in a set of verified non-cycle starts
+            // like memoization - storing previous solutions
+            foreach (object node in adjList.Keys)
+            {
+                if (DfsHelper(node, new HashSet<object>()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool HasCycleDP(Dictionary<object, List<object>> adjList)
+        {
+            // dp solution for not rechecking a node for cycle on its path
+            HashSet<object> verifiedNodes = new();
+
+            bool DfsHelper(object node, HashSet<object> path, HashSet<object> verifiedNodes)
+            {
+                if (verifiedNodes.Contains(node)) return false; // exits early if this node was verified for having no cycle in this sub-path
+
+                if (path.Contains(node))
+                {
+                    verifiedNodes.Add(node);
+                    return true;
+                }
+                path.Add(node);
+
+                Console.WriteLine($"{node}");
+
+                foreach (object neighbor in adjList[node])
+                {
+                    // dfs allows each path to be explored for possible cycle, and return out true if exists
+                    if (DfsHelper(neighbor, path, verifiedNodes))
+                    {
+                        return true;
+                    }
+                }
+
+                /* backtracking allows exploring a current path and removing it from consideration 
+                 * once the work is done on the path
+                 */
+                path.Remove(node);
+
+                verifiedNodes.Add(node); // this only runs if the entire code block executes, i.e. no cycle or cycle detected early and exited out 
+                return false;
+            }
+            foreach (object node in adjList.Keys)
+            {
+                if (DfsHelper(node, new HashSet<object>(), verifiedNodes))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
